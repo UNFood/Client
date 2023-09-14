@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from "react-bootstrap";
-import Login from "./login";
+import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
 import styles from "../styles/navbar.module.css";
 import { BiMap } from "react-icons/bi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
+import ModalLoginRegister from "./ModalLoginRegister";
 
 // @ToDo hacer header
 
@@ -24,8 +17,10 @@ function Header() {
 
   return (
     <>
-      <Login show={show} handleClose={handleClose}></Login>
-
+      <ModalLoginRegister
+        show={show}
+        handleClose={handleClose}
+      ></ModalLoginRegister>
       <Navbar fixed="top" expand="lg" className={`${styles.navbar}`}>
         <Container fluid>
           <Navbar.Brand href="#">
