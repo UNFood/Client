@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "../styles/ladingpage.module.css";
 import { Row, Col } from "react-bootstrap";
+import { FaYoutube, FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 function LandingPage() {
   return (
@@ -63,6 +64,43 @@ function LandingPage() {
           </Col>
         </Row>
       </section>
+      <footer className={`${styles.footer} pb-3`}>
+        <div className="pt-5 d-flex flex-row">
+          <a
+            className="ms-3"
+            href="https://www.instagram.com/unfood"
+            target="_blank"
+          >
+            <FaInstagram size={30} color="white"></FaInstagram>
+          </a>
+          <a className="ms-3" href="https://twitter.com/unfood" target="_blank">
+            <FaTwitter size={30} color="white"></FaTwitter>
+          </a>
+          <a
+            className="ms-3"
+            href="https://www.facebook.com/unfood"
+            target="_blank"
+          >
+            <FaFacebook size={30} color="white"></FaFacebook>
+          </a>
+          <a
+            className="ms-3"
+            href="https://www.youtube.com/@unfood"
+            target="_blank"
+          >
+            <FaYoutube size={30} color="white"></FaYoutube>
+          </a>
+        </div>
+        <hr className="hr text-light" />
+        <div>
+          <a href="#" className="link-secondary ms-3">
+            Politica de privacidad
+          </a>
+          <a href="#" className="link-secondary ms-3">
+            Terminos y condiciones
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }

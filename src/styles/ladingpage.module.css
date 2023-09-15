@@ -47,6 +47,9 @@
 .img_container{
     position: unset!important;
 }
+.footer{
+    background-color: #550A2D;
+}
 
 
 @media (min-width: 768px) {
