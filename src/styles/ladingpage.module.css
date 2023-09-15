@@ -1,0 +1,46 @@
+
+.landing{
+    padding-top:76px; 
+    background-color: #550A2D;
+}
+.landing h1{
+    color: white;
+    font-size: 160px;
+    font-weight: bolder;
+
+}
+.landing p{
+    color: #A63C6D;
+    font-size: 45px;
+    font-weight: bolder;
+}
+.landingbtn{
+    width: 606px;
+    height: 157px;
+    background-color: #A63C6D;
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.landingbtn:hover{
+    transition-duration: 0.2s;
+    transform: scale(1.1);
+}
+
+.aboutus{
+   background-color: #A63C6D; 
+}
+.aboutus h1{
+    color: white;
+    font-size: 80px;
+    font-weight: bolder;
+}
+.aboutus p{
+    color: #550A2D;
+    font-size: 30px;
+    font-weight: 400;
+
+}
