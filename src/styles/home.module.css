@@ -1,0 +1,56 @@
+.home{
+    padding-top:76px; 
+    background-color: #A63C6D;
+}
+.home h1{
+    color: white;
+    font-weight: bolder;
+
+}
+.home h1 span{
+    color: #550A2D;
+}
+.home p{
+    color: #550A2D;
+    font-weight: bolder;
+}
+.fondo{
+    object-fit: contain;
+    position: relative !important;
+    height: unset !important;
+}
+.img_container{
+    position: unset!important;
+}
+.counter{
+    background-color: #550A2D;
+}
+
+@media (min-width: 768px) {
+    .home h1{
+        font-size: 160px;
+    }
+    .home p{
+        font-size: 45px;
+    }
+    .fondo{
+        width: 80%;
+    }
+}
+@media (max-width: 767.98px){
+    .fondo{
+        width: 100%;
+    }
+    
+    .promotion{
+        display: flex;
+        justify-content: space-around ;
+    }
+    .home h1{
+        text-align: center;
+        font-size: 80px;
+    }
+    .home p{
+        font-size: 32px;
+    }
+}
