@@ -27,6 +27,10 @@
 }
 
 @media (min-width: 768px) {
+    .counter div{
+        display: flex;
+        align-items: center;
+    }
     .home h1{
         font-size: 160px;
     }
@@ -38,6 +42,9 @@
     }
 }
 @media (max-width: 767.98px){
+    .counter div{
+        text-align: center;
+    }
     .fondo{
         width: 100%;
     }
