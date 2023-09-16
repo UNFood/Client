@@ -25,6 +25,11 @@
 .counter{
     background-color: #550A2D;
 }
+.homebtn a{
+    width: 300px ;
+    font-size: 32px;
+    font-weight: bold;
+}
 
 @media (min-width: 768px) {
     .counter div{
