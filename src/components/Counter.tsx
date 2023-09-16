@@ -8,7 +8,12 @@ function Counter() {
       className={`${styles.counter} d-flex justify-content-center text-light p-2`}
     >
       <div>
-        <Image src="/favicon.ico" alt="tienda" width={60} height={42}></Image>
+        <Image
+          src="/images/tienda.png"
+          alt="tienda"
+          width={60}
+          height={42}
+        ></Image>
         <p className="fs-3 text-light ms-3 me-3">
           Más de <span className="fs-1">0</span> Chazas
         </p>
@@ -18,7 +23,7 @@ function Counter() {
       <div>
         <Image
           className="ms-3"
-          src="/favicon.ico"
+          src="/images/donut.png"
           alt="dona"
           width={60}
           height={42}

@@ -48,6 +48,9 @@
     .fondo{
         width: 100%;
     }
+    .homebtn{
+        text-align: center; 
+    }
     
     .promotion{
         display: flex;

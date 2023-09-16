@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "../../styles/home.module.css";
 import Image from "next/image";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import Counter from "../Counter";
+import Link from "next/link";
 
 function Home() {
   return (
@@ -17,6 +18,12 @@ function Home() {
               <p className="text-light">Pide</p>
               <p>Paga</p>
               <p className="text-light">Recoge</p>
+            </div>
+            <div className={`${styles.homebtn}`}>
+              <Link className="btn btn-success btn-lg" href="products">
+                {" "}
+                ! Compra ahora !
+              </Link>
             </div>
           </Col>
           <Col md={12} lg={8}>
