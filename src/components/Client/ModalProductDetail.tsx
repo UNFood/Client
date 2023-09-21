@@ -4,11 +4,9 @@ import Modal from "react-bootstrap/Modal";
 
 function ModalProductDetail() {
   return (
-    <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
+        <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>Centered Modal</h4>
