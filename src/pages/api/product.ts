@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Product } from "../../types/product";
+import { Product } from "@/types/product";
 import cookie from "js-cookie";
 
 export function getProducts() {

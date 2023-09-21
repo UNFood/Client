@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "../styles/ladingpage.module.css";
+import styles from "@/styles/ladingpage.module.css";
 import { Row, Col } from "react-bootstrap";
 import { FaYoutube, FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 

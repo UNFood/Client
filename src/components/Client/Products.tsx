@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/products.module.css";
+import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
@@ -136,6 +136,7 @@ function Products() {
           <li className="breadcrumb-item">
             <Link href="/client/products"> Productos</Link>
           </li>
+          <li className="breadcrumb-item active">Todo</li>
         </Breadcrumb>
       </div>
       <Row className="gx-0">{renderProducts}</Row>
