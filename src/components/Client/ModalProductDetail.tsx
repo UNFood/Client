@@ -2,9 +2,15 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function ModalProductDetail() {
+function ModalProductDetail({
+  show,
+  handleClose,
+}: {
+  show: boolean;
+  handleClose: () => void;
+}) {
   return (
-    <Modal size="lg" centered>
+    <Modal show={show} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
@@ -17,7 +23,7 @@ function ModalProductDetail() {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Close</Button>
+        <Button onClick={handleClose}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
