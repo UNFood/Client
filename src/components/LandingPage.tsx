@@ -13,12 +13,6 @@ function LandingPage() {
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
 
-  //  useEffect(() => {
-  //if (loginMode === "chaza" || loginMode === "cliente") {
-  //handleShowLogin();
-  //}
-  //}, [loginMode]);
-
   return (
     <>
       <ModalLoginRegister

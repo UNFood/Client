@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import { useMutation } from "react-query";
+import { loginData } from "@/types/user";
 import { login } from "../pages/api/auth";
 import cookie from "js-cookie";
 import Loading from "./Loading";
 
 function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState<loginData>({
+    username: "",
+    password: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
 
@@ -33,7 +37,6 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
-    console.log(loginMode);
     setLoading(true);
     event.preventDefault();
     event.stopPropagation();
@@ -41,9 +44,20 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
       setLoading(false);
       setValidated(true);
     } else {
-      loginMutation.mutate({ username, password });
+      loginMutation.mutate(formData);
     }
   };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  };
+
   return (
     <>
       {loading ? <Loading></Loading> : null}
@@ -69,7 +83,8 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
             required
             type="text"
             placeholder="Nombre de usuario"
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Nombre de usuario no valido
@@ -80,7 +95,8 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
             required
             type="password"
             placeholder="Contraseña"
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Contraseña no valida
