@@ -1,0 +1,32 @@
+.products{
+    padding-top: 76px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.products button{
+    background-color: #A63C6D;
+    border-color: #A63C6D;
+    color: white;
+}
+
+.products button:hover{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.products button:active{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.product_card{
+    width: 18rem;
+    height: 24rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+.product_card:hover{
+    transition-duration: 0.2s; 
+    transform: scale(1.1);
+}

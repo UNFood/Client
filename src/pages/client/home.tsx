@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../../components/Header";
-import Home from "../../components/Client/Home";
+import Header from "@/components/Header";
+import Home from "@/components/Client/Home";
 
 function home() {
   return (
