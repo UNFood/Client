@@ -7,9 +7,11 @@ import Register from "./Register";
 function ModalLoginRegister({
   show,
   handleClose,
+  loginMode,
 }: {
   show: boolean;
   handleClose: () => void;
+  loginMode: "chaza" | "cliente" | "";
 }) {
   const [showLogin, setShowLogin] = useState(true);
   return (
@@ -30,7 +32,11 @@ function ModalLoginRegister({
         </div>
 
         <hr className="hr text-danger" />
-        {showLogin ? <Login></Login> : <Register></Register>}
+        {showLogin ? (
+          <Login loginMode={loginMode}></Login>
+        ) : (
+          <Register></Register>
+        )}
         <hr className="hr text-danger" />
         <Button variant="link" onClick={() => setShowLogin(!showLogin)}>
           {showLogin ? "Crear una cuenta" : "Ingresar"}

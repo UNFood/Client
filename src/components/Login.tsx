@@ -1,25 +1,52 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
+import { useMutation } from "react-query";
+import { login } from "../pages/api/auth";
+import cookie from "js-cookie";
+import Loading from "./Loading";
 
-function Login() {
+function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const loginMutation = useMutation({
+    mutationFn: login,
+    onSuccess: (response) => {
+      setShowError(false);
+      setLoading(false);
+      cookie.set("user-token", response.data);
+      if (loginMode === "chaza") {
+        window.location.href = "/chaza/home";
+      } else {
+        window.location.href = "/client/home";
+      }
+    },
+    onError: (error: any) => {
+      setShowError(true);
+      setLoading(false);
+    },
+  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
+    console.log(loginMode);
+    setLoading(true);
+    event.preventDefault();
+    event.stopPropagation();
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      setLoading(false);
+      setValidated(true);
     } else {
-      alert(`Usuario: ${username} \nContraseña: ${password}`);
+      loginMutation.mutate({ username, password });
     }
-
-    setValidated(true);
   };
   return (
     <>
+      {loading ? <Loading></Loading> : null}
       <div className="">
         <Button
           size="lg"
@@ -59,6 +86,9 @@ function Login() {
             Contraseña no valida
           </Form.Control.Feedback>
         </Form.Group>
+        {showError ? (
+          <p className="text-danger">Usuario o contraseña incorrectos</p>
+        ) : null}
         <Button type="submit">Ingresar</Button>
       </Form>
     </>
