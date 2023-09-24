@@ -35,7 +35,7 @@ function ModalLoginRegister({
         {showLogin ? (
           <Login loginMode={loginMode}></Login>
         ) : (
-          <Register></Register>
+          <Register loginMode={loginMode}></Register>
         )}
         <hr className="hr text-danger" />
         <Button variant="link" onClick={() => setShowLogin(!showLogin)}>
