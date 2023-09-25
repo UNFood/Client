@@ -1,0 +1,17 @@
+.sidebar_chaza{
+    width: 384px;
+ max-width: 384px;
+ height: 100%;
+ background-color: #A63C6D ;
+
+
+}
+
+.sidebar_chaza a{
+    text-decoration: none;
+    color: white ;
+}
+.sidebar_chaza a:hover{
+    background-color: #FCC8E1;
+    color: #A63C6D;
+}
