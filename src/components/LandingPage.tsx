@@ -81,7 +81,7 @@ function LandingPage() {
             </Col>
             <Col md={12} lg={6} className="text-center m-auto">
               <div className={`${styles.img_container} `}>
-                <Image src="/images/logoUNFood_3.png" alt="logo" fill></Image>
+                <Image src="/images/logoUNFood_3.png" alt="logo" layout= 'fill'></Image>
               </div>
             </Col>
           </Row>

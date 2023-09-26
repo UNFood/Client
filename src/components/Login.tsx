@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import { useMutation } from "react-query";
@@ -58,6 +58,31 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
     });
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      const auth2 = gapi.auth2.getAuthInstance();
+      const googleUser = await auth2.signIn();
+      const id_token = googleUser.getAuthResponse().id_token;
+
+      const response = await fetch('http://localhost:8080/api/v1/auth/google', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: id_token }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        console.log('Backend response:', data);
+      } else {
+        console.log('Error:', data.message);
+      }
+    } catch (error) {
+      console.log('Google Login Failed:', error);
+    }
+  };
+
   return (
     <>
       {loading ? <Loading></Loading> : null}
@@ -65,7 +90,8 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
         <Button
           size="lg"
           variant="light"
-          className="ps-5 pe-5 border border-2  "
+          className="ps-5 pe-5 border border-2"
+          onClick={handleGoogleLogin}
         >
           <FcGoogle size={30} />
           <span className="ms-3">Google</span>
