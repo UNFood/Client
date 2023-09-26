@@ -1,30 +1,80 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { FcGoogle } from "react-icons/fc";
+import { useMutation } from "react-query";
+import { signupData } from "@/types/user";
+import { signup } from "../pages/api/auth";
+import cookie from "js-cookie";
+import Loading from "./Loading";
 
-function Register() {
+function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState<signupData>({
+    username: "",
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const signupMutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (response) => {
+      setShowError(false);
+      setLoading(false);
+      cookie.set("user-token", response.data);
+      if (loginMode === "chaza") {
+        window.location.href = "/chaza/home";
+      } else {
+        window.location.href = "/client/home";
+      }
+    },
+    onError: (error: any) => {
+      console.log(error);
+      setShowError(true);
+      setLoading(false);
+    },
+  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
+    setLoading(true);
+    event.preventDefault();
+    event.stopPropagation();
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      setLoading(false);
+      setValidated(true);
     } else {
-      alert(
-        `Usuario: ${username} \nNombre: ${name} \nApellido: ${lastname} \nEmail: ${email} \nContraseña: ${password}`
-      );
+      signupMutation.mutate(formData);
     }
+  };
 
-    setValidated(true);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
   };
 
   return (
     <>
+      {loading ? <Loading></Loading> : null}
+      <div className="">
+        <Button
+          size="lg"
+          variant="light"
+          className="ps-5 pe-5 border border-2  "
+        >
+          <FcGoogle size={30} />
+          <span className="ms-3">Google</span>
+        </Button>
+      </div>
+      <div className="mb-4 mt-4">Ó</div>
       <Form
         noValidate
         validated={validated}
@@ -36,7 +86,8 @@ function Register() {
             required
             type="text"
             placeholder="Nombre de usuario"
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Nombre de usuario no valido
@@ -47,7 +98,8 @@ function Register() {
             required
             type="text"
             placeholder="Nombre"
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Nombre no valido
@@ -58,7 +110,8 @@ function Register() {
             required
             type="text"
             placeholder="Apellido"
-            onChange={(e) => setLastname(e.target.value)}
+            name="lastName"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Apellido no valido
@@ -70,7 +123,8 @@ function Register() {
             required
             type="email"
             placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Email no valido
@@ -82,12 +136,16 @@ function Register() {
             required
             type="password"
             placeholder="Contraseña"
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            onChange={handleChange}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
             Contraseña no valida
           </Form.Control.Feedback>
         </Form.Group>
+        {showError ? (
+          <p className="text-danger">Nombre de usuario ya existe</p>
+        ) : null}
         <Button type="submit">Registrarse</Button>
       </Form>
     </>
