@@ -10,13 +10,16 @@ function SidebarChaza() {
       className={`${styles.sidebar_chaza} d-flex flex-column  justify-content-between text-center`}
     >
       <div>
-        <Link className="nav-link" href="/home">
+        <Link className="nav-link" href="home">
           Administrar Chaza
         </Link>
-        <Link className="nav-link" href="/pedidos">
+        <Link className="nav-link" href="orders">
+          Productos
+        </Link>
+        <Link className="nav-link" href="orders">
           Pedidos
         </Link>
-        <Link className="nav-link" href="/analytics">
+        <Link className="nav-link" href="analytics">
           Estadisticas
         </Link>
       </div>
