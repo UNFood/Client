@@ -6,7 +6,6 @@ import type { AppProps } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { handleGoogleLogin } from "@/utils/auth";
 
 const queryClient = new QueryClient();
 const clientId =

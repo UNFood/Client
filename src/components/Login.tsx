@@ -7,7 +7,6 @@ import { login, GoogleLogin } from "../pages/api/auth";
 import cookie from "js-cookie";
 import Loading from "./Loading";
 import { useGoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 
 function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
