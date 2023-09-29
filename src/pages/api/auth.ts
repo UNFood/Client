@@ -14,3 +14,10 @@ export function signup(userData: signupData) {
     .post(`${BASE_URL}/api/v1/auth/signup`, userData)
     .then((res) => res.data);
 }
+
+export async function GoogleLogin(token: string) {
+  const GOOGLE_API = "https://www.googleapis.com/oauth2/v3/userinfo ";
+  return axios
+    .get(GOOGLE_API, { headers: { Authorization: `Bearer ${token}` } })
+    .then((res) => res.data);
+}

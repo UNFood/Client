@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import { useMutation } from "react-query";
 import { loginData } from "@/types/user";
-import { login } from "../pages/api/auth";
+import { login, GoogleLogin } from "../pages/api/auth";
 import cookie from "js-cookie";
 import Loading from "./Loading";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
@@ -58,6 +59,34 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
     });
   };
 
+  const googleLoginMutation = useMutation({
+    mutationFn: GoogleLogin,
+    onSuccess: (response) => {
+      loginMutation.mutate({
+        username: response.email.split("@")[0],
+        password: response.name + process.env.GOOGLE_PASS_KEY,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      setLoading(false);
+    },
+  });
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      googleLoginMutation.mutate(codeResponse.access_token);
+    },
+    onError: (error) => {
+      console.log(error);
+      setLoading(false);
+    },
+    onNonOAuthError: (error) => {
+      console.log(error);
+      setLoading(false);
+    },
+  });
+
   return (
     <>
       {loading ? <Loading></Loading> : null}
@@ -65,7 +94,11 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
         <Button
           size="lg"
           variant="light"
-          className="ps-5 pe-5 border border-2  "
+          className="ps-5 pe-5 border border-2"
+          onClick={() => {
+            handleGoogleLogin();
+            setLoading(true);
+          }}
         >
           <FcGoogle size={30} />
           <span className="ms-3">Google</span>
