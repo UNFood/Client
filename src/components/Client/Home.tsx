@@ -31,6 +31,7 @@ function Home() {
               <Image
                 src="/images/fondo1.png"
                 alt="fondo"
+                fill
                 className={`${styles.fondo}`}
               ></Image>
             </div>

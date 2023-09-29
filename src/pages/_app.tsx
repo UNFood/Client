@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import "dotenv/config";
+import React from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
