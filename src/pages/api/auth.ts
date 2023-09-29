@@ -15,17 +15,9 @@ export function signup(userData: signupData) {
     .then((res) => res.data);
 }
 
-// New function to handle Google login
-export async function handleGoogleLogin(response: any) {
-  const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
-  const tokenId = response.tokenId;
-  try {
-    const res = await axios.post(`${BASE_URL}/api/v1/auth/google`, {
-      token: tokenId,
-    });
-    return res.data;
-  } catch (error) {
-    console.error("Google login failed:", error);
-    throw new Error("Google login failed");
-  }
+export async function GoogleLogin(token: string) {
+  const GOOGLE_API = "https://www.googleapis.com/oauth2/v3/userinfo ";
+  return axios
+    .get(GOOGLE_API, { headers: { Authorization: `Bearer ${token}` } })
+    .then((res) => res.data);
 }

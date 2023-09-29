@@ -3,9 +3,10 @@ import { Form, Button } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import { useMutation } from "react-query";
 import { signupData } from "@/types/user";
-import { signup } from "../pages/api/auth";
+import { signup, GoogleLogin } from "../pages/api/auth";
 import cookie from "js-cookie";
 import Loading from "./Loading";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
   const [validated, setValidated] = useState(false);
@@ -61,6 +62,37 @@ function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
     });
   };
 
+  const googleLoginMutation = useMutation({
+    mutationFn: GoogleLogin,
+    onSuccess: (response) => {
+      signupMutation.mutate({
+        username: response.email.split("@")[0],
+        name: response.given_name,
+        lastName: response.family_name,
+        email: response.email,
+        password: response.name + process.env.GOOGLE_PASS_KEY,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      setLoading(false);
+    },
+  });
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      googleLoginMutation.mutate(codeResponse.access_token);
+    },
+    onError: (error) => {
+      console.log(error);
+      setLoading(false);
+    },
+    onNonOAuthError: (error) => {
+      console.log(error);
+      setLoading(false);
+    },
+  });
+
   return (
     <>
       {loading ? <Loading></Loading> : null}
@@ -69,6 +101,10 @@ function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
           size="lg"
           variant="light"
           className="ps-5 pe-5 border border-2  "
+          onClick={() => {
+            handleGoogleLogin();
+            setLoading(true);
+          }}
         >
           <FcGoogle size={30} />
           <span className="ms-3">Google</span>

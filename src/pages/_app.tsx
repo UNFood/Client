@@ -1,49 +1,19 @@
-import React, { useEffect } from 'react';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import React, { useEffect } from "react";
+import "dotenv/config";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { handleGoogleLogin } from '@/utils/auth';
+import { handleGoogleLogin } from "@/utils/auth";
 
 const queryClient = new QueryClient();
-const clientId = "714119740864-86bb52urngugkd0t6iorv6cq5rv5ecvm.apps.googleusercontent.com"; // Replace with your actual Google Client ID
+const clientId =
+  process.env.GOOGLE_CLIENT_ID ??
+  "714119740864-86bb52urngugkd0t6iorv6cq5rv5ecvm.apps.googleusercontent.com";
 
-export default function App({
-  Component,
-  pageProps,
-}: AppProps) {
-
-  const [isLogged, setIsLogged] = React.useState(false);
-
-  const onSuccess = async (res: any) => {
-    console.log('Login Success:', res.profileObj);
-    const data = await handleGoogleLogin(res);
-    console.log('Backend response:', data);
-    setIsLogged(true);
-  };
-
-  const onFailure = (res: any) => {
-    console.log('Login Failed:', res);
-  };
-
-  const onLogout = () => {
-    console.log('Logout');
-    setIsLogged(false);
-  };
-
-  useEffect(() => {
-    // Load the 'auth2' library and initialize it
-    if (window.gapi) {
-      window.gapi.load('auth2', function() {
-        window.gapi.auth2.init({
-          client_id: clientId,
-        });
-      });
-    }
-  }, []);
-  
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -53,22 +23,9 @@ export default function App({
         <link rel="icon" href="/images/logoUNFoodObj_0.png" />
       </Head>
       <QueryClientProvider client={queryClient}>
-        {isLogged ? (
-          <GoogleLogout
-            clientId={clientId}
-            buttonText="Logout"
-            onLogoutSuccess={onLogout}
-          />
-        ) : (
-          <GoogleLogin
-            clientId={clientId}
-            buttonText="Login"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            cookiePolicy={'single_host_origin'}
-          />
-        )}
-        <Component {...pageProps} />
+        <GoogleOAuthProvider clientId={clientId}>
+          <Component {...pageProps} />
+        </GoogleOAuthProvider>
       </QueryClientProvider>
     </>
   );
