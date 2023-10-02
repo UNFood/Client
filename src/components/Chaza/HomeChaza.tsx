@@ -6,6 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import { Button, Form } from "react-bootstrap";
 import { BiMap, BiSolidCategory } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
+import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
 
 function HomeChaza() {
@@ -18,18 +19,18 @@ function HomeChaza() {
         </div>
         <div className="p-4">
           <div className="d-flex justify-content-between mb-3">
-            <div className="d-flex align-items-center">
+            <div className={`${styles.title}`}>
               <h1 className="me-3">McDonald's</h1>
               <Stars number={4}></Stars>
             </div>
             <Button variant="danger">
-              <FiEdit size={40}></FiEdit>
+              <FiEdit size={30}></FiEdit>
             </Button>
           </div>
           <Form className={`${styles.info}`}>
             <Form.Group className="mb-3">
               <Form.Control
-                type="textarea"
+                as="textarea"
                 defaultValue="Que esperas para probar nustros McCombos apetitosos desde 17.900 o
             deleita tu dia con el nuevo mcflurry y nucita"
                 disabled
@@ -65,6 +66,17 @@ function HomeChaza() {
               <Form.Control
                 type="text"
                 defaultValue="Comida Rapida"
+                disabled
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-3 d-flex">
+              <Form.Label className="d-flex align-items-center me-2">
+                <MdPayment size={25}></MdPayment>
+                Med.Pago
+              </Form.Label>
+              <Form.Control
+                type="text"
+                defaultValue="Nequi"
                 disabled
               ></Form.Control>
             </Form.Group>
