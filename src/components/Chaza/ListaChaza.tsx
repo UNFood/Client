@@ -24,7 +24,7 @@ const chazaList = [
   },
   {
     name: "MCDonalds",
-    description: "Hamburguesa, papitas, nuggies y  maquina de helados funcional.",
+    description: "Hamburguesa, papitas, nuggies y  maquina de heladossss funcional.",
     category: "Comida rapida",
     image: "/images/mcdonalds.png",
     numerocel: 23423423542534,
