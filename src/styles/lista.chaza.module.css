@@ -1,0 +1,42 @@
+.chaza{
+    padding-top: 76px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.chaza button{
+    background-color: #A63C6D;
+    border-color: #A63C6D;
+    color: white;
+}
+
+.chaza button:hover{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.chaza button:active{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.chaza_card{
+   
+    cursor: pointer;
+    transition-duration: 0.1s;
+}
+.chaza_card:hover{
+    transition-duration: 0.1s; 
+    transform: scale(1.1);
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8; /* Half-opacity background image */
+    z-index: -1; /* Place behind other content */
+  }
+  
+  
