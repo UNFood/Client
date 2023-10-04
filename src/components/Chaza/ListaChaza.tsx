@@ -61,22 +61,22 @@ function Chazas() {
         >
           
           <Card.Body>
-            <div><Image
-            src={chaza.image}
-            alt="emapanada"
-            width={300}
-            height={300}
-          ></Image></div>
-            <Card.Title>{chaza.name}</Card.Title>
-            <Card.Text>
-            <div className="flex flex-col gap-0">
-                <h3 className=" text-foreground/90">Descripcion :{chaza.description}</h3>
-                <h2 className="text-medium text-foreground/80">Tipo de Chaza: {chaza.category}</h2>
-                <h3 className="text-small font-medium mt-2">Numero de Celular {chaza.numerocel}</h3>
-              </div>
-            </Card.Text>
-            <Button variant="primary">Editar chaza</Button> <Button variant="primary">Eliminar Chaza</Button>
-          </Card.Body>
+  <div className="flex items-center">
+    <div className="relative">
+      <Image
+        src={chaza.image}
+        alt="chazadesumadre"
+        width={300}
+        height={300}
+      ></Image>
+    </div>
+    <div className="flex flex-col ml-4">
+      <h3 className="text-foreground/90">Descripcion: {chaza.description}</h3>
+      <h2 className="text-medium text-foreground/80">Tipo de Chaza: {chaza.category}</h2>
+      <h3 className="text-small font-medium mt-2">Numero de Celular: {chaza.numerocel}</h3>
+    </div>
+  </div>
+</Card.Body>
         </Card>
       </Row>
       </div>

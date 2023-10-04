@@ -4,29 +4,13 @@
     margin: auto;
 }
 
-.chaza button{
-    background-color: #A63C6D;
-    border-color: #A63C6D;
-    color: white;
-}
-
-.chaza button:hover{
-    background-color: #FEEBF4;
-    color: #A63C6D;
-    border-color: #FEEBF4;
-}
-.chaza button:active{
-    background-color: #FEEBF4;
-    color: #A63C6D;
-    border-color: #FEEBF4;
-}
 .chaza_card{
    
     cursor: pointer;
     transition-duration: 0.1s;
 }
 .chaza_card:hover{
-    transition-duration: 0.2s; 
+    transition-duration: 0.1s; 
     transform: scale(1.1);
 }
 .chaza_card:div{
