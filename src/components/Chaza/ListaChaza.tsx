@@ -97,7 +97,7 @@ function Chazas() {
             <li className="breadcrumb-item">
               <Link href="/client/chazaList"> Chaza</Link>
             </li>
-            <li className="breadcrumb-item active">Todo</li>
+            <li className="breadcrumb-item active">Lista</li>
           </Breadcrumb>
         </div>
         <h1>Lista de chazas</h1>
