@@ -66,14 +66,15 @@ function Chazas() {
       <Image
         src={chaza.image}
         alt="chazadesumadre"
-        width={300}
-        height={300}
+        width={200}
+        height={200}
       ></Image>
     </div>
     <div className="flex flex-col ml-4">
+      <h2 className="text-foreground/90">Nombre de Chaza: {chaza.name}</h2>
       <h3 className="text-foreground/90">Descripcion: {chaza.description}</h3>
-      <h2 className="text-medium text-foreground/80">Tipo de Chaza: {chaza.category}</h2>
-      <h3 className="text-small font-medium mt-2">Numero de Celular: {chaza.numerocel}</h3>
+      <h3 className="text-medium text-foreground/80">Tipo de Chaza: {chaza.category}</h3>
+      <h4 className="text-small font-medium mt-2">Numero de Celular: {chaza.numerocel}</h4>
     </div>
   </div>
 </Card.Body>
@@ -100,7 +101,18 @@ function Chazas() {
             <li className="breadcrumb-item active">Lista</li>
           </Breadcrumb>
         </div>
-        <h1>Lista de chazas</h1>
+        <div>
+        <h1>
+        <Image
+          src="/images/logoUNFood_4.png"
+          alt="logo"
+          width={200}
+          height={260}
+        ></Image>
+        Lista de chazas: 
+        </h1>
+        </div>
+        
         <Row className="gx-0">{renderchazaList}</Row>
       </div>
     </>
