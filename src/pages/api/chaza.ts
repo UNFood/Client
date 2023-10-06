@@ -13,7 +13,7 @@ export function getChazas() {
   return axios.get<Chaza[]>(`${BASE_URL}/api/v1/chazaz`, config);
 }
 
-export function getChaza() {
+export function getChaza(id: string) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -21,7 +21,7 @@ export function getChaza() {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get<Chaza>(`${BASE_URL}/api/v1/chaza`, config);
+  return axios.get<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config);
 }
 
 export function createChaza(chaza: Chaza) {

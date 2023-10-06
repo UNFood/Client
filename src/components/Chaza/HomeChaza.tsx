@@ -53,7 +53,6 @@ function HomeChaza() {
         value={metodosPago[key]}
         onChange={(event: React.ChangeEvent) => {
           const isChecked = (event.target as HTMLInputElement).checked;
-
           const prevData = chaza;
           if (!isChecked) {
             if (prevData.payment_method.includes(parseInt(key))) {
@@ -79,87 +78,84 @@ function HomeChaza() {
     );
   });
   return (
-    <div className={`${styles.home_chaza} h-100`}>
-      <SidebarChaza></SidebarChaza>
-      <div className=" w-100 h-100">
-        <div className={styles.img_container}>
-          <Image src="/images/mcdonalds.png" alt="logo" fill></Image>
-        </div>
-        <div className="p-4">
-          <div className="d-flex justify-content-between mb-3">
-            <div className={`${styles.title}`}>
-              <h1 className="me-3">McDonald's</h1>
-              <Stars number={4}></Stars>
-            </div>
-            <Button variant="danger" onClick={() => setEditable(!editable)}>
-              <FiEdit size={30}></FiEdit>
-            </Button>
+    <div className=" w-100 h-100">
+      <div className={styles.img_container}>
+        <Image src="/images/mcdonalds.png" alt="logo" fill></Image>
+      </div>
+      <div className="p-4">
+        <div className="d-flex justify-content-between mb-3">
+          <div className={`${styles.title}`}>
+            <h1 className="me-3">McDonald's</h1>
+            <Stars number={4}></Stars>
           </div>
-          <Form className={`${styles.info} mb-3`}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                name="description"
-                as="textarea"
-                defaultValue="Que esperas para probar nustros McCombos apetitosos desde 17.900 o
-            deleita tu dia con el nuevo mcflurry y nucita"
-                disabled={!editable}
-                onChange={handleChange}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <Form.Label className="d-flex align-items-center me-2">
-                <BiMap size={25}></BiMap>
-                Ubicación
-              </Form.Label>
-              <Form.Control
-                name="address"
-                type="text"
-                defaultValue="Plaza Che"
-                disabled={!editable}
-                onChange={handleChange}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <Form.Label className="d-flex align-items-center me-2">
-                <BsFillChatDotsFill size={25}></BsFillChatDotsFill>
-                Telefono.
-              </Form.Label>
-              <Form.Control
-                name="phone"
-                type="text"
-                defaultValue="6666666"
-                disabled={!editable}
-                onChange={handleChange}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <Form.Label className="d-flex align-items-center me-2">
-                <BiSolidCategory size={25}></BiSolidCategory>
-                Categoria
-              </Form.Label>
-              <Form.Select
-                name="type"
-                disabled={!editable}
-                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                  const { name, value } = event.target;
-                  const prevData = chaza;
-                  prevData.type = parseInt(value);
-                  setChaza(prevData);
-                }}
-              >
-                {renderCategories}
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <Form.Label className="d-flex align-items-center me-2">
-                <MdPayment size={25}></MdPayment>
-                Med.Pago
-              </Form.Label>
-              <div className="d-flex">{renderPaymentMethods}</div>
-            </Form.Group>
-            <Button>Guardar</Button>
-          </Form>
+          <Button variant="danger" onClick={() => setEditable(!editable)}>
+            <FiEdit size={30}></FiEdit>
+          </Button>
         </div>
+        <Form className={`${styles.info} mb-3`}>
+          <Form.Group className="mb-3">
+            <Form.Control
+              name="description"
+              as="textarea"
+              defaultValue="Que esperas para probar nustros McCombos apetitosos desde 17.900 o
+            deleita tu dia con el nuevo mcflurry y nucita"
+              disabled={!editable}
+              onChange={handleChange}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex">
+            <Form.Label className="d-flex align-items-center me-2">
+              <BiMap size={25}></BiMap>
+              Ubicación
+            </Form.Label>
+            <Form.Control
+              name="address"
+              type="text"
+              defaultValue="Plaza Che"
+              disabled={!editable}
+              onChange={handleChange}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex">
+            <Form.Label className="d-flex align-items-center me-2">
+              <BsFillChatDotsFill size={25}></BsFillChatDotsFill>
+              Telefono.
+            </Form.Label>
+            <Form.Control
+              name="phone"
+              type="text"
+              defaultValue="6666666"
+              disabled={!editable}
+              onChange={handleChange}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex">
+            <Form.Label className="d-flex align-items-center me-2">
+              <BiSolidCategory size={25}></BiSolidCategory>
+              Categoria
+            </Form.Label>
+            <Form.Select
+              name="type"
+              disabled={!editable}
+              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                const { name, value } = event.target;
+                const prevData = chaza;
+                prevData.type = parseInt(value);
+                setChaza(prevData);
+              }}
+            >
+              {renderCategories}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex">
+            <Form.Label className="d-flex align-items-center me-2">
+              <MdPayment size={25}></MdPayment>
+              Med.Pago
+            </Form.Label>
+            <div className={`${styles.payment}`}>{renderPaymentMethods}</div>
+          </Form.Group>
+          <Button>Guardar</Button>
+        </Form>
       </div>
     </div>
   );
