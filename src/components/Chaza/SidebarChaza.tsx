@@ -24,7 +24,7 @@ function SidebarChaza() {
             <Link className="nav-link" href="home">
               Administrar Chaza
             </Link>
-            <Link className="nav-link" href="orders">
+            <Link className="nav-link" href="products">
               Productos
             </Link>
             <Link className="nav-link" href="orders">
