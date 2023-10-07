@@ -19,8 +19,6 @@ export interface ChazaCreate {
   type: Number;
   address: String;
   phone: String;
-  products: string[];
-  score: Number;
   image: String;
   payment_method: Number[];
 }

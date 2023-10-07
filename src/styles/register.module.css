@@ -9,7 +9,6 @@
   
   .form-box {
     background: rgba(255, 255, 255, 1); /* White background with half opacity */
-    padding: 70px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add a box shadow */
   }
@@ -23,4 +22,18 @@
     opacity: 0.8; /* Half-opacity background image */
     z-index: -1; /* Place behind other content */
   }
-  
+@media (max-width: 767.98px){
+   .form-box{
+        padding: 20px;
+   } 
+ 
+}
+
+  @media (min-width: 768px){ 
+    .payment{
+        display: flex;
+    }
+    .form-box{
+        padding: 70px;
+    }
+}

@@ -5,10 +5,8 @@ import styles from "@/styles/home.chaza.module.css";
 import { useQuery } from "react-query";
 import Loading from "@/components/Loading";
 import Chazaregister from "@/components/Chaza/ChazaRegister";
-import cookie from "js-cookie";
 import { getChaza } from "../api/chaza";
 import { getToken } from "../api/token";
-import { tokenData } from "@/types/user";
 
 function home() {
   const [id, setId] = useState<string>("");
@@ -33,9 +31,10 @@ function home() {
   if (status === "loading") return <Loading></Loading>;
   if (status === "error") return <div>{JSON.stringify(error)}</div>;
   if (chaza === null) return <div>Error</div>;
+
   console.log(chaza);
-  console.log(error);
-  if (chaza?._id === undefined) return <Chazaregister></Chazaregister>;
+
+  if (chaza?.data === undefined) return <Chazaregister id={id}></Chazaregister>;
   return (
     <div className={`${styles.home_chaza} h-100`}>
       <SidebarChaza></SidebarChaza>

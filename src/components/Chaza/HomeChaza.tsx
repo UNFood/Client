@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SidebarChaza from "./SidebarChaza";
 import Image from "next/image";
 import styles from "@/styles/home.chaza.module.css";
 import { FiEdit } from "react-icons/fi";
@@ -9,20 +8,8 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
 import { ChazaUpdate } from "@/types/chaza";
-
-const categorias: { [index: string]: any } = {
-  1: "Comida",
-  2: "Ropa",
-  3: "Accesorios",
-  4: "+18",
-};
-const metodosPago: { [index: string]: any } = {
-  1: "Efectivo",
-  2: "Nequi",
-  3: "Daviplata",
-  4: "PSE",
-  5: "Tarjeta",
-};
+import metodosPago from "@/utils/paymentMethods";
+import categorias from "@/utils/categories";
 
 function HomeChaza() {
   const [editable, setEditable] = useState(false);
