@@ -21,7 +21,9 @@ export function getChaza(id: string) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config);
+  return axios
+    .get<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config)
+    .then((res) => res.data);
 }
 
 export function createChaza(chaza: Chaza) {

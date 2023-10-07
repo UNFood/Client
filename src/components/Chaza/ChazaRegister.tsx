@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/register.module.css";
+import styles from "../../styles/register.module.css";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
 
@@ -30,7 +30,7 @@ function Chazaregister() {
     <div className={styles["form-container"]}>
       <>
         <img
-          src="images/chazafondo.PNG"
+          src="/images/chazafondo.PNG"
           alt="Background"
           className={styles["background-image"]}
         />

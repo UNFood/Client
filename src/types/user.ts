@@ -10,3 +10,8 @@ export interface signupData {
   email: string;
   password: string;
 }
+
+export interface tokenData {
+  id: string;
+  username: string;
+}

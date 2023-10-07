@@ -4,7 +4,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 
-function SidebarChaza({ isRegister }: { isRegister: boolean }) {
+function SidebarChaza() {
   return (
     <Navbar expand="md" className="p-0">
       <div className={`${styles.sidebar_chaza} text-center`}>
