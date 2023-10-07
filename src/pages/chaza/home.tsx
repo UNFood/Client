@@ -38,7 +38,7 @@ function home() {
   return (
     <div className={`${styles.home_chaza} h-100`}>
       <SidebarChaza></SidebarChaza>
-      <HomeChaza></HomeChaza>
+      <HomeChaza chazaData={chaza.data}></HomeChaza>
     </div>
   );
 }

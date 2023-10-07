@@ -10,15 +10,16 @@ import Stars from "../Stars";
 import { ChazaUpdate } from "@/types/chaza";
 import metodosPago from "@/utils/paymentMethods";
 import categorias from "@/utils/categories";
+import { Chaza } from "@/types/chaza";
 
-function HomeChaza() {
+function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const [editable, setEditable] = useState(false);
   const [chaza, setChaza] = useState<ChazaUpdate>({
-    description: "",
-    type: -1,
-    address: "",
-    phone: "",
-    payment_method: [],
+    description: chazaData.description,
+    type: chazaData.type,
+    address: chazaData.address,
+    phone: chazaData.phone,
+    payment_method: chazaData.payment_method,
   });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -38,6 +39,7 @@ function HomeChaza() {
         label={metodosPago[key]}
         disabled={!editable}
         value={metodosPago[key]}
+        checked={chaza.payment_method.includes(parseInt(key))}
         onChange={(event: React.ChangeEvent) => {
           const isChecked = (event.target as HTMLInputElement).checked;
           const prevData = chaza;
@@ -72,8 +74,8 @@ function HomeChaza() {
       <div className="p-4">
         <div className="d-flex justify-content-between mb-3">
           <div className={`${styles.title}`}>
-            <h1 className="me-3">McDonald's</h1>
-            <Stars number={4}></Stars>
+            <h1 className="me-3">{chazaData.name}</h1>
+            <Stars number={chazaData.score}></Stars>
           </div>
           <Button variant="danger" onClick={() => setEditable(!editable)}>
             <FiEdit size={30}></FiEdit>
@@ -84,8 +86,7 @@ function HomeChaza() {
             <Form.Control
               name="description"
               as="textarea"
-              defaultValue="Que esperas para probar nustros McCombos apetitosos desde 17.900 o
-            deleita tu dia con el nuevo mcflurry y nucita"
+              defaultValue={chazaData.description?.toString()}
               disabled={!editable}
               onChange={handleChange}
             ></Form.Control>
@@ -98,7 +99,7 @@ function HomeChaza() {
             <Form.Control
               name="address"
               type="text"
-              defaultValue="Plaza Che"
+              defaultValue={chazaData.address?.toString()}
               disabled={!editable}
               onChange={handleChange}
             ></Form.Control>
@@ -111,7 +112,7 @@ function HomeChaza() {
             <Form.Control
               name="phone"
               type="text"
-              defaultValue="6666666"
+              defaultValue={chazaData.phone?.toString()}
               disabled={!editable}
               onChange={handleChange}
             ></Form.Control>
@@ -124,6 +125,7 @@ function HomeChaza() {
             <Form.Select
               name="type"
               disabled={!editable}
+              defaultValue={chazaData.type}
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                 const { name, value } = event.target;
                 const prevData = chaza;
