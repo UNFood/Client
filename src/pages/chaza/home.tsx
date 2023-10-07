@@ -32,8 +32,6 @@ function home() {
   if (status === "error") return <div>{JSON.stringify(error)}</div>;
   if (chaza === null) return <div>Error</div>;
 
-  console.log(chaza);
-
   if (chaza?.data === undefined) return <Chazaregister id={id}></Chazaregister>;
   return (
     <div className={`${styles.home_chaza} h-100`}>

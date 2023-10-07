@@ -22,11 +22,11 @@ function Chazaregister({ id }: { id: string }) {
   });
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorPayment, setErrorPayment] = useState(false);
 
   const registerChazaMutation = useMutation({
     mutationFn: createChaza,
     onSuccess: (response) => {
-      console.log(response);
       setLoading(false);
       window.location.href = "home";
     },
@@ -40,6 +40,11 @@ function Chazaregister({ id }: { id: string }) {
     setLoading(true);
     event.preventDefault();
     event.stopPropagation();
+    if (formData.payment_method.length === 0) {
+      setErrorPayment(true);
+      setLoading(false);
+      return;
+    }
     if (form.checkValidity() === false) {
       setLoading(false);
       setValidated(true);
@@ -205,7 +210,7 @@ function Chazaregister({ id }: { id: string }) {
               <Form.Label> Metodos de pago</Form.Label>
               <div className={`${styles.payment}`}>{renderPaymentMethods}</div>
 
-              <p className={`text-danger ${!validated ? "d-none" : ""}`}>
+              <p className={`text-danger ${!errorPayment ? "d-none" : ""}`}>
                 Selecciona al menos un metodo de pago
               </p>
             </Form.Group>

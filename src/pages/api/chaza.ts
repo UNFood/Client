@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Chaza, ChazaCreate } from "@/types/chaza";
+import { Chaza, ChazaCreate, ChazaUpdate } from "@/types/chaza";
 import cookie from "js-cookie";
 
 export function getChazas() {
@@ -42,7 +42,7 @@ export function createChaza(chaza: ChazaCreate) {
     .then((res) => res.data);
 }
 
-export function updateChaza(chaza: Chaza) {
+export function updateChaza(chaza: ChazaUpdate) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {

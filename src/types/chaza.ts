@@ -24,6 +24,7 @@ export interface ChazaCreate {
 }
 
 export interface ChazaUpdate {
+  owner: string;
   description: String;
   type: number;
   address: String;
