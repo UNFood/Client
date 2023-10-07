@@ -3,11 +3,11 @@ export interface Chaza {
   owner: string;
   name: String;
   description: String;
-  type: Number;
+  type: number;
   address: String;
   phone: String;
   products: string[];
-  score: Number;
+  score: number;
   image: String;
   payment_method: Number[];
 }
@@ -16,18 +16,17 @@ export interface ChazaCreate {
   owner: string;
   name: String;
   description: String;
-  type: Number;
+  type: number;
   address: String;
   phone: String;
-  products: string[];
-  score: Number;
   image: String;
   payment_method: Number[];
 }
 
 export interface ChazaUpdate {
+  owner: string;
   description: String;
-  type: Number;
+  type: number;
   address: String;
   phone: String;
   payment_method: Number[];
