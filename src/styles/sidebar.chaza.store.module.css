@@ -22,7 +22,14 @@
   font-weight: bold;
   color: #a63c6d;
 }
-.sidebar_chaza_store a:hover {
+.sidebar_chaza_store a:hover{
+  background-color: #f1f0f0;
+  font-weight: bold;
+  color: #a63c6d;
+  border-left: 10px solid #a63c6d;
+  border-right: 1px solid #a63c6d;
+}
+.sidebar_chaza_store a:active{
   background-color: #f1f0f0;
   font-weight: bold;
   color: #a63c6d;

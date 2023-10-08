@@ -1,6 +1,6 @@
 import React from "react";
 import SidebarChazaStore from "./SidebarChazaStore";
-import ProductsChaza from "./ProductsChaza"; 
+import Products from "./Products";
 import Image from "next/image";
 import styles from "@/styles/home.chaza.module.css";
 import { FiEdit } from "react-icons/fi";
@@ -9,11 +9,20 @@ import { BiMap, BiSolidCategory } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import Stars from "../Stars";
 
+
+const categories = [
+  "Comida rapida",
+  "Bebidad",
+  "Licores",
+  "Cigarrillos",
+  "Comida rapida",
+]
+
 function ChazaStore() {
   return (
     <div className={`${styles.home_chaza}`}>
-      <SidebarChazaStore></SidebarChazaStore>
-      <ProductsChaza></ProductsChaza>
+      <SidebarChazaStore categories={categories}></SidebarChazaStore>
+      <Products></Products>
     </div>
   );
 }

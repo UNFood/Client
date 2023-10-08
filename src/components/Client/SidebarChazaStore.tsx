@@ -5,7 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiMap } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
-function SidebarChazaStore() {
+interface categoriesProps {
+  categories: string[];
+}
+
+function SidebarChazaStore({categories}: categoriesProps) {
+  
+  const renderCategories = categories.map((category, index) => {
+    return (
+        <Link className="nav-link" href="" key={index}>
+          {category}
+        </Link>
+    );
+  });
+
   return (
     <Nav
       className={`${styles.sidebar_chaza_store} d-flex flex-column`}
@@ -35,40 +48,10 @@ function SidebarChazaStore() {
             Ubicación
           </Form.Label>
         </div>
+      </div> 
+      <div className={styles.categories}>
+        {renderCategories}
       </div>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
-        <Link className="nav-link" href="">
-          Categoria 1
-        </Link>
     </Nav>
   );
 }
