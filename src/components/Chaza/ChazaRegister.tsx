@@ -175,7 +175,7 @@ function Chazaregister({ id }: { id: string }) {
             <Form.Group className="mb-3 ">
               <Form.Control
                 required
-                type="text"
+                type="input"
                 name="image"
                 placeholder="Imagen"
                 onChange={handleChange}
