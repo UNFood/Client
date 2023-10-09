@@ -10,6 +10,7 @@ import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
 import { log } from "console";
 
+
 function Chazaregister({ id }: { id: string }) {
   const [formData, setFormData] = useState<ChazaCreate>({
     owner: id,
@@ -22,7 +23,6 @@ function Chazaregister({ id }: { id: string }) {
     payment_method: [],
   });
 
-  const [image, setImage] = useState<File | null>(null);
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
@@ -42,8 +42,8 @@ function Chazaregister({ id }: { id: string }) {
     const form = event.currentTarget;
     setLoading(true);
     event.preventDefault();
-
     event.stopPropagation();
+    
     if (formData.payment_method.length === 0) {
       setErrorPayment(true);
       setLoading(false);
@@ -124,6 +124,7 @@ function Chazaregister({ id }: { id: string }) {
             noValidate
             validated={validated}
             onSubmit={handleSubmit}
+            encType="multipart/form-data" 
             className="w-10 text-center m-auto"
           >
             <Form.Group className="mb-3 ">
@@ -181,11 +182,20 @@ function Chazaregister({ id }: { id: string }) {
                 required
                 type="file"
                 name="image"
-                onChange={ (event: React.ChangeEvent<HTMLInputElement>) => {
-                  if (!event.target.files) return;
-                  console.log(event.target.files[0]);
-                  setImage(event.target.files[0]);
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {                
+                  // Verificar si event.target.files tiene un valor
+                  const selectedImage = event.target.files ? event.target.files[0] : null;
+                
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    image: selectedImage, // Usar selectedImage si está definido, de lo contrario, usar value
+                  }));
+                
+                  // Ahora puedes hacer otras cosas con selectedImage si es necesario
+                  if (selectedImage) {
+                    console.log(selectedImage);
                   }
+                }
                 }
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
