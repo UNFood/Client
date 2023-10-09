@@ -6,7 +6,7 @@ import { FaYoutube, FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 function LandingPage() {
   return (
-    <div className={`${styles.landingpage}`}>
+    <div>
       <section className={`${styles.landing}  pb-5`}>
         <div className="p-5">
           <div>
@@ -43,7 +43,7 @@ function LandingPage() {
           </Row>
         </div>
       </section>
-      <section className={`${styles.aboutus} p-5`}>
+      <section id="aboutus" className={`${styles.aboutus} p-5`}>
         <Row className="gx-0">
           <Col md={12} lg={6}>
             <h1 className="mt-5">¿Quienes somos?</h1>
@@ -64,7 +64,29 @@ function LandingPage() {
           </Col>
         </Row>
       </section>
-      <footer className={`${styles.footer} pb-3`}>
+      <hr style={{ backgroundColor: "#550A2D" }} />
+      <section id="benefits" className={`${styles.aboutus} p-5`}>
+        <Row className="gx-0">
+          <Col md={12} lg={6} className="text-center m-auto">
+            <div className={`${styles.img_container} `}>
+              <Image src="/images/logoUNFood.png" alt="logo" fill></Image>
+            </div>
+          </Col>
+
+          <Col md={12} lg={6}>
+            <h1 className="mt-5">¿Por que uilizar UNFood?</h1>
+            <p>
+              Con nuestra aplicacon podras facilitar la forma en que compras en
+              la universidad mediante una experiencia de usuario inigualable.
+              Podras ver los productos de tu chaza favorita, hacer tu pedido
+              desde la comodidad de tu casa o desde cualquier lugar de la
+              universidad. Podras ver el estado de tu pedido y cuando este
+              listo, pasar a recogerlo.
+            </p>
+          </Col>
+        </Row>
+      </section>
+      <footer id="redes" className={`${styles.footer} pb-3`}>
         <div className="pt-5 d-flex flex-row">
           <a
             className="ms-3"
