@@ -8,6 +8,7 @@ import categorias from "@/utils/categories";
 import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
+import { log } from "console";
 
 function Chazaregister({ id }: { id: string }) {
   const [formData, setFormData] = useState<ChazaCreate>({
@@ -20,6 +21,8 @@ function Chazaregister({ id }: { id: string }) {
     image: "",
     payment_method: [],
   });
+
+  const [image, setImage] = useState<File | null>(null);
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
@@ -39,6 +42,7 @@ function Chazaregister({ id }: { id: string }) {
     const form = event.currentTarget;
     setLoading(true);
     event.preventDefault();
+
     event.stopPropagation();
     if (formData.payment_method.length === 0) {
       setErrorPayment(true);
@@ -172,13 +176,17 @@ function Chazaregister({ id }: { id: string }) {
                 Direccion no valida
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3 ">
+            <Form.Group className="mb-3 " >
               <Form.Control
                 required
-                type="input"
+                type="file"
                 name="image"
-                placeholder="Imagen"
-                onChange={handleChange}
+                onChange={ (event: React.ChangeEvent<HTMLInputElement>) => {
+                  if (!event.target.files) return;
+                  console.log(event.target.files[0]);
+                  setImage(event.target.files[0]);
+                  }
+                }
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Imagen no valida
