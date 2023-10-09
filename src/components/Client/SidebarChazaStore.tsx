@@ -20,7 +20,7 @@ function SidebarChazaStore({chaza}: chazaProps) {
     return categories.indexOf(category) === index;
   }
   );
-    
+  //toDO filters to products by category
   const renderCategories = categories.map((category, index) => {
     return (
         <Link className="nav-link" href={`/client/chazas/${chaza.name}?category=${category}`} key={index}>
