@@ -8,20 +8,17 @@ import { Button, Form } from "react-bootstrap";
 import { BiMap, BiSolidCategory } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import Stars from "../Stars";
+import {Chaza} from "@/types/chaza";
 
 
-const categories = [
-  "Comida rapida",
-  "Bebidad",
-  "Licores",
-  "Cigarrillos",
-  "Comida rapida",
-]
 
-function ChazaStore() {
+interface chazaProps {
+  chaza: Chaza;
+}
+function ChazaStore({chaza}: chazaProps) {
   return (
     <div className={`${styles.home_chaza}`}>
-      <SidebarChazaStore categories={categories}></SidebarChazaStore>
+      <SidebarChazaStore chaza={chaza}></SidebarChazaStore>
       <Products></Products>
     </div>
   );

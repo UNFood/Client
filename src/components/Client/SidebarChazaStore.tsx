@@ -5,15 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiMap } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
-interface categoriesProps {
-  categories: string[];
+import { Chaza } from "@/types/chaza";
+
+
+interface chazaProps {
+  chaza: Chaza;
 }
 
-function SidebarChazaStore({categories}: categoriesProps) {
-  
+function SidebarChazaStore({chaza}: chazaProps) {
+
+  let categories=chaza.products.map((product) => product.category);
+
+  categories = categories.filter((category, index) => {
+    return categories.indexOf(category) === index;
+  }
+  );
+    
   const renderCategories = categories.map((category, index) => {
     return (
-        <Link className="nav-link" href="" key={index}>
+        <Link className="nav-link" href={`/client/chazas/${chaza.name}?category=${category}`} key={index}>
           {category}
         </Link>
     );
@@ -28,24 +38,23 @@ function SidebarChazaStore({categories}: categoriesProps) {
         <div className="p-4">
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
-            <h1>McDonald's</h1>
+            <h1>{chaza.name}</h1>
           </div>
         </div>
         <Card.Text className={styles.card}>
-          Que esperas para probar nuestros McCombos Apetitosos combos desde
-          $17.900, o deleita tu dia con el nuevo McFlurry Nucita
+          {chaza.description}
         </Card.Text>
           <Form.Label className="d-flex align-items-cente">
             <BiMap size={16}></BiMap>
-            Ubicación:
+            Ubicación: {chaza.address}
           </Form.Label>
           <Form.Label className="d-flex align-items-center">
             <BsFillChatDotsFill size={16}></BsFillChatDotsFill>
-            Telefono:
+            Telefono: {chaza.phone}
           </Form.Label>
           <Form.Label className="d-flex align-items-  ">
             <BiMap size={16}></BiMap>
-            Ubicación
+            Ubicación: {chaza.address}
           </Form.Label>
         </div>
       </div> 
