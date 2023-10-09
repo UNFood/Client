@@ -30,3 +30,9 @@
     transition-duration: 0.2s; 
     transform: scale(1.1);
 }
+
+.title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #A63C6D;
+}

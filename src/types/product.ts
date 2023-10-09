@@ -2,8 +2,8 @@ export interface Product {
   name: string;
   description: string;
   price: string;
-  category: number;
-  imgage: string;
+  category: string;
+  image: string;
   stock: number;
   total_sales: number;
 }
