@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/navbar.module.css";
-import { BiMap } from "react-icons/bi";
-import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
-import { BsSearch } from "react-icons/bs";
-import ModalLoginRegister from "./ModalLoginRegister";
 
 // @ToDo hacer header
 
