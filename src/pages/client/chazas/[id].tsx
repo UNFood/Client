@@ -34,6 +34,51 @@ const products:Product[] = [
   },
   {
     name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
+    price: "$2.800",
+    category: "Bebidas",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
+    price: "$2.800",
+    category: "Bebidas",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
+    price: "$2.800",
+    category: "Bebidas",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
     description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
     price: "$2.800",
     category: "Bebidas",
@@ -54,7 +99,7 @@ const products:Product[] = [
     name: "Empanada de pollo y champiñon",
     description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
     price: "$2.800",
-    category: "Bebidas",
+    category: "Comida rapida",
     image: "/images/empanada.png",
     stock: 10,
     total_sales: 0,
@@ -71,6 +116,60 @@ const products:Product[] = [
   {
     name: "Empanada de pollo y champiñon",
     description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
+    price: "$2.800",
+    category: "Bebidas",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
+    price: "$2.800",
+    category: "Bebidas",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
+    price: "$2.800",
+    category: "Comida rapida",
+    image: "/images/empanada.png",
+    stock: 10,
+    total_sales: 0,
+  },
+  {
+    name: "Empanada de pollo y champiñon",
+    description: "Esto es una bebida",
     price: "$2.800",
     category: "Bebidas",
     image: "/images/empanada.png",
@@ -107,16 +206,16 @@ const products:Product[] = [
 ];
 
 const chaza:Chaza={
-  _id: "An id",
-  owner: "string",
-  name: "SexChaza",
-  description: "String",
-  type: 0,
-  address: "Alguna direccion",
-  phone: "String",
+  _id: "_ID",
+  owner: "John Silva",
+  name: "Chaza de John",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  type: 1,
+  address: "Frente al FEM",
+  phone: "3138946439",
   products: products,
   score: 100,
-  image: "String",
+  image: "https://example.png",
   payment_method: [
     0,
     0,
@@ -124,11 +223,7 @@ const chaza:Chaza={
   ],
 }
 
-interface chazaProps {
-  chaza: Chaza;
-}
-
-function chazaStore(/*{chaza}: chazaProps*/) {
+function chazaStore(/*{chaza}: {chaza:Chaza}*/) {
   return (
     <>
       <Header></Header>
