@@ -1,4 +1,5 @@
 import React from "react";
+
 import SidebarChazaStore from "./SidebarChazaStore";
 import Products from "./Products";
 import Image from "next/image";
@@ -19,9 +20,12 @@ function ChazaStore({chaza}: chazaProps) {
   return (
     <div className={`${styles.home_chaza}`}>
       <SidebarChazaStore chaza={chaza}></SidebarChazaStore>
+      
       <Products></Products>
     </div>
   );
 }
+
+
 
 export default ChazaStore;

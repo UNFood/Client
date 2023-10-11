@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -12,6 +12,24 @@ const clientId =
   "714119740864-86bb52urngugkd0t6iorv6cq5rv5ecvm.apps.googleusercontent.com";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      console.log("Geolocation not available");
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -22,6 +40,15 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <GoogleOAuthProvider clientId={clientId}>
+          <div>
+            {location ? (
+              <p>
+                Your location: Latitude {location.latitude}, Longitude {location.longitude}
+              </p>
+            ) : (
+              <p>Fetching location...</p>
+            )}
+          </div>
           <Component {...pageProps} />
         </GoogleOAuthProvider>
       </QueryClientProvider>
