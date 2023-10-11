@@ -1,3 +1,7 @@
+.navbar{
+    background-color: #550A2D;
+    color: white;
+}
 .img_container{
     position: unset!important; 
     width: 100%;
@@ -10,6 +14,7 @@
 }
 .home_chaza{
     height: 100%;
+    padding-top: 57px;
 }
 
 .home_chaza h1{

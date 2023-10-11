@@ -20,18 +20,14 @@ function Header() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="justify-content-end">
-            <Nav
-              className="my-2 my-lg-0 float-right"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link href="#aboutus">
+            <Nav className="my-2 my-lg-0 float-right" navbarScroll>
+              <Nav.Link href="#aboutus" className="text-center">
                 <span className="ms-2">Quienes somos</span>
               </Nav.Link>
-              <Nav.Link href="#benefits">
+              <Nav.Link href="#benefits" className="text-center">
                 <span className="ms-2">Beneficios</span>
               </Nav.Link>
-              <Nav.Link href="#redes">
+              <Nav.Link href="#redes" className="text-center">
                 <span className="ms-2">Redes</span>
               </Nav.Link>
             </Nav>
