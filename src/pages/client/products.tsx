@@ -33,6 +33,7 @@ function products() {
 
   return (
     <>
+      <Loading></Loading>
       <Header></Header>
       <Products></Products>
     </>
