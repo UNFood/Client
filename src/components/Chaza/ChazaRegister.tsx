@@ -10,7 +10,6 @@ import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
 import { log } from "console";
 
-
 function Chazaregister({ id }: { id: string }) {
   const [formData, setFormData] = useState<ChazaCreate>({
     owner: id,
@@ -43,16 +42,18 @@ function Chazaregister({ id }: { id: string }) {
     setLoading(true);
     event.preventDefault();
     event.stopPropagation();
-    
-    if (formData.payment_method.length === 0) {
-      setErrorPayment(true);
-      setLoading(false);
-      return;
-    }
+
+    console.log(formData.image);
+
     if (form.checkValidity() === false) {
       setLoading(false);
       setValidated(true);
     } else {
+      if (formData.payment_method.length === 0) {
+        setErrorPayment(true);
+        setLoading(false);
+        return;
+      }
       registerChazaMutation.mutate(formData);
     }
 
@@ -124,7 +125,6 @@ function Chazaregister({ id }: { id: string }) {
             noValidate
             validated={validated}
             onSubmit={handleSubmit}
-            encType="multipart/form-data" 
             className="w-10 text-center m-auto"
           >
             <Form.Group className="mb-3 ">
@@ -177,26 +177,26 @@ function Chazaregister({ id }: { id: string }) {
                 Direccion no valida
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3 " >
+            <Form.Group className="mb-3 ">
               <Form.Control
                 required
                 type="file"
                 name="image"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {                
+                id="image"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   // Verificar si event.target.files tiene un valor
-                  const selectedImage = event.target.files ? event.target.files[0] : null;
-                
+                  const selectedImage = event.target.files
+                    ? event.target.files[0]
+                    : null;
+                  console.log(selectedImage);
+
                   setFormData((prevFormData) => ({
                     ...prevFormData,
                     image: selectedImage, // Usar selectedImage si está definido, de lo contrario, usar value
                   }));
-                
+
                   // Ahora puedes hacer otras cosas con selectedImage si es necesario
-                  if (selectedImage) {
-                    console.log(selectedImage);
-                  }
-                }
-                }
+                }}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Imagen no valida
