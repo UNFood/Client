@@ -1,0 +1,39 @@
+/* styles/Chazaregister.css */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 102vh; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+  }
+  
+  .form-box {
+    background: rgba(255, 255, 255, 1); /* White background with half opacity */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add a box shadow */
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8; /* Half-opacity background image */
+    z-index: -1; /* Place behind other content */
+  }
+@media (max-width: 767.98px){
+   .form-box{
+        padding: 20px;
+   } 
+ 
+}
+
+  @media (min-width: 768px){ 
+    .payment{
+        display: flex;
+    }
+    .form-box{
+        padding: 70px;
+    }
+}

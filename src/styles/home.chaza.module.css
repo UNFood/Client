@@ -70,6 +70,9 @@
     .info textarea{
         height: 100px;
     }
+    .payment{
+        display: flex;
+    }
 }
 @media (max-width: 767.98px){
     .home_chaza h1{
@@ -79,5 +82,5 @@
     .info textarea{
         height: 200px;
     }
- 
+
 }

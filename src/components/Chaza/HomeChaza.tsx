@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SidebarChaza from "./SidebarChaza";
 import Image from "next/image";
 import styles from "@/styles/home.chaza.module.css";
 import { FiEdit } from "react-icons/fi";
@@ -9,30 +8,35 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
 import { ChazaUpdate } from "@/types/chaza";
+import metodosPago from "@/utils/paymentMethods";
+import categorias from "@/utils/categories";
+import { Chaza } from "@/types/chaza";
+import { useMutation } from "react-query";
+import Loading from "../Loading";
+import { updateChaza } from "@/pages/api/chaza";
+import Message from "../Message";
 
-const categorias: { [index: string]: any } = {
-  1: "Comida",
-  2: "Ropa",
-  3: "Accesorios",
-  4: "+18",
-};
-const metodosPago: { [index: string]: any } = {
-  1: "Efectivo",
-  2: "Nequi",
-  3: "Daviplata",
-  4: "PSE",
-  5: "Tarjeta",
-};
-
-function HomeChaza() {
+function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const [editable, setEditable] = useState(false);
   const [chaza, setChaza] = useState<ChazaUpdate>({
-    description: "",
-    type: -1,
-    address: "",
-    phone: "",
-    payment_method: [],
+    owner: chazaData.owner,
+    description: chazaData.description,
+    type: chazaData.type,
+    address: chazaData.address,
+    phone: chazaData.phone,
+    payment_method: chazaData.payment_method,
   });
+
+  const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorPayment, setErrorPayment] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+
+  const handleShowMessage = () => setShowMessage(true);
+  const handleCloseMessage = () => setShowMessage(false);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setChaza((prevFormData) => {
@@ -51,9 +55,9 @@ function HomeChaza() {
         label={metodosPago[key]}
         disabled={!editable}
         value={metodosPago[key]}
+        defaultChecked={chaza.payment_method.includes(parseInt(key))}
         onChange={(event: React.ChangeEvent) => {
           const isChecked = (event.target as HTMLInputElement).checked;
-
           const prevData = chaza;
           if (!isChecked) {
             if (prevData.payment_method.includes(parseInt(key))) {
@@ -78,9 +82,57 @@ function HomeChaza() {
       </option>
     );
   });
+
+  const handleMessage = (message: string, type: string) => {
+    setMessage(message);
+    setMessageType(type);
+    handleShowMessage();
+  };
+
+  const updateChazaMutation = useMutation({
+    mutationFn: updateChaza,
+    onSuccess: (data) => {
+      setLoading(false);
+      handleMessage("Chaza actualizada", "success");
+    },
+    onError: (error) => {
+      handleMessage("Error al actualizar la chaza", "danger");
+      setLoading(false);
+      console.log(error);
+    },
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const form = event.currentTarget;
+    setLoading(true);
+    console.log("first");
+    event.preventDefault();
+    event.stopPropagation();
+    form.reportValidity();
+    if (form.checkValidity() === false) {
+      setValidated(true);
+      setLoading(false);
+    } else {
+      if (chaza.payment_method.length === 0) {
+        setErrorPayment(true);
+        setLoading(false);
+        return;
+      }
+      console.log(chaza);
+      updateChazaMutation.mutate(chaza);
+    }
+    setValidated(true);
+  };
+
   return (
-    <div className={`${styles.home_chaza} h-100`}>
-      <SidebarChaza></SidebarChaza>
+    <>
+      <Message
+        message={message}
+        type={messageType}
+        show={showMessage}
+        handleClose={handleCloseMessage}
+      ></Message>
+      {loading ? <Loading></Loading> : null}
       <div className=" w-100 h-100">
         <div className={styles.img_container}>
           <Image src="/images/mcdonalds.png" alt="logo" fill></Image>
@@ -88,23 +140,31 @@ function HomeChaza() {
         <div className="p-4">
           <div className="d-flex justify-content-between mb-3">
             <div className={`${styles.title}`}>
-              <h1 className="me-3">McDonald's</h1>
-              <Stars number={4}></Stars>
+              <h1 className="me-3">{chazaData.name}</h1>
+              <Stars number={chazaData.score}></Stars>
             </div>
             <Button variant="danger" onClick={() => setEditable(!editable)}>
               <FiEdit size={30}></FiEdit>
             </Button>
           </div>
-          <Form className={`${styles.info} mb-3`}>
+          <Form
+            noValidate={false}
+            validated={validated}
+            onSubmit={handleSubmit}
+            className={`${styles.info} mb-3`}
+          >
             <Form.Group className="mb-3">
               <Form.Control
+                required
                 name="description"
                 as="textarea"
-                defaultValue="Que esperas para probar nustros McCombos apetitosos desde 17.900 o
-            deleita tu dia con el nuevo mcflurry y nucita"
+                defaultValue={chazaData.description?.toString()}
                 disabled={!editable}
                 onChange={handleChange}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                Descripción no valida
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
               <Form.Label className="d-flex align-items-center me-2">
@@ -112,12 +172,16 @@ function HomeChaza() {
                 Ubicación
               </Form.Label>
               <Form.Control
+                required
                 name="address"
                 type="text"
-                defaultValue="Plaza Che"
+                defaultValue={chazaData.address?.toString()}
                 disabled={!editable}
                 onChange={handleChange}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                Direccion no valida
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
               <Form.Label className="d-flex align-items-center me-2">
@@ -125,12 +189,16 @@ function HomeChaza() {
                 Telefono.
               </Form.Label>
               <Form.Control
+                required
                 name="phone"
                 type="text"
-                defaultValue="6666666"
+                defaultValue={chazaData.phone?.toString()}
                 disabled={!editable}
                 onChange={handleChange}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                Telefono no valido
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3 d-flex">
               <Form.Label className="d-flex align-items-center me-2">
@@ -140,6 +208,7 @@ function HomeChaza() {
               <Form.Select
                 name="type"
                 disabled={!editable}
+                defaultValue={chazaData.type}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                   const { name, value } = event.target;
                   const prevData = chaza;
@@ -155,13 +224,18 @@ function HomeChaza() {
                 <MdPayment size={25}></MdPayment>
                 Med.Pago
               </Form.Label>
-              <div className="d-flex">{renderPaymentMethods}</div>
+              <div className={`${styles.payment}`}>{renderPaymentMethods}</div>
             </Form.Group>
-            <Button>Guardar</Button>
+            <p className={`text-danger ${!errorPayment ? "d-none" : ""}`}>
+              Debe seleccionar al menos un metodo de pago
+            </p>
+            <Button type="submit" disabled={!editable}>
+              Guardar
+            </Button>
           </Form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
