@@ -8,7 +8,6 @@ import categorias from "@/utils/categories";
 import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
-import { log } from "console";
 
 function Chazaregister({ id }: { id: string }) {
   const [formData, setFormData] = useState<ChazaCreate>({
@@ -34,7 +33,6 @@ function Chazaregister({ id }: { id: string }) {
     },
     onError: (error: any) => {
       setLoading(false);
-      console.log(error);
     },
   });
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,8 +40,6 @@ function Chazaregister({ id }: { id: string }) {
     setLoading(true);
     event.preventDefault();
     event.stopPropagation();
-
-    console.log(formData.image);
 
     if (form.checkValidity() === false) {
       setLoading(false);
