@@ -183,8 +183,8 @@ function Chazaregister({ id }: { id: string }) {
                 type="file"
                 name="image"
                 id="image"
+                accept="image/*"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  // Verificar si event.target.files tiene un valor
                   const selectedImage = event.target.files
                     ? event.target.files[0]
                     : null;
@@ -192,10 +192,8 @@ function Chazaregister({ id }: { id: string }) {
 
                   setFormData((prevFormData) => ({
                     ...prevFormData,
-                    image: selectedImage, // Usar selectedImage si está definido, de lo contrario, usar value
+                    image: selectedImage,
                   }));
-
-                  // Ahora puedes hacer otras cosas con selectedImage si es necesario
                 }}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
