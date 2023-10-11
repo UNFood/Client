@@ -20,6 +20,7 @@ function Chazaregister({ id }: { id: string }) {
     image: "",
     payment_method: [],
   });
+
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
@@ -32,7 +33,6 @@ function Chazaregister({ id }: { id: string }) {
     },
     onError: (error: any) => {
       setLoading(false);
-      console.log(error);
     },
   });
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,15 +40,16 @@ function Chazaregister({ id }: { id: string }) {
     setLoading(true);
     event.preventDefault();
     event.stopPropagation();
-    if (formData.payment_method.length === 0) {
-      setErrorPayment(true);
-      setLoading(false);
-      return;
-    }
+
     if (form.checkValidity() === false) {
       setLoading(false);
       setValidated(true);
     } else {
+      if (formData.payment_method.length === 0) {
+        setErrorPayment(true);
+        setLoading(false);
+        return;
+      }
       registerChazaMutation.mutate(formData);
     }
 
@@ -175,10 +176,21 @@ function Chazaregister({ id }: { id: string }) {
             <Form.Group className="mb-3 ">
               <Form.Control
                 required
-                type="input"
+                type="file"
                 name="image"
-                placeholder="Imagen"
-                onChange={handleChange}
+                id="image"
+                accept="image/*"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const selectedImage = event.target.files
+                    ? event.target.files[0]
+                    : null;
+                  console.log(selectedImage);
+
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    image: selectedImage,
+                  }));
+                }}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Imagen no valida

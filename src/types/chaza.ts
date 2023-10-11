@@ -19,7 +19,7 @@ export interface ChazaCreate {
   type: number;
   address: String;
   phone: String;
-  image: String;
+  image: null | String | File;
   payment_method: Number[];
 }
 
