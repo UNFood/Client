@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SidebarChazaStore from "./SidebarChazaStore";
 import Products from "./Products";
 import Image from "next/image";
@@ -12,14 +12,20 @@ import {Chaza} from "@/types/chaza";
 
 
 
+
 interface chazaProps {
   chaza: Chaza;
 }
-function ChazaStore({chaza}: chazaProps) {
+
+function ChazaStore({ chaza }: chazaProps) {
+  // State to manage overlay visibility
+  const [showOverlay, setShowOverlay] = useState(false);
+
   return (
     <div className={`${styles.home_chaza}`}>
       <SidebarChazaStore chaza={chaza}></SidebarChazaStore>
-      <Products></Products>
+      {/* Pass state to Products component */}
+      <Products showOverlay={showOverlay} setShowOverlay={setShowOverlay}></Products>
     </div>
   );
 }

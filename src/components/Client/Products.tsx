@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,10 +106,17 @@ const products = [
     total_sales: 0,
   },
 ];
-function Products() {
-  const [showDetails, setShowDetails] = React.useState(false);
-  const handleCloseDetails = () => setShowDetails(false);
-  const handleSHowDetails = () => setShowDetails(true);
+function Products({ showOverlay, setShowOverlay }: ProductsProps  ) {
+  const [showInfoIndex, setShowInfoIndex] = useState<number | null>(null);
+  const [showDetails, setShowDetails] = useState(false); // Nuevo estado para el modal
+
+  const handleSHowDetails = () => {  // Definición de la función
+    setShowDetails(true);
+  };
+
+  const handleCloseDetails = () => {  // Definición de la función para cerrar el modal
+    setShowDetails(false);
+  };
 
   const renderProducts = products.map((product, index) => {
     return (
@@ -117,10 +124,12 @@ function Products() {
         <Card
           className={`${styles.product_card} m-auto`}
           onClick={handleSHowDetails}
+          onMouseEnter={() => setShowInfoIndex(index)} 
+          onMouseLeave={() => setShowInfoIndex(null)}  
         >
           <Image
             src={product.image}
-            alt="emapanada"
+            alt="Empanada"
             width={260}
             height={179}
           ></Image>
@@ -128,6 +137,7 @@ function Products() {
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
             <h1>{product.price}</h1>
+            {showInfoIndex === index && <div>Información adicional del producto</div>}  // Actualizado
           </Card.Body>
         </Card>
       </Col>
@@ -156,6 +166,10 @@ function Products() {
       </div>
     </>
   );
+}
+interface ProductsProps {
+  showOverlay: boolean;
+  setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default Products;

@@ -49,3 +49,12 @@
     font-size: 16px;
     font-style: normal;
 }
+
+.info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: #A63C6D;
+  font-size: 16px;
+}
