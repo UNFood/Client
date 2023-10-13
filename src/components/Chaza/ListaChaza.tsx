@@ -3,7 +3,8 @@ import styles from "@/styles/lista.chaza.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Card, Row, Col, Breadcrumb } from "react-bootstrap";
-
+import {Chaza} from "@/types/chaza";
+import categorias from "@/utils/categories";
 
 
 
@@ -44,13 +45,13 @@ const chazaList = [
     numerocel: 23423423523424,
   },
 ];
-function Chazas() {
+function Chazas({chazas}:{chazas:Chaza[]}) {
   const [showDetails, setShowDetails] = React.useState(false);
   const handleCloseDetails = () => setShowDetails(false);
   const handleSHowDetails = () => setShowDetails(true);
 
 
-  const renderchazaList = chazaList.map((chaza, index) => {
+  const renderchazaList = chazas.map((chaza, index) => {
     return (
       <div>
       
@@ -64,7 +65,7 @@ function Chazas() {
   <div className="flex items-center">
     <div className="relative">
       <Image
-        src={chaza.image}
+        src={chaza.image?.toString()}
         alt="chazadesumadre"
         width={200}
         height={200}
@@ -73,8 +74,8 @@ function Chazas() {
     <div className="flex flex-col ml-4">
       <h2 className="text-foreground/90">Nombre de Chaza: {chaza.name}</h2>
       <h3 className="text-foreground/90">Descripcion: {chaza.description}</h3>
-      <h3 className="text-medium text-foreground/80">Tipo de Chaza: {chaza.category}</h3>
-      <h4 className="text-small font-medium mt-2">Numero de Celular: {chaza.numerocel}</h4>
+      <h3 className="text-medium text-foreground/80">Tipo de Chaza: {categorias[chaza.type]}</h3>
+      <h4 className="text-small font-medium mt-2">Numero de Celular: {chaza.phone}</h4>
     </div>
   </div>
 </Card.Body>
