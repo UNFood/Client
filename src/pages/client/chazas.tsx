@@ -10,7 +10,7 @@ function chazaStore() {
   return (
     <>
         <h1>chazaList</h1>
-        <Link href="/client/chazas/SexChaza">
+        <Link href="/client/chazas/sexchaza de Juan">
             SexChaza
         </Link>
 

@@ -29,6 +29,22 @@ export function getChaza(id: string) {
     .then((res) => res.data);
 }
 
+export function getChazabyName(name: string) {
+  const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
+  const token = cookie.get("user-token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios
+    .get<{ message: string; data: Chaza }>(
+      `${BASE_URL}/api/v1/chaza/byName/${name}`,
+      config
+    )
+    .then((res) => res.data);
+}
+
 export function createChaza(chaza: ChazaCreate) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");

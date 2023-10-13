@@ -29,6 +29,7 @@ function ChazaStore({chaza}: {chaza:Chaza}) {
   }
   );
 
+
   const renderCategories = categories.map((category, index) => {
     return (
         <Button key={index} variant="link" className="nav-link" onClick={()=>handleCategory(chaza.products, category)}>
@@ -69,9 +70,9 @@ function ChazaStore({chaza}: {chaza:Chaza}) {
       </div> 
       <div className={styles.categories}>
         {renderCategories}
-      </div>
+      </div>S 
     </Nav>
-    <Products products={products} category={category}></Products>
+    <Products products={products} category={category} name={chaza.name} ></Products>
     </div>
   );
 }

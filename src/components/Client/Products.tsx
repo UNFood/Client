@@ -7,7 +7,7 @@ import styles from "@/styles/products.module.css";
 import { Product } from "@/types/product";
 
   
-function Products({products, category}: {products: Product[], category: string},) {
+function Products({products, category, name}: {products: Product[], category: string, name:String},) {
   const [showDetails, setShowDetails] = React.useState(false);
   const handleCloseDetails = () => setShowDetails(false);
   const handleSHowDetails = () => setShowDetails(true);
@@ -20,7 +20,7 @@ function Products({products, category}: {products: Product[], category: string},
           onClick={handleSHowDetails}
         >
           <Image
-            src={product.image}
+            src="/images/empanada.png"
             alt="emapanada"
             width={260}
             height={179}
@@ -48,7 +48,10 @@ function Products({products, category}: {products: Product[], category: string},
               <Link href="/client/home"> UNFood</Link>
             </li>
             <li className="breadcrumb-item">
-              <Link href="/client/products"> Productos</Link>
+              <Link href="/client/chazas"> Chazas</Link>
+            </li>
+            <li className="breadcrumb-item">
+              <Link href={`/client/chazas/${name}/all`}> {name}</Link>
             </li>
             <li className="breadcrumb-item active">{category}</li>
           </Breadcrumb>
