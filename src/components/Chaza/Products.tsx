@@ -3,7 +3,7 @@ import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
-import ModalProductDetail from "./ModalProductDetail";
+import ModalProductDetail from "../Chaza/ModalProductRegister";
 
 const products = [
   {
