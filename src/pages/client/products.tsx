@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
-import Products from "@/components/Client/Products";
+import Products from "@/components/Client/Products2";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getProducts } from "../api/product";
