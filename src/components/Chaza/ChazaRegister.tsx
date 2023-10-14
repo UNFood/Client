@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
 import { ChazaCreate } from "@/types/chaza";
 import metodosPago from "@/utils/paymentMethods";
-import categorias from "@/utils/categories";
+import categorias from "@/utils/categoriesChaza";
 import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";

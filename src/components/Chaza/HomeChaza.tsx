@@ -9,7 +9,7 @@ import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
 import { ChazaUpdate } from "@/types/chaza";
 import metodosPago from "@/utils/paymentMethods";
-import categorias from "@/utils/categories";
+import categorias from "@/utils/categoriesChaza";
 import { Chaza } from "@/types/chaza";
 import { useMutation } from "react-query";
 import Loading from "../Loading";

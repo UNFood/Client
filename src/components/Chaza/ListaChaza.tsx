@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
 import { Chaza } from "@/types/chaza";
-import categorias from "@/utils/categories";
+import categorias from "@/utils/categoriesChaza";
 import { useRouter } from "next/router";
 
 function Chazas({ chazas }: { chazas: Chaza[] }) {
@@ -13,6 +13,7 @@ function Chazas({ chazas }: { chazas: Chaza[] }) {
   const handleChazaClick = (chaza_name: string) => {
     router.push(`/client/chaza/${chaza_name}`);
   };
+
   const renderchazaList = chazas.map((chaza, index) => {
     return (
       <Col sm={12} md={6} xl={4}>

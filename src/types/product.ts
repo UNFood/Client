@@ -9,15 +9,14 @@ export interface Product {
 }
 
 export interface ProductCreate {
+  chaza_id: string;
   name: string;
   description: string;
-  price: string;
-  category: string;
+  price: number;
+  category: number;
   image: null | String | File;
   stock: number;
-  total_sales: number;
 }
-
 
 export interface ProductUpdate {
   description: string;
@@ -26,4 +25,3 @@ export interface ProductUpdate {
   stock: number;
   total_sales: number;
 }
-
