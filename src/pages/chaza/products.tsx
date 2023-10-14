@@ -1,7 +1,7 @@
 // pages/chaza/productos.tsx
 import React, { useEffect } from "react";
 import Header from "@/components/HeaderChaza";
-import Products from "@/components/Client/Products";
+import Products from "@/components/Chaza/Products";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getProducts } from "../api/product";

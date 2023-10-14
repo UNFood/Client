@@ -7,7 +7,7 @@ import ModalProductDetail from "../Chaza/ModalProductRegister";
 
 const products = [
   {
-    name: "Empanada de pollo y champiñon",
+    name: "Empanadddda de pollo y champiñon",
     description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
     price: "$2.800",
     category: "Comida rapida",
