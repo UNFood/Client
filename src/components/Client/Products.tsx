@@ -4,109 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
 import ModalProductDetail from "./ModalProductDetail";
+import { Product } from "@/types/product";
+import currencyFormater from "@/utils/currency";
 
-const products = [
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-  {
-    name: "Empanada de pollo y champiñon",
-    description: "Empanada rellena de pollo desmechado, arroz y champiñones.",
-    price: "$2.800",
-    category: "Comida rapida",
-    image: "/images/empanada.png",
-    stock: 10,
-    total_sales: 0,
-  },
-];
-function Products() {
+function Products({ products }: { products: Product[] }) {
   const [showDetails, setShowDetails] = React.useState(false);
   const handleCloseDetails = () => setShowDetails(false);
   const handleSHowDetails = () => setShowDetails(true);
@@ -119,7 +20,7 @@ function Products() {
           onClick={handleSHowDetails}
         >
           <Image
-            src={product.image}
+            src="/images/empanada.png"
             alt="emapanada"
             width={260}
             height={179}
@@ -127,7 +28,7 @@ function Products() {
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
-            <h1>{product.price}</h1>
+            <h1>{currencyFormater.format(product.price)}</h1>
           </Card.Body>
         </Card>
       </Col>

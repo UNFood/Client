@@ -10,5 +10,10 @@ export function getProducts() {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get<Product[]>(`${BASE_URL}/api/v1/product`, config);
+  return axios
+    .get<{ message: string; data: Product[] }>(
+      `${BASE_URL}/api/v1/product/products`,
+      config
+    )
+    .then((res) => res.data);
 }
