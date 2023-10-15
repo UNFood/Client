@@ -8,7 +8,7 @@ export interface Chaza {
   phone: String;
   products: string[];
   score: number;
-  image: String;
+  image: String ;
   payment_method: Number[];
 }
 

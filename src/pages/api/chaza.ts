@@ -10,7 +10,12 @@ export function getChazas() {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get<Chaza[]>(`${BASE_URL}/api/v1/chazaz`, config);
+  return axios
+    .get<{ message: string; data: Chaza[] }>(
+      `${BASE_URL}/api/v1/chaza/chazas`,
+      config
+    )
+    .then((res) => res.data);
 }
 
 export function getChaza(id: string) {
@@ -23,7 +28,7 @@ export function getChaza(id: string) {
   };
   return axios
     .get<{ message: string; data: Chaza }>(
-      `${BASE_URL}/api/v1/chaza/${id}`,
+      `${BASE_URL}/api/v1/chaza/byId/${id}`,
       config
     )
     .then((res) => res.data);
