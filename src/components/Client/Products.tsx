@@ -1,24 +1,28 @@
-import React from "react";
-import styles from "@/styles/products.module.css";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
 import ModalProductDetail from "./ModalProductDetail";
+import styles from "@/styles/products.module.css";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 
 function Products({ products }: { products: Product[] }) {
-  const [showDetails, setShowDetails] = React.useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const handleCloseDetails = () => setShowDetails(false);
-  const handleSHowDetails = () => setShowDetails(true);
+  const handleSHowDetails = (product: Product) => {
+    setProductSelected(product);
+    setShowDetails(true);
+  };
+  const [productSelected, setProductSelected] = useState<Product>();
 
   const renderProducts = products.map((product, index) => {
     return (
       <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
         <Card
           className={`${styles.product_card} ${styles.pointer} m-auto `}
-          onClick={handleSHowDetails}
+          onClick={() => handleSHowDetails(product)}
         >
           <div>
             <Image
@@ -48,19 +52,9 @@ function Products({ products }: { products: Product[] }) {
       <ModalProductDetail
         show={showDetails}
         handleClose={handleCloseDetails}
+        product={productSelected}
       ></ModalProductDetail>
       <div className={`${styles.products}`}>
-        <div className="mb-5 mt-3">
-          <Breadcrumb>
-            <li className="breadcrumb-item">
-              <Link href="/client/home"> UNFood</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link href="/client/products"> Productos</Link>
-            </li>
-            <li className="breadcrumb-item active">Todo</li>
-          </Breadcrumb>
-        </div>
         <Row className="gx-0">{renderProducts}</Row>
       </div>
     </>

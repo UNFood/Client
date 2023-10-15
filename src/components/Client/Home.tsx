@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function Home() {
   return (
-    <div className={`${styles.home}`}>
+    <div className={`${styles.home} h-100`}>
       <section className="p-5">
         <h1>
           UNFood <span>Clientes</span>
@@ -20,7 +20,7 @@ function Home() {
               <p className="text-light">Recoge</p>
             </div>
             <div className={`${styles.homebtn}`}>
-              <Link className="btn btn-success btn-lg" href="products">
+              <Link className="btn btn-success btn-lg" href="chazas">
                 {" "}
                 ! Compra ahora !
               </Link>
