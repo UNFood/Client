@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import Loading from "@/components/Loading";
+import ListaChaza from "@/components/Chaza/ListaChaza";
+import { getChazas } from "../api/chaza";
 import Header from "@/components/Header";
-import ChazaStore from "@/components/Client/ChazaStore";
-import Link from "next/link";
-import {Product} from "@/types/product"
 
+function home() {
+  const {
+    status,
+    error,
+    data: chazas,
+  } = useQuery({
+    queryKey: ["getChazas"],
+    queryFn: () => getChazas(),
+  });
 
+  if (status === "loading") return <Loading></Loading>;
+  if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
+  if (chazas === null || chazas === undefined) return <h1>Error</h1>;
 
-function chazaStore() {
   return (
     <>
-        <h1>chazaList</h1>
-        <Link href="/client/chazas/SexChaza">
-            SexChaza
-        </Link>
-
+      <Header></Header>
+      <ListaChaza chazas={chazas.data}></ListaChaza>
     </>
   );
 }
 
-export default chazaStore;
+export default home;

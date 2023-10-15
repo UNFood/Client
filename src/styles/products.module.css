@@ -1,5 +1,4 @@
 .products{
-    padding-top: 76px;
     max-width: 1500px;
     margin: auto;
 }
@@ -20,10 +19,13 @@
     color: #A63C6D;
     border-color: #FEEBF4;
 }
+.pointer{
+    cursor: pointer;
+}
+
 .product_card{
     width: 18rem;
     height: 24rem;
-    cursor: pointer;
     transition-duration: 0.2s;
 }
 .product_card:hover{
@@ -35,4 +37,9 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #A63C6D;
+}
+
+.product_card a{
+    background-color: #A63C6D;
+    color: white;
 }

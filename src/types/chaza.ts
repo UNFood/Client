@@ -1,3 +1,5 @@
+import {Product} from "./product";
+
 export interface Chaza {
   _id: string;
   owner: string;
@@ -6,9 +8,9 @@ export interface Chaza {
   type: number;
   address: String;
   phone: String;
-  products: string[];
+  products: Product[];
   score: number;
-  image: String;
+  image: String ;
   payment_method: Number[];
 }
 

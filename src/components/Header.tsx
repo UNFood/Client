@@ -14,7 +14,7 @@ function Header() {
     <>
       <Navbar fixed="top" expand="lg" className={`${styles.navbar}`}>
         <Container fluid>
-          <Navbar.Brand href="home">
+          <Navbar.Brand href="/client/home">
             <Image
               src="/images/logoUNFood.png"
               width={100}

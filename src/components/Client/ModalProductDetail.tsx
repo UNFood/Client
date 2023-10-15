@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
+<<<<<<< HEAD
 import Button from "react-bootstrap/Button";
 
 interface ModalProductDetailProps {
@@ -61,17 +62,41 @@ const ModalProductDetail: React.FC<ModalProductDetailProps> = ({ show, handleClo
     }
   }, [show, productId, fetchProductDetails]);
 
+=======
+import { Product } from "@/types/product";
+
+function ModalProductDetail({
+  show,
+  handleClose,
+  product,
+}: {
+  show: boolean;
+  handleClose: () => void;
+  product: Product | undefined;
+}) {
+  console.log(product);
+>>>>>>> origin/develop
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered>
       <Modal.Header closeButton>
         <Modal.Title>{productData.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+<<<<<<< HEAD
         <div>
           <img src={productData.imageSrc} alt={productData.name} style={{ maxWidth: "100%" }} />
         </div>
         <h4>Detalles del Producto</h4>
         <p>{productData.description}</p>
+=======
+        <h4>Centered Modal</h4>
+        <p>
+          {product?.description}
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+          consectetur ac, vestibulum at eros.
+        </p>
+>>>>>>> origin/develop
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleClose}>Close</Button>
