@@ -18,6 +18,7 @@
     "dotenv": "^16.3.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "jose": "^4.15.4",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "next": "13.4.19",

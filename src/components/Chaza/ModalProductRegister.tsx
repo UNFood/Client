@@ -197,7 +197,7 @@ function ModalProductRegister({
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Button type="submit">Register Product</Button>
+            <Button type="submit">Registrar producto</Button>
           </Form>
         </Modal.Body>
       </Modal>

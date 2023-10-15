@@ -5,7 +5,7 @@ import styles from "@/styles/home.module.css";
 function Counter() {
   return (
     <div
-      className={`${styles.counter} d-flex justify-content-center text-light p-2`}
+      className={`${styles.counter} position-absolute w-100  d-flex justify-content-center text-light p-2 bottom-0`}
     >
       <div>
         <Image

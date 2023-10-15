@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "@/styles/sidebar.chaza.module.css";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
+import { FiLogOut } from "react-icons/fi";
+import logout from "@/utils/logout";
 
 function SidebarChaza() {
   return (
@@ -21,18 +23,26 @@ function SidebarChaza() {
         <Navbar.Toggle className="p-2 m-0 mb-3" aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="w-100">
           <Nav navbarScroll className="w-100 d-flex flex-column">
-            <Link className="nav-link" href="home">
-              Administrar Chaza
-            </Link>
-            <Link className="nav-link" href="products">
-              Productos
-            </Link>
-            <Link className="nav-link" href="orders">
-              Pedidos
-            </Link>
-            <Link className="nav-link" href="analytics">
-              Estadisticas
-            </Link>
+            <div>
+              <Link className="nav-link" href="home">
+                Administrar Chaza
+              </Link>
+              <Link className="nav-link" href="products">
+                Productos
+              </Link>
+              <Link className="nav-link" href="orders">
+                Pedidos
+              </Link>
+              <Link className="nav-link" href="analytics">
+                Estadisticas
+              </Link>
+            </div>
+
+            <div className="mt-5 mb-2">
+              <Button variant="danger">
+                <FiLogOut size={20} onClick={logout} />
+              </Button>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </div>
