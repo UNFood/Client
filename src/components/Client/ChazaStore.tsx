@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import SidebarChazaStore from "./SidebarChazaStore";
-=======
 import React from "react";
->>>>>>> origin/develop
 import Products from "./Products";
 import Image from "next/image";
 import styles from "@/styles/chaza.store.module.css";
@@ -55,22 +50,6 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     );
   });
 
-<<<<<<< HEAD
-
-interface chazaProps {
-  chaza: Chaza;
-}
-
-function ChazaStore({ chaza }: chazaProps) {
-  // State to manage overlay visibility
-  const [showOverlay, setShowOverlay] = useState(false);
-
-  return (
-    <div className={`${styles.home_chaza}`}>
-      <SidebarChazaStore chaza={chaza}></SidebarChazaStore>
-      {/* Pass state to Products component */}
-      <Products showOverlay={showOverlay} setShowOverlay={setShowOverlay}></Products>
-=======
   return (
     <div className={`${styles.home_chaza}`}>
       <div className={`${styles.sidebar_chaza_store} d-flex flex-column`}>
@@ -132,7 +111,6 @@ function ChazaStore({ chaza }: chazaProps) {
         </div>
         <Products products={products}></Products>
       </div>
->>>>>>> origin/develop
     </div>
   );
 }
