@@ -4,13 +4,18 @@ import cookie from "js-cookie";
 
 export function getProducts() {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
-  const token = cookie.get("x-access-token");
+  const token = cookie.get("user-token");
   const config = {
     headers: {
-      "x-access-token": token,
+      Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get<Product[]>(`${BASE_URL}/api/v1/product`, config);
+  return axios
+    .get<{ message: string; data: Product[] }>(
+      `${BASE_URL}/api/v1/product/products`,
+      config
+    )
+    .then((res) => res.data);
 }
 
 export function getProduct(id: string) {
