@@ -5,6 +5,8 @@ import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
 import ModalProductDetail from "./ModalProductDetail";
 import styles from "@/styles/products.module.css";
 import { Product } from "@/types/product";
+import { BsCartPlusFill } from "react-icons/bs";
+import currencyFormater from "@/utils/currency";
 
   
 function Products({products, category, name}: {products: Product[], category: string, name:String},) {
@@ -19,16 +21,24 @@ function Products({products, category, name}: {products: Product[], category: st
           className={`${styles.product_card} m-auto`}
           onClick={handleSHowDetails}
         >
-          <Image
+        <div>
+        <Image
             src="/images/empanada.png"
             alt="emapanada"
             width={260}
             height={179}
           ></Image>
+           <div className="position-absolute top-0">
+              <button className="btn btn-light  rounded-0">
+                <BsCartPlusFill></BsCartPlusFill>
+              </button>
+            </div>
+        </div>
+          
           <Card.Body>
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
-            <h1>{product.price}</h1>
+            <h1>{currencyFormater.format(product.price)}</h1>
           </Card.Body>
         </Card>
       </Col>
@@ -51,7 +61,7 @@ function Products({products, category, name}: {products: Product[], category: st
               <Link href="/client/chazas"> Chazas</Link>
             </li>
             <li className="breadcrumb-item">
-              <Link href={`/client/chazas/${name}/all`}> {name}</Link>
+              <Link onClick={()=>window.location.reload()} href="#"> {name}</Link>
             </li>
             <li className="breadcrumb-item active">{category}</li>
           </Breadcrumb>
