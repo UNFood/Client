@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "@/components/Header";
-import Products from "@/components/Client/Products";
+import Products from "@/components/Client/Products2";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getProducts } from "../api/product";
@@ -17,24 +17,25 @@ function products() {
     }
   }, [router.query.filterBy]);
 
-  // const {
-  //status,
-  //error,
-  //data: products,
-  //} = useQuery({
-  //queryKey: ["getProducts"],
-  //queryFn: () => getProducts(),
-  //enabled: !filter,
-  //});
+  const {
+    status,
+    error,
+    data: products,
+  } = useQuery({
+    queryKey: ["getProducts"],
+    queryFn: () => getProducts(),
+    enabled: !filter,
+  });
 
-  //if (status === "loading") return <Loading></Loading>;
-  //if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
-  //if (products === null) return <h1>Error</h1>;
+  if (status === "loading") return <Loading></Loading>;
+  if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
+  if (products === null || products === undefined) return <h1>Error</h1>;
 
+  console.log(products);
   return (
     <>
       <Header></Header>
-      <Products></Products>
+      <Products products={products.data}></Products>
     </>
   );
 }

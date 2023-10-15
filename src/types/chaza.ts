@@ -10,7 +10,7 @@ export interface Chaza {
   phone: String;
   products: Product[];
   score: number;
-  image: String;
+  image: String ;
   payment_method: Number[];
 }
 
@@ -21,7 +21,7 @@ export interface ChazaCreate {
   type: number;
   address: String;
   phone: String;
-  image: String;
+  image: null | String | File;
   payment_method: Number[];
 }
 

@@ -23,3 +23,16 @@
 .navbar input::placeholder{
     color: #A63C6D;
 }
+
+@media (min-width: 768px) {
+ .navbar form {
+    width: 50%;
+ }
+}
+@media (max-width: 767.98px){
+    .navbar form {
+        width: 100%;
+    }
+
+}
+
