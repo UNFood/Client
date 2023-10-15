@@ -43,11 +43,11 @@ function Header() {
                 <BiMap size={25} />
                 <span className="ms-2">Ubicacion</span>
               </Nav.Link>
-              <Nav.Link href="products" className="text-center me-3">
+              <Nav.Link href="/client/products" className="text-center me-3">
                 <BiPackage size={25} />
                 <span> Productos</span>
               </Nav.Link>
-              <Nav.Link href="chazas" className="text-center me-3">
+              <Nav.Link href="/client/chazas" className="text-center me-3">
                 <BiStoreAlt size={25} />
                 <span>Chazas</span>
               </Nav.Link>

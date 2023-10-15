@@ -135,7 +135,7 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
       {loading ? <Loading></Loading> : null}
       <div className=" w-100 h-100">
         <div className={styles.img_container}>
-          <Image src="/images/mcdonalds.png" alt="logo" fill></Image>
+          <Image src={chazaData.image.toString()} alt="logo" fill></Image>
         </div>
         <div className="p-4">
           <div className="d-flex justify-content-between mb-3">
