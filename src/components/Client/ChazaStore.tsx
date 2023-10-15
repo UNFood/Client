@@ -12,9 +12,16 @@ import { useState } from "react";
 import { Product } from "@/types/product";
 import Link from "next/link";
 
+let dictCategorias: { [key: string]: string } = {};
+
 function ChazaStore({ chaza }: { chaza: Chaza }) {
   const [products, setProducts] = useState(chaza.products);
   const [category, setCategory] = useState(-1);
+
+  products.forEach((product) => {
+    dictCategorias[product.category.toString()] =
+      categorias[product.category.toString()];
+  });
 
   const handleCategory = (products: Product[], category: number) => {
     const newProducts = products.filter(
@@ -30,7 +37,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     return categories.indexOf(category) === index;
   });
 
-  const renderCategories = Object.keys(categorias).map((key, index) => {
+  const renderCategories = Object.keys(dictCategorias).map((key, index) => {
     return (
       <Button
         key={index}
