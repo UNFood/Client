@@ -43,3 +43,30 @@
     background-color: #A63C6D;
     color: white;
 }
+
+
+.product_detail button{
+    background-color: #A63C6D;
+    border-color: #A63C6D;
+    color: white;
+}
+
+.product_detail button:hover{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.product_detail button:active{
+    background-color: #FEEBF4;
+    color: #A63C6D;
+    border-color: #FEEBF4;
+}
+.img_container img{
+    object-fit: contain;
+    width: 80% !important;
+    position: relative !important;
+    height: unset !important;
+}
+.img_container{
+    position: unset!important;
+}
