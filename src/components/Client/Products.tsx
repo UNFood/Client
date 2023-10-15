@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
@@ -9,16 +9,20 @@ import currencyFormater from "@/utils/currency";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 
 function Products({ products }: { products: Product[] }) {
-  const [showDetails, setShowDetails] = React.useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const handleCloseDetails = () => setShowDetails(false);
-  const handleSHowDetails = () => setShowDetails(true);
+  const handleSHowDetails = (product: Product) => {
+    setProductSelected(product);
+    setShowDetails(true);
+  };
+  const [productSelected, setProductSelected] = useState<Product>();
 
   const renderProducts = products.map((product, index) => {
     return (
       <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
         <Card
           className={`${styles.product_card} ${styles.pointer} m-auto `}
-          onClick={handleSHowDetails}
+          onClick={() => handleSHowDetails(product)}
         >
           <div>
             <Image
@@ -48,6 +52,7 @@ function Products({ products }: { products: Product[] }) {
       <ModalProductDetail
         show={showDetails}
         handleClose={handleCloseDetails}
+        product={productSelected}
       ></ModalProductDetail>
       <div className={`${styles.products}`}>
         <Row className="gx-0">{renderProducts}</Row>
