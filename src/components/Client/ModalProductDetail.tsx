@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash } from "react-icons/fa";
 import { Product } from "@/types/product";
 import categoriasChaza from "@/utils/categoriesChaza";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
+import styles from "@/styles/products.module.css";
+import currencyFormatter from "@/utils/currency";
+import Image from "next/image";
 
 function ModalProductDetail({
   show,
@@ -12,81 +15,94 @@ function ModalProductDetail({
 }: {
   show: boolean;
   handleClose: () => void;
-  product: Product | undefined;
+  product: Product;
 }) {
-  console.log(product);
-  
+  const [count, setCount] = useState(1);
+
   // Static Information
   const staticInfo = {
     rating: "4.5",
     reviews: "250 Reviews",
-    deliveryTime: "30-45 mins"
+    deliveryTime: "30-45 mins",
   };
-  
-  const categoryName = categoriasChaza[product?.category];
-  
-  const handleAddToCart = (count) => {
+
+  const handleAddToCart = (id: String) => {
     // Implement your logic to add the product to the cart
-    console.log("Agregado al carro",count);
+    console.log("Agregado al carro", id);
   };
-  
-  const [count, setCount] = useState(1);
-  
-  const handleAddToCartAndBuy = (count) => {
+
+  const handleAddToCartAndBuy = (id: String) => {
     // Implement your logic to add the product to the cart
-    console.log("Agregado al carro y comprando",count);
-  };
-  
-
-  // Function to handle counter increment
-  const handleIncrement = () => {
-    setCount(count + 1);
+    console.log("Agregado al carro y comprando", id);
   };
 
-  // Function to handle counter decrement
-  const handleDecrement = () => {
-    if(count > 1) {
-      setCount(count - 1);
-    }
-  };
-
-    // Function to reset counter
-    const handleReset = () => {
-      setCount(0);
-    };
   return (
-    <Modal show={show} onHide={handleClose} size="lg" centered>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      size="lg"
+      centered
+      className={`${styles.product_detail}`}
+    >
       <Modal.Header closeButton>
-        <Modal.Title>{product?.name}</Modal.Title>
-
+        <Modal.Title>{product.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <img src={product?.image} alt={`${product?.name} image`} style={{width: '200px', height: '200px'}} />
-        
-          <p> <strong>Descripción: </strong>{product?.description}</p>
-        
-        <p style={{fontSize: 'smaller', opacity: 0.6}}>
-          Ubicado en: <strong>{product?.name_chaza}</strong>
-        </p>
-        <hr />
-        <p><strong>Precio:</strong> {product?.price} $</p>
-        <p><strong>Unidades Disponibles:</strong> {product?.stock}</p>
-        <p><strong>Tiempo estimado de entrega:</strong> {staticInfo.deliveryTime}</p>
+        <Row>
+          <Col md={6} lg={6}>
+            <div className={styles.img_container}>
+              <Image
+                src={product.image.toString()}
+                alt={`${product.name} image`}
+                fill
+              ></Image>
+            </div>
+          </Col>
+          <Col md={6} lg={6}>
+            <p>
+              <strong>Descripción: </strong>
+              {product.description}
+            </p>
+
+            <p>
+              Ubicado en: <strong>{product.name_chaza}</strong>
+            </p>
+            <p>
+              <strong>Precio:</strong> {currencyFormatter.format(product.price)}
+            </p>
+            <p>
+              <strong>Unidades Disponibles:</strong> {product.stock.toString()}
+            </p>
+            <p>
+              <strong>Tiempo estimado de entrega:</strong>{" "}
+              {staticInfo.deliveryTime}
+            </p>
+          </Col>
+        </Row>
       </Modal.Body>
-      <Modal.Footer style={{ justifyContent: 'flex-start' }}>
-  <Button style={{ backgroundColor: '#A63C6D', borderColor: '#A63C6D' }} size="sm" onClick={handleReset}>
-    <FaTrash />
-  </Button>
-  <Button style={{ backgroundColor: '#A63C6D', borderColor: '#A63C6D' }} size="sm" onClick={handleDecrement}>-</Button>
-  <span style={{ margin: '0 10px' }}>{count}</span>
-  <Button style={{ backgroundColor: '#A63C6D', borderColor: '#A63C6D' }} size="sm" onClick={handleIncrement}>+</Button>
-  <Button style={{ backgroundColor: '#A63C6D', borderColor: '#A63C6D' }} size="sm" onClick={() => handleAddToCart(count)}>Agregar y seguir comprando</Button>
-  <Button style={{ backgroundColor: '#550A2D', borderColor: '#550A2D' }} size="sm" onClick={() => handleAddToCartAndBuy(count)}>Agregar y comprar</Button>
-</Modal.Footer>
-
+      <Modal.Footer style={{ justifyContent: "flex-start" }}>
+        <Button size="sm" onClick={() => setCount(1)}>
+          <FaTrash />
+        </Button>
+        <Button size="sm" onClick={() => setCount(count - 1)}>
+          -
+        </Button>
+        <span style={{ margin: "0 10px" }}>{count}</span>
+        <Button size="sm" onClick={() => setCount(count + 1)}>
+          +
+        </Button>
+        <Button size="sm" onClick={() => handleAddToCart(product._id)}>
+          Agregar y seguir comprando
+        </Button>
+        <Button
+          style={{ backgroundColor: "#550A2D", borderColor: "#550A2D" }}
+          size="sm"
+          onClick={() => handleAddToCartAndBuy(product._id)}
+        >
+          Agregar y comprar
+        </Button>
+      </Modal.Footer>
     </Modal>
-
-//style={{ backgroundColor: "#550A2D" }}
   );
 }
 

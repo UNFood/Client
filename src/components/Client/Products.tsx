@@ -15,7 +15,7 @@ function Products({ products }: { products: Product[] }) {
     setProductSelected(product);
     setShowDetails(true);
   };
-  const [productSelected, setProductSelected] = useState<Product>();
+  const [productSelected, setProductSelected] = useState<Product>(products[0]);
 
   const renderProducts = products.map((product, index) => {
     return (
@@ -59,10 +59,6 @@ function Products({ products }: { products: Product[] }) {
       </div>
     </>
   );
-}
-interface ProductsProps {
-  showOverlay: boolean;
-  setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default Products;
