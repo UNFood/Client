@@ -106,15 +106,19 @@ const products = [
     total_sales: 0,
   },
 ];
+
+
 function Products({ showOverlay, setShowOverlay }: ProductsProps  ) {
   const [showInfoIndex, setShowInfoIndex] = useState<number | null>(null);
   const [showDetails, setShowDetails] = useState(false); // Nuevo estado para el modal
 
   const handleSHowDetails = () => {  // Definición de la función
+    console.log("xxxx is being opened");  //
     setShowDetails(true);
   };
 
   const handleCloseDetails = () => {  // Definición de la función para cerrar el modal
+    
     setShowDetails(false);
   };
 
@@ -124,8 +128,8 @@ function Products({ showOverlay, setShowOverlay }: ProductsProps  ) {
         <Card
           className={`${styles.product_card} m-auto`}
           onClick={handleSHowDetails}
-          onMouseEnter={() => setShowInfoIndex(index)}  // Actualizado
-          onMouseLeave={() => setShowInfoIndex(null)}   // Actualizado
+          onMouseEnter={() => setShowInfoIndex(index)}  // fff
+          onMouseLeave={() => setShowInfoIndex(null)}   // fff
         >
           <Image
             src={product.image}
@@ -146,10 +150,12 @@ function Products({ showOverlay, setShowOverlay }: ProductsProps  ) {
 
   return (
     <>
-      <ModalProductDetail
-        show={showDetails}
-        handleClose={handleCloseDetails}
-      ></ModalProductDetail>
+<ModalProductDetail
+  show={showDetails}
+  handleClose={handleCloseDetails}
+/>
+
+
       <div className={`${styles.products}`}>
         <div className="mb-5 mt-3">
           <Breadcrumb>
