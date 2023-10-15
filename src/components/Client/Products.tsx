@@ -44,17 +44,6 @@ function Products({ products }: { products: Product[] }) {
 
   return (
     <div className={`${styles.products}`}>
-      <div className="mb-5 mt-3">
-        <Breadcrumb>
-          <li className="breadcrumb-item">
-            <Link href="/client/home"> UNFood</Link>
-          </li>
-          <li className="breadcrumb-item">
-            <Link href="/client/products"> Productos</Link>
-          </li>
-          <li className="breadcrumb-item active">Todo</li>
-        </Breadcrumb>
-      </div>
       <Row className="gx-0">{renderProducts}</Row>
     </div>
   );
