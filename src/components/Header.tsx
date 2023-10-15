@@ -6,6 +6,8 @@ import { BiMap } from "react-icons/bi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import { BiStoreAlt, BiPackage } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
+import logout from "@/utils/logout";
 
 // @ToDo hacer header
 
@@ -51,10 +53,13 @@ function Header() {
                 <BiStoreAlt size={25} />
                 <span>Chazas</span>
               </Nav.Link>
-              <Nav.Link href="#" className="text-center">
+              <Nav.Link href="#" className="text-center me-3">
                 <FaShoppingCart size={25} />
                 <span className="ms-2">Carrito</span>
               </Nav.Link>
+              <Button variant="danger" onClick={logout}>
+                <FiLogOut size={20}></FiLogOut>
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </Container>
