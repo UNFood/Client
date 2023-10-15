@@ -50,20 +50,6 @@ function Products({ products }: { products: Product[] }) {
         handleClose={handleCloseDetails}
       ></ModalProductDetail>
       <div className={`${styles.products}`}>
-        <div className="mb-5 mt-3">
-          <Breadcrumb>
-            <li className="breadcrumb-item">
-              <Link href="/client/home"> UNFood</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link href="/client/chazas"> Chazas</Link>
-            </li>
-            <li className="breadcrumb-item">
-              <Link onClick={()=>window.location.reload()} href="#"> {name}</Link>
-            </li>
-            <li className="breadcrumb-item active">{category}</li>
-          </Breadcrumb>
-        </div>
         <Row className="gx-0">{renderProducts}</Row>
       </div>
     </>
