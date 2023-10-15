@@ -3,5 +3,8 @@ const categoriasChaza: { [index: string]: any } = {
   2: "Comida vegetariana",
   3: "Pines",
   4: "Ropa",
+  5: "Bebidas",
+  6: "Otros",
+  7: "Juguetes",
 };
 export default categoriasChaza;
