@@ -10,7 +10,7 @@ import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 function Products({ products }: { products: Product[] }) {
   const renderProducts = products.map((product, index) => {
     return (
-      <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
+      <Col sm={6} md={4} xl={2} className="mb-5" key={index}>
         <Card className={`${styles.product_card} m-auto`}>
           <div className="text-center">
             <Image
