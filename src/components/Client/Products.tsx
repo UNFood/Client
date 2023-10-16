@@ -10,12 +10,12 @@ import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 function Products({ products }: { products: Product[] }) {
   const renderProducts = products.map((product, index) => {
     return (
-      <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
+      <Col sm={6} md={4} xl={2} className="mb-5" key={index}>
         <Card className={`${styles.product_card} m-auto`}>
-          <div>
+          <div className="text-center">
             <Image
               src={product.image.toString()}
-              alt="emapanada"
+              alt={product.name.toString()}
               width={260}
               height={179}
             ></Image>
@@ -26,24 +26,37 @@ function Products({ products }: { products: Product[] }) {
             </div>
           </div>
 
-          <Card.Body>
-            <Card.Title>{product.name}</Card.Title>
-            <Card.Text>{product.description}</Card.Text>
-            <h1>{currencyFormater.format(product.price)}</h1>
+          <Card.Body className={styles.product_card_body}>
+            <div>
+              <h5>
+                {product.name.length > 22
+                  ? product.name.substring(0, 22).concat("...")
+                  : product.name}
+              </h5>
+              <Card.Text>
+                {product.description.length > 80
+                  ? product.description.substring(0, 80).concat("...")
+                  : product.description}
+              </Card.Text>
+            </div>
+
+            <h1 className="mt-3">{currencyFormater.format(product.price)}</h1>
           </Card.Body>
-          <Link
-            href={`chaza/${product.name_chaza}`}
-            className="btn btn-light mb-3 w-100 rounded-0"
-          >
-            Ver tienda
-          </Link>
+          <div>
+            <Link
+              href={`chaza/${product.name_chaza}`}
+              className="btn btn-light w-100 rounded-0 mb-0"
+            >
+              Ver tienda
+            </Link>
+          </div>
         </Card>
       </Col>
     );
   });
 
   return (
-    <div className={`${styles.products}`}>
+    <div className={`${styles.products} mt-5 w-100`}>
       <Row className="gx-0">{renderProducts}</Row>
     </div>
   );

@@ -6,5 +6,6 @@ const categoriasChaza: { [index: string]: any } = {
   5: "Bebidas",
   6: "Otros",
   7: "Juguetes",
+  8: "Libros",
 };
 export default categoriasChaza;

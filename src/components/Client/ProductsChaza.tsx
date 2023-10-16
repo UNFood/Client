@@ -19,15 +19,15 @@ function Products({ products }: { products: Product[] }) {
 
   const renderProducts = products.map((product, index) => {
     return (
-      <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
+      <Col sm={6} md={6} xl={3} className="mb-5 " key={index}>
         <Card
-          className={`${styles.product_card} ${styles.pointer} m-auto `}
+          className={`${styles.product_card} ${styles.pointer} m-auto`}
           onClick={() => handleSHowDetails(product)}
         >
           <div>
             <Image
               src={product.image.toString()}
-              alt="emapanada"
+              alt={product.name.toString()}
               width={260}
               height={179}
             ></Image>
@@ -37,10 +37,20 @@ function Products({ products }: { products: Product[] }) {
               </button>
             </div>
           </div>
-          <Card.Body>
-            <Card.Title>{product.name}</Card.Title>
-            <Card.Text>{product.description}</Card.Text>
-            <h1>{currencyFormater.format(product.price)}</h1>
+          <Card.Body className={styles.product_card_body}>
+            <div>
+              <h5>
+                {product.name.length > 22
+                  ? product.name.substring(0, 22).concat("...")
+                  : product.name}
+              </h5>
+              <Card.Text>
+                {product.description.length > 120
+                  ? product.description.substring(0, 120).concat("...")
+                  : product.description}
+              </Card.Text>
+            </div>
+            <h1 className="mt-5">{currencyFormater.format(product.price)}</h1>
           </Card.Body>
         </Card>
       </Col>
@@ -55,7 +65,7 @@ function Products({ products }: { products: Product[] }) {
         product={productSelected}
       ></ModalProductDetail>
       <div className={`${styles.products}`}>
-        <Row className="gx-0">{renderProducts}</Row>
+        <Row className="gx-0 w-100">{renderProducts}</Row>
       </div>
     </>
   );

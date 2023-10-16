@@ -26,20 +26,25 @@ function Chazas({ chazas }: { chazas: Chaza[] }) {
             <div className="flex items-center">
               <div className="img_container">
                 <Image
-                  src="/images/mcdonalds.png"
+                  src={chaza.image.toString()}
                   alt={chaza.name.toString()}
                   fill
                 ></Image>
               </div>
               <div className="flex flex-col ml-4">
-                <h2 className="text-foreground/90">{chaza.name}</h2>
-                <h3 className="text-foreground/90">{chaza.description}</h3>
+                <h2 className="text-foreground/90">
+                  {chaza.name.length > 32
+                    ? chaza.name.substring(0, 32).concat("...")
+                    : chaza.name}
+                </h2>
+                <p className="text-foreground/90">
+                  {chaza.description.length > 145
+                    ? chaza.description.substring(0, 145).concat("...")
+                    : chaza.description}
+                </p>
                 <h3 className="text-medium text-foreground/80">
                   Categoria: {categorias[chaza.type]}
                 </h3>
-                <h4 className="text-small font-medium mt-2">
-                  Numero de Celular: {chaza.phone}
-                </h4>
               </div>
             </div>
           </Card.Body>

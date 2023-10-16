@@ -1,5 +1,5 @@
 .products{
-    max-width: 1500px;
+    padding-top: 66px;
     margin: auto;
 }
 
@@ -23,9 +23,22 @@
     cursor: pointer;
 }
 
+.product_card_body{
+    height: 208px;
+}
+
+.product_card_body{
+    height: 208px;
+}
+
+.product_card_body div{
+    height: 104px;
+}
+
+
 .product_card{
     width: 18rem;
-    height: 24rem;
+    height: 420px; 
     transition-duration: 0.2s;
 }
 .product_card:hover{

@@ -5,7 +5,7 @@
 }
 
 .chaza_card{
-   
+    min-height: 331px;
     cursor: pointer;
     transition-duration: 0.1s;
 }
@@ -33,6 +33,9 @@
     height: 200px;
 }
 .chaza_card img{
+    min-height: 138px;
+    max-height: 138px;
+    height: 200px;
     object-fit: contain;
     width: 100% !important;
     position: relative !important;
