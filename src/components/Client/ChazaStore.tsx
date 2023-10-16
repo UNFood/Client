@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "./Products";
+import Products from "@/components/Client/ProductsChaza";
 import Image from "next/image";
 import styles from "@/styles/chaza.store.module.css";
 import { Button, Form, Card, Nav, Breadcrumb } from "react-bootstrap";
@@ -92,7 +92,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         </div>
         <div className={styles.categories}>{renderCategories}</div>
       </div>
-      <div className="p-5">
+      <div className="p-5 w-100">
         <div className="mb-5 mt-3">
           <Breadcrumb>
             <li className="breadcrumb-item">

@@ -32,7 +32,11 @@ function Chazas({ chazas }: { chazas: Chaza[] }) {
                 ></Image>
               </div>
               <div className="flex flex-col ml-4">
-                <h2 className="text-foreground/90">{chaza.name}</h2>
+                <h2 className="text-foreground/90">
+                  {chaza.name.length > 32
+                    ? chaza.name.substring(0, 32).concat("...")
+                    : chaza.name}
+                </h2>
                 <p className="text-foreground/90">
                   {chaza.description.length > 145
                     ? chaza.description.substring(0, 145).concat("...")

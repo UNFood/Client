@@ -40,7 +40,7 @@ function ModalProductDetail({
     <Modal
       show={show}
       onHide={handleClose}
-      size="lg"
+      size="xl"
       centered
       className={`${styles.product_detail}`}
     >
