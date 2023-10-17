@@ -9,16 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.11.1",
     "@types/node": "20.5.8",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "axios": "^1.5.0",
     "bootstrap": "^5.3.1",
+    "dotenv": "^16.3.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "jose": "^4.15.4",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^3.1.2",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.10.1",
+    "react-query": "^3.39.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.4"
   }
 }
