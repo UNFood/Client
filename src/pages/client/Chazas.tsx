@@ -5,7 +5,7 @@ import ListaChaza from "@/components/Chaza/ListaChaza";
 import { getChazas } from "../api/chaza";
 import Header from "@/components/Header";
 
-function home() {
+function Home() {
   const {
     status,
     error,
@@ -27,4 +27,4 @@ function home() {
   );
 }
 
-export default home;
+export default Home;

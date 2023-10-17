@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { getProducts } from "../api/product";
 import Loading from "@/components/Loading";
 
-function products() {
+function Productss() {
   const router = useRouter();
   const [filter, setFilter] = React.useState<string | null>(null);
   useEffect(() => {
@@ -40,4 +40,4 @@ function products() {
   );
 }
 
-export default products;
+export default Productss;

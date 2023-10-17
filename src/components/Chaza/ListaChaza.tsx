@@ -16,7 +16,7 @@ function Chazas({ chazas }: { chazas: Chaza[] }) {
 
   const renderchazaList = chazas.map((chaza, index) => {
     return (
-      <Col sm={12} md={6} xl={4}>
+      <Col sm={12} md={6} xl={4} key={index}>
         <Card
           key={index}
           className={`${styles.chaza_card} m-auto w-100`}

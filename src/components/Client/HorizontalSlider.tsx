@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Carousel, Col, Row } from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/products.module.css";
-import products from "@/pages/client/products";
+import products from "@/pages/client/Products";
 
 interface Product {
   name: string;
