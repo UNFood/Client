@@ -60,7 +60,7 @@ export function createChaza(chaza: ChazaCreate) {
     },
   };
   return axios
-    .post<Chaza>(`${BASE_URL}/api/v1/chaza`, chaza, config)
+    .post<Chaza>(`${BASE_URL}api/v1/chaza`, chaza, config)
     .then((res) => res.data);
 }
 
@@ -72,7 +72,7 @@ export function updateChaza(chaza: ChazaUpdate) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.put<Chaza>(`${BASE_URL}/api/v1/chaza`, chaza, config);
+  return axios.put<Chaza>(`${BASE_URL}api/v1/chaza`, chaza, config);
 }
 
 export function deleteChaza(id: number) {
