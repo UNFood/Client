@@ -1,11 +1,9 @@
 
 .landing{
-    padding-top:76px; 
     background-color: #550A2D;
 }
 .landing h1{
     color: white;
-    font-size: 160px;
     font-weight: bolder;
 
 }
@@ -53,36 +51,42 @@
 
 
 @media (min-width: 768px) {
+    .landing{
+        padding-top: 76px;
+    }
     .landing h1{
-        font-size: 160px;
+        font-size: 10rem;
     }
     .landing p{
-        font-size: 45px;
+        font-size: 2.813rem;
     }
     .landingbtn{
         width: 606px;
         height: 157px;
     }
     .aboutus h1{
-        font-size: 80px;
+        font-size: 5rem;
     }
     .aboutus img{
         width: 457!important;
         height: 279!important;
     }
     .aboutus p{
-        font-size: 30px;
+        font-size: 1.875rem;
     }
     .landingbtn{
-        font-size: 60px;
+        font-size: 3.75rem;
     }
 }
 @media (max-width: 767.98px){
+    .landing{
+        padding-top: 32px;
+    }
     .landing h1{
-        font-size: 80px;
+        font-size: 4.5rem;
     }
     .landing p{
-        font-size: 32px;
+        font-size: 2rem;
     }
     .landingbtn{
         width: 100%;
@@ -90,16 +94,16 @@
         padding: 20px;
     }
     .aboutus h1{
-        font-size: 40px;
+        font-size: 2.5rem;
     }
     .aboutus img{
         width: 327!important;
         height: 200!important;
     }
     .aboutus p{
-        font-size: 24px;
+        font-size: 1.5rem;
     }
     .landingbtn{
-        font-size: 32px;
+        font-size: 2rem;
     }
 }
