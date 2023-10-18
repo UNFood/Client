@@ -7,7 +7,7 @@ import { getToken } from "../api/token";
 import { getChaza } from "../api/chaza";
 import Loading from "@/components/Loading";
 
-function products() {
+function Products() {
   const [id, setId] = useState<string>("");
 
   const token = getToken()?.id;
@@ -40,4 +40,4 @@ function products() {
   );
 }
 
-export default products;
+export default Products;
