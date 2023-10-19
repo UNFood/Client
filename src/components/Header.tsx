@@ -8,12 +8,19 @@ import { BsSearch } from "react-icons/bs";
 import { BiStoreAlt, BiPackage } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import logout from "@/utils/logout";
+import Cart from "./Client/Cart";
 
 // @ToDo hacer header
 
 function Header() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
+      <Cart show={show} handleClose={handleClose}></Cart>
       <Navbar fixed="top" expand="lg" className={`${styles.navbar}`}>
         <Container fluid>
           <Navbar.Brand href="/client/home">
@@ -53,10 +60,14 @@ function Header() {
                 <BiStoreAlt size={25} />
                 <span>Chazas</span>
               </Nav.Link>
-              <Nav.Link href="#" className="text-center me-3">
+              <hr />
+              <Button
+                variant="success"
+                className="nav-link text-center me-3"
+                onClick={handleShow}
+              >
                 <FaShoppingCart size={25} />
-                <span className="ms-2">Carrito</span>
-              </Nav.Link>
+              </Button>
               <Button variant="danger" onClick={logout}>
                 <FiLogOut size={20}></FiLogOut>
               </Button>
