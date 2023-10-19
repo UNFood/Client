@@ -14,13 +14,13 @@
   border-color: #550A2D;
 }
 .info input{
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 30px */
 }
 .info textarea{
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 30px */ 
@@ -28,7 +28,7 @@
 
 .info label{
   color: #A63C6D;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 30px */
@@ -58,14 +58,14 @@
 .card {
     text-align-last: left;
     color: #979797;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .info {
     border-bottom: #A63C6D 1px solid;
 }
 .info label{
     color: #A63C6D;
-    font-size: 16px;
+    font-size: 1rempx;
     font-style: normal;
 }
 
@@ -110,7 +110,7 @@
     width: 100%;
   }
   .home_chaza h1{
-      font-size: 30px;
+      font-size: 1.875rem;
   }
   
   .info textarea{

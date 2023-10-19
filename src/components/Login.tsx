@@ -109,7 +109,7 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
         noValidate
         validated={validated}
         onSubmit={handleSubmit}
-        className="w-50 text-center m-auto"
+        className="w-75 text-center m-auto"
       >
         <Form.Group className="mb-3">
           <Form.Control

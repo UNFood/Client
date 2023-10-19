@@ -21,7 +21,7 @@ function ModalLoginRegister({
           {showLogin ? "Ingresar" : "Registrarse"}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="p-5 text-center">
+      <Modal.Body className="p-3 text-center">
         <div className="text-center">
           <Image
             src="/images/logoUNFood.png"
