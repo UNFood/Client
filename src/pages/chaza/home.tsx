@@ -8,7 +8,7 @@ import Chazaregister from "@/components/Chaza/ChazaRegister";
 import { getChaza } from "../api/chaza";
 import { getToken } from "../api/token";
 
-function home() {
+function Home() {
   const [id, setId] = useState<string>("");
 
   const token = getToken()?.id;
@@ -41,4 +41,4 @@ function home() {
   );
 }
 
-export default home;
+export default Home;

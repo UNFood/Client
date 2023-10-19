@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { getChazabyName } from "@/pages/api/chaza";
 import Loading from "@/components/Loading";
 
-function chazaStore() {
+function ChazaStoree() {
   const router = useRouter();
   const [name, setName] = useState<string>("");
 
@@ -40,4 +40,4 @@ function chazaStore() {
   );
 }
 
-export default chazaStore;
+export default ChazaStoree;
