@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
+import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
+import addProductToCart from "@/utils/addProductCart";
+import Message from "@/components/Message";
 
 function Products({ products }: { products: Product[] }) {
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handelAddProductToCart = (product: Product) => {
+    if (addProductToCart(product.name_chaza.toString(), product, 1)) {
+      setMessage("Producto agregado al carrito");
+      setType("success");
+      handleShow();
+    } else {
+      setMessage("Producto ya agregado al carrito");
+      setType("warning");
+      handleShow();
+    }
+  };
+
   const renderProducts = products.map((product, index) => {
     return (
       <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
@@ -20,9 +40,12 @@ function Products({ products }: { products: Product[] }) {
               height={179}
             ></Image>
             <div className="position-absolute top-0">
-              <button className="btn btn-light  rounded-0">
+              <Button
+                className="btn btn-light  rounded-0"
+                onClick={() => handelAddProductToCart(product)}
+              >
                 <BsCartPlusFill></BsCartPlusFill>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -56,9 +79,17 @@ function Products({ products }: { products: Product[] }) {
   });
 
   return (
-    <div className={`${styles.products} mt-5 w-100`}>
-      <Row className="gx-0">{renderProducts}</Row>
-    </div>
+    <>
+      <Message
+        show={show}
+        handleClose={handleClose}
+        message={message}
+        type={type}
+      ></Message>
+      <div className={`${styles.products} mt-5 w-100`}>
+        <Row className="gx-0">{renderProducts}</Row>
+      </div>
+    </>
   );
 }
 

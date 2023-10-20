@@ -10,6 +10,7 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 function Cart({
   show,
@@ -21,7 +22,9 @@ function Cart({
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Carrito</Offcanvas.Title>
+        <Offcanvas.Title>
+          <FaShoppingCart></FaShoppingCart> Carrito
+        </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Accordion>

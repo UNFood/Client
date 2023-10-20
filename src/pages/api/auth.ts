@@ -11,7 +11,7 @@ export function login(userData: loginData) {
 export function signup(userData: signupData) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   return axios
-    .post(`${BASE_URL}api/v1/auth/signup`, userData)
+    .post(`${BASE_URL}/api/v1/auth/signup`, userData)
     .then((res) => res.data);
 }
 
