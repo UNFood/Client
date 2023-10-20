@@ -256,12 +256,12 @@ function Cart({
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <Button
-          variant="danger"
-          className="  position-absolute bottom-0 start-50 mb-3"
-        >
-          <FaTrash size={30}></FaTrash>
-        </Button>
+        <div className="position-absolute bottom-0 mb-2 w-100">
+          <Button variant="link" className="nav-link m-auto">
+            <FaTrash size={20}></FaTrash>
+            <span className="ms-2">Vaciar todo</span>
+          </Button>
+        </div>
       </Offcanvas.Body>
     </Offcanvas>
   );
