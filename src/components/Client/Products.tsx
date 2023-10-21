@@ -6,7 +6,7 @@ import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
-import addProductToCart from "@/utils/addProductCart";
+import { addProductToCart } from "@/utils/cart";
 import Message from "@/components/Message";
 
 function Products({ products }: { products: Product[] }) {
