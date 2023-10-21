@@ -67,3 +67,13 @@ export function updateProductQuantity(
   localStorage.setItem("cart", JSON.stringify(cart));
   return true;
 }
+
+export function deleteCart() {
+  localStorage.removeItem("cart");
+}
+
+export function removeChazaFromCart(chaza: string) {
+  const cart: Cart = JSON.parse(localStorage.getItem("cart") ?? "{}");
+  delete cart[chaza];
+  localStorage.setItem("cart", JSON.stringify(cart));
+}

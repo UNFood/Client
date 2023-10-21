@@ -110,14 +110,8 @@ function CartProducts({
   return (
     <>
       {renderProducts}
-      <div className="d-flex justify-content-between align-items-center mt-3">
-        <div>
-          <p className="m-auto">Total: {currencyFormatter.format(total)}</p>
-        </div>
-        <Button variant="success">Confirmar compra</Button>
-        <Button variant="danger">
-          <FaTrash size={16}></FaTrash>
-        </Button>
+      <div className="mt-2">
+        <p className="text-end">Total: {currencyFormatter.format(total)}</p>
       </div>
     </>
   );
