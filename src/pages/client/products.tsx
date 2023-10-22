@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Products from "@/components/Client/Products";
 import { useRouter } from "next/router";
@@ -8,14 +8,16 @@ import Loading from "@/components/Loading";
 
 function Productss() {
   const router = useRouter();
-  const [filter, setFilter] = React.useState<string | null>(null);
+  const [priceOrder, setPriceOrder] = useState<number>(-1);
+  const [categories, setCategories] = useState<string>("-1");
+  const [priceRange, setPriceRange] = useState<string>("-1");
+
   useEffect(() => {
-    const filterValue = router.query.filterBy;
-    if (typeof filterValue === "string") {
-      console.log(filterValue);
-      setFilter(filterValue);
-    }
-  }, [router.query.filterBy]);
+    setPriceOrder(Number(router.query.priceOrder) || -1);
+    setCategories(router.query.categories as string || "-1");
+    setPriceRange(router.query.priceRange as string|| "-1");
+
+  }, [router.query.priceOrder, router.query.categories, router.query.priceRange]);
 
   const {
     status,
@@ -23,8 +25,8 @@ function Productss() {
     data: products,
   } = useQuery({
     queryKey: ["getProducts"],
-    queryFn: () => getProducts(),
-    enabled: !filter,
+    queryFn: () => getProducts(priceOrder.toString(), categories, priceRange.toString()),
+    
   });
 
   if (status === "loading") return <Loading></Loading>;

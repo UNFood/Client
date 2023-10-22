@@ -1,13 +1,98 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, Row, Col, Breadcrumb } from "react-bootstrap";
+import { Card, Row, Col, Form } from "react-bootstrap";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
+import { ordenPrecio, rangoPrecio } from "@/utils/filtrosProductos";
+import categorias from "@/utils/categoriesProduct";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 
 function Products({ products }: { products: Product[] }) {
+  const router = useRouter();
+  const [priceSort, setPriceSort] = useState<number>(-1);
+  const [categories, setCategories] = useState<string>("");
+  const [priceRange, setPriceRange] = useState<number>(-1);
+
+  useEffect(() => {
+    let query = {}
+    if(categories === "" && priceRange === -1 && priceSort === -1){
+      router.push({
+        pathname: router.pathname,
+      });
+      return;
+    }
+
+    if (categories !== "") {
+      query = {
+        ...query,
+        categories: categories,
+      }
+    }
+    if (priceRange !== -1) {
+      query = {
+        ...query,
+        priceRange: `${rangoPrecio[priceRange].split('-')[0]},${rangoPrecio[priceRange].split('-')[1]}`,
+      }
+    }
+
+    if (priceSort !== -1) {
+      query = {
+        ...query,
+        priceOrder: priceSort,
+      }
+    }
+
+    if (Object.keys(query).length === 0) {
+      return;
+    }
+    router.push({
+      pathname: router.pathname,
+      query: query,
+    });
+  }, [categories, priceRange, priceSort]);
+
+  const renderPriceSort = Object.keys(ordenPrecio).map((key, index) => {
+    return (
+      <option key={key} value={key}>
+        {ordenPrecio[key]}
+      </option>
+    );
+  });
+
+  const renderCategories = Object.keys(categorias).map((key, index) => {
+    return (
+      <Form.Check
+        label={categorias[key]}
+        key={index}
+        onChange={(event: React.ChangeEvent) => {
+          const isChecked = (event.target as HTMLInputElement).checked;
+          let prevData =
+            categories.split(",").length > 0 ? categories.split(",") : [];
+          if (!isChecked) {
+            prevData = prevData.filter((item) => item !== key);
+          } else {
+            prevData.push(key);
+          }
+          prevData = prevData.filter((item) => item !== "");
+          setCategories(prevData.join(","));
+        }}
+      ></Form.Check>
+    );
+  });
+
+  const renderRangoPrecio = Object.keys(rangoPrecio).map((key, index) => {
+    return (
+      <option key={key} value={key}>
+        {`${currencyFormater.format(rangoPrecio[key].split('-')[0])} - ${currencyFormater.format(rangoPrecio[key].split('-')[1])}`}
+        
+      </option>
+    );
+  });
+
   const renderProducts = products.map((product, index) => {
     return (
       <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
@@ -57,7 +142,45 @@ function Products({ products }: { products: Product[] }) {
 
   return (
     <div className={`${styles.products} mt-5 w-100`}>
-      <Row className="gx-0">{renderProducts}</Row>
+      <div className={`${styles.home_chaza}`}>
+        <div className={`${styles.sidebar_filters} d-grid gap-3`}>
+          <div className={`${styles.filter_type}`}>
+            <span className="mb-1">ORDENAR POR</span>
+            <Form.Select defaultValue={0}
+              onChange={(event: React.ChangeEvent) => {
+                const value = (event.target as HTMLInputElement).value;
+                setPriceSort(parseInt(value));
+              }
+              }
+            >
+              <option value={0}>Todos</option>
+              {renderPriceSort}
+            
+            </Form.Select>
+          </div>
+          <div className={`${styles.filter_type}`}>
+            <span className="mb-1">CATEGORIAS</span>
+            {renderCategories}
+          </div>
+          <div className={`${styles.filter_type}`}>
+            <span className="mb-1">RANGO DE PRECIOS</span>
+              <Form.Select defaultValue={0}
+                onChange={(event: React.ChangeEvent) => {
+                  const value = (event.target as HTMLInputElement).value;
+                  setPriceRange(parseInt(value));
+                }}
+              >
+                <option value={0}>Todos</option>
+                {renderRangoPrecio}
+              </Form.Select>
+
+          </div>
+          <div className={styles.info}></div>
+        </div>
+        <div className="p-5 w-100">
+          <Row className="gx-0">{renderProducts}</Row>
+        </div>
+      </div>
     </div>
   );
 }
