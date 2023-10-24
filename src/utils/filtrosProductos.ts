@@ -4,10 +4,11 @@ export const ordenPrecio: { [index: string]: any } = {
 };
 
 export const rangoPrecio: { [index: string]: any } = {
+    0: "0-1000000",
     1: "100-5000",
     2: "5100-10000",
     3: "10100-15000",
     4: "15100-20000",
-    5: "20100-10000000",
+    5: "20100-25100",
 };
   

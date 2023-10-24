@@ -8,14 +8,14 @@ import Loading from "@/components/Loading";
 
 function Productss() {
   const router = useRouter();
-  const [priceOrder, setPriceOrder] = useState<number>(-1);
-  const [categories, setCategories] = useState<string>("-1");
-  const [priceRange, setPriceRange] = useState<string>("-1");
+  const [priceOrder, setPriceOrder] = useState<string>("0");
+  const [categories, setCategories] = useState<string>("0,");
+  const [priceRange, setPriceRange] = useState<string>("0,1000000");
 
   useEffect(() => {
-    setPriceOrder(Number(router.query.priceOrder) || -1);
-    setCategories(router.query.categories as string || "-1");
-    setPriceRange(router.query.priceRange as string|| "-1");
+    setPriceOrder(router.query.priceOrder as string || "0");
+    setCategories(router.query.categories as string || "0,");
+    setPriceRange(router.query.priceRange as string|| "0,1000000");
 
   }, [router.query.priceOrder, router.query.categories, router.query.priceRange]);
 
@@ -25,7 +25,7 @@ function Productss() {
     data: products,
   } = useQuery({
     queryKey: ["getProducts"],
-    queryFn: () => getProducts(priceOrder.toString(), categories, priceRange.toString()),
+    queryFn: () => getProducts(categories, priceOrder, priceRange),
     
   });
 

@@ -13,41 +13,29 @@ import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 
 function Products({ products }: { products: Product[] }) {
   const router = useRouter();
-  const [priceSort, setPriceSort] = useState<number>(-1);
+  const [priceSort, setPriceSort] = useState<string>("0");
   const [categories, setCategories] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<number>(-1);
+  const [priceRange, setPriceRange] = useState<number>(0);
 
   useEffect(() => {
     let query = {}
-    if(categories === "" && priceRange === -1 && priceSort === -1){
-      router.push({
-        pathname: router.pathname,
-      });
-      return;
+    if (priceSort !== "0") {
+      query = {
+        ...query,
+        priceOrder: priceSort,
+      }
     }
-
     if (categories !== "") {
       query = {
         ...query,
         categories: categories,
       }
     }
-    if (priceRange !== -1) {
+    if (priceRange !== 0) {
       query = {
         ...query,
         priceRange: `${rangoPrecio[priceRange].split('-')[0]},${rangoPrecio[priceRange].split('-')[1]}`,
       }
-    }
-
-    if (priceSort !== -1) {
-      query = {
-        ...query,
-        priceOrder: priceSort,
-      }
-    }
-
-    if (Object.keys(query).length === 0) {
-      return;
     }
     router.push({
       pathname: router.pathname,
@@ -149,7 +137,7 @@ function Products({ products }: { products: Product[] }) {
             <Form.Select defaultValue={0}
               onChange={(event: React.ChangeEvent) => {
                 const value = (event.target as HTMLInputElement).value;
-                setPriceSort(parseInt(value));
+                setPriceSort(value.toString());
               }
               }
             >
