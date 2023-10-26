@@ -16,7 +16,7 @@ function ModalMap({
   setCurrentLocation: (location: { lat: number; lng: number }) => void;
 }) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyD8Ju-O68NBMNIPwArDNTkWTJwFODrRkAA",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
   const center= { lat: 4.636312349308707, lng: -74.08334255218506 };
   const zoom = 16;
