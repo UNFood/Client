@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, Col, Row } from "react-bootstrap";
-import styles from "@/styles/products.module.css";
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import styles from "../../styles/register.module.css";
+import { GoogleMap, useLoadScript, MarkerF,  } from "@react-google-maps/api";
 
 function ModalMap({
   show,
@@ -45,7 +45,7 @@ function ModalMap({
       onHide={handleClose}
       size="lg"
       centered
-      className={`${styles.product_detail}`}
+      className={`${styles.GoogleMap}`}
     >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>

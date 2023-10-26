@@ -191,7 +191,7 @@ function Chazaregister({ id }: { id: string }) {
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Descripcion no valida
-              </Form.Control.Feedback>
+               </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3 ">
