@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "@/components/Header";
+import OrdersComponent from "@/components/Client/Orders";
 
 function Orders() {
   return (
     <>
       <Header></Header>
-      <h1>Orders</h1>
+      <OrdersComponent></OrdersComponent>
     </>
   );
 }

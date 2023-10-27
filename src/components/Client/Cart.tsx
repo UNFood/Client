@@ -86,8 +86,9 @@ function Cart({
       total,
       products: products,
     };
-    console.log(order);
     handleCompraMutation.mutate(order);
+
+    removeChaza(chaza);
   };
 
   const renderCartChaza = Object.keys(cart).map((key, index) => {

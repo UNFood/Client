@@ -111,7 +111,10 @@ function CartProducts({
     <>
       {renderProducts}
       <div className="mt-2">
-        <p className="text-end">Total: {currencyFormatter.format(total)}</p>
+        <p className="text-end">
+          Total:
+          <strong> {currencyFormatter.format(total)}</strong>
+        </p>
       </div>
     </>
   );
