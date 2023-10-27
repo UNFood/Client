@@ -43,8 +43,6 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   };
   const calculateRoute = async () => {
     const directionsService = new google.maps.DirectionsService();
-    console.log(currentLocation);
-    console.log(destination);
     const result = await directionsService.route({
       origin: new google.maps.LatLng(
         currentLocation?.lat,
@@ -53,7 +51,6 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
       destination: new google.maps.LatLng(destination?.lat, destination?.lng),
       travelMode: google.maps.TravelMode.WALKING,
     });
-    console.log(result);
     setDirectionResponse(result);
   };
   //Extract categories from products
@@ -108,6 +105,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                   Ubicación:{" "}
                   <Nav.Link
                     className="text-secondary ms-2"
+                    eventKey="link-1"
                     onClick={handleShowMap}
                   >
                     {chaza.address}
