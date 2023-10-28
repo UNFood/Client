@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  Dropdown,
+} from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/navbar.module.css";
 import { BiMap } from "react-icons/bi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
-import { BiStoreAlt, BiPackage } from "react-icons/bi";
+import { BiStoreAlt, BiPackage, BiReceipt } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import logout from "@/utils/logout";
 import Cart from "./Client/Cart";
+import { MdAccountCircle } from "react-icons/md";
 
 // @ToDo hacer header
 
@@ -61,16 +69,28 @@ function Header() {
                 <span>Chazas</span>
               </Nav.Link>
               <hr />
-              <Button
-                variant="success"
-                className="nav-link text-center me-3"
-                onClick={handleShow}
-              >
+              <Button variant="success" onClick={handleShow}>
                 <FaShoppingCart size={25} />
               </Button>
-              <Button variant="danger" onClick={logout}>
-                <FiLogOut size={20}></FiLogOut>
-              </Button>
+              <Dropdown>
+                <Dropdown.Toggle variant="light" className="w-100">
+                  <MdAccountCircle size={25}></MdAccountCircle>
+                </Dropdown.Toggle>
+                <Dropdown.Menu className={`${styles.dropdown}`}>
+                  <Dropdown.Item>
+                    <FaUserAlt size={20}></FaUserAlt>
+                    <span>Perfil</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/client/orders">
+                    <BiReceipt size={20}></BiReceipt>
+                    <span>Ordenes</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>
+                    <FiLogOut size={20}></FiLogOut>
+                    <span>Salir</span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

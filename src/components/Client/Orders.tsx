@@ -3,23 +3,16 @@ import styles from "@/styles/orders.module.css";
 import { Card, Badge, Row, Col, ProgressBar, Accordion } from "react-bootstrap";
 import Image from "next/image";
 import { Order, ProductsOrderReader } from "@/types/order";
-import { Product } from "@/types/product";
 import currencyFormatter from "@/utils/currency";
 import Link from "next/link";
 
 function Orders({ orders }: { orders: Order[] }) {
-  const [countProgress, setCountProgress] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountProgress((countProgress) => countProgress + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   const renderProducts = (products: ProductsOrderReader[]) =>
-    products.map((product) => (
-      <div className="d-flex justify-content-between align-items-center">
+    products.map((product, index) => (
+      <div
+        className="d-flex justify-content-between align-items-center"
+        key={index}
+      >
         <Image
           src={product.product.image.toString()}
           alt={product.product.name.toString()}
@@ -36,15 +29,30 @@ function Orders({ orders }: { orders: Order[] }) {
 
   const renderOrders = orders.map((order, index) => {
     const date = new Date(order.createdAt);
-    const date2 = new Date();
-    const Datenow = new Date();
     return (
       <Card className="w-100" key={index}>
         <Card.Body>
           <Card.Header className="d-flex justify-content-between">
             <strong>{date.toDateString()}</strong>
-            <Badge bg="info" pill>
-              Pendiente
+            <Badge
+              bg={
+                order.state === 0
+                  ? "secondary"
+                  : order.state === 1
+                  ? "warning"
+                  : order.state === 2
+                  ? "success"
+                  : "success"
+              }
+              pill
+            >
+              {order.state === 0
+                ? "Pendiente"
+                : order.state === 1
+                ? "En preparación"
+                : order.state === 2
+                ? "Listo para recoger"
+                : "Entregado"}
             </Badge>
           </Card.Header>
           <div className="ms-4 mt-2">
@@ -93,7 +101,27 @@ function Orders({ orders }: { orders: Order[] }) {
               </Col>
               <Col md={4}>
                 <div className="mt-3">
-                  <ProgressBar now={countProgress} animated></ProgressBar>
+                  <ProgressBar
+                    now={
+                      order.state === 0
+                        ? 15
+                        : order.state === 1
+                        ? 60
+                        : order.state === 2
+                        ? 80
+                        : 100
+                    }
+                    variant={`${
+                      order.state === 0
+                        ? "secondary"
+                        : order.state === 1
+                        ? "warning"
+                        : order.state === 2
+                        ? "success"
+                        : "success"
+                    }`}
+                    animated={order.state !== 3}
+                  ></ProgressBar>
                 </div>
               </Col>
             </Row>
