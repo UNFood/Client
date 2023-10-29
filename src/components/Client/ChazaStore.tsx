@@ -16,8 +16,16 @@ import ModalMapDirections from "@/components/Client/ModalMapDirections";
 let dictCategorias: { [key: string]: string } = {};
 
 function ChazaStore({ chaza }: { chaza: Chaza }) {
-  const currentLocation = { lat: 4.636312349308707, lng: -74.08334255218506};
-  const destination = { lat: 4.639312349308707, lng: -74.08324255218506 };
+  const stringCurrentLocation = localStorage.getItem("currentLocation")?.toString()??"";
+  const stringDestination = "4.639312349308707,-74.08324255218506";
+  const currentLocation = {
+    lat: Number(stringCurrentLocation.split(",")[0]),
+    lng: Number(stringCurrentLocation.split(",")[1]),
+  };
+  const destination = {
+    lat: Number(stringDestination.split(",")[0]),
+    lng: Number(stringDestination.split(",")[1]),
+  };
   const [products, setProducts] = useState(chaza.products);
   const [category, setCategory] = useState(-1);
   const [showMap, setShowMap] = useState(false);
@@ -53,6 +61,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     });
     setDirectionResponse(result);
   };
+
   //Extract categories from products
   let categories = chaza.products.map((product) => product.category);
   categories = categories.filter((category, index) => {

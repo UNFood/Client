@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/navbar.module.css";
@@ -8,9 +8,9 @@ import { BsSearch } from "react-icons/bs";
 import { BiStoreAlt, BiPackage } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import logout from "@/utils/logout";
-
-// @ToDo hacer header
-
+import { StringLiteral } from "typescript";
+import { getCurrentLocation, addLocation } from "@/utils/currentLocation";
+import Location from "./Location";
 function Header() {
   return (
     <>
@@ -41,10 +41,7 @@ function Header() {
               </Button>
             </Form>
             <Nav className="ms-3" navbarScroll>
-              <Nav.Link href="#action1" className="text-center">
-                <BiMap size={25} />
-                <span className="ms-2">Ubicacion</span>
-              </Nav.Link>
+              <Location></Location>
               <Nav.Link href="/client/products" className="text-center me-3">
                 <BiPackage size={25} />
                 <span> Productos</span>
