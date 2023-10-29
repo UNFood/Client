@@ -40,7 +40,10 @@ function Chazaregister({ id }: { id: string }) {
       setLoading(false);
     },
   });
-  const handleCloseMap = () => setShowMap(false);
+  const handleCloseMap = () => {
+    setShowMap(false);
+    handleChange({target:{name:"address",value:`${currentLocation.lat},${currentLocation.lng}`}} as React.ChangeEvent<HTMLInputElement>)
+  }
   const handleShowMap = () => {
     setShowMap(true);
   };
