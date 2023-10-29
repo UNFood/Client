@@ -6,6 +6,7 @@ import Counter from "../Counter";
 import Link from "next/link";
 
 function Home() {
+
   return (
     <div className={`${styles.home} h-100`}>
       <section className="p-5">
