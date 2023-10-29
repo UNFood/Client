@@ -1,27 +1,27 @@
-/* styles/dashboard.module.css */
-
+/* Estilo general del dashboard */
 .dashboardContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espacio entre los componentes */
     padding: 20px;
-}
-
-.revenue {
+    background-color: #f4f4f4;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
-.salesChart, .productsSoldPieChart, .orderHistory {
-    width: 100%;
-    height: 300px; /* Puedes ajustar según tus necesidades */
+/* Estilos para el componente Revenue */
+.revenueContainer {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1;
 }
 
-.stock, .topSellingProducts {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Estilos para SalesChart */
+.salesChartContainer {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 2;
 }
-
-/* Puedes continuar añadiendo más estilos específicos según tu diseño y necesidades. */
