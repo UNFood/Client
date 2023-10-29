@@ -8,7 +8,7 @@ const SalesChart: React.FC = () => {
     // Lógica para generar el gráfico de barras.
     return (
         <div>
-            {/* Gráfico de barras aquí */}
+            <h1>"hola"</h1>
         </div>
     );
 }

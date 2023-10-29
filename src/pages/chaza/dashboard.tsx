@@ -4,13 +4,13 @@ import DashboardMain from '../../components/Chaza/Dashboard/DasboardMain';
 const DashboardPage: React.FC = () => {
     return (
         <div>
-            {/* Puedes añadir un header o algún otro componente si lo deseas */}
-            <h1>Dashboard</h1>
+
+            
 
             {/* Renderizar el componente DashboardMain */}
             <DashboardMain />
 
-            {/* Aquí podrías añadir otros componentes o secciones si lo necesitas */}
+
         </div>
     );
 }
