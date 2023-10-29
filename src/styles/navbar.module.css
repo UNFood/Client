@@ -33,4 +33,7 @@
     .navbar form {
         width: 100%;
     }
+    .dropdown{
+        text-align: center;
+    }
 }
