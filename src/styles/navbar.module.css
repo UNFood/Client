@@ -28,6 +28,9 @@
  .navbar form {
     width: 50%;
  }
+ .dropdown{
+    margin-right: 2rem !important;
+ }
 }
 @media (max-width: 767.98px){
     .navbar form {
