@@ -1,0 +1,27 @@
+/* styles/dashboard.module.css */
+
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los componentes */
+    padding: 20px;
+}
+
+.revenue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.salesChart, .productsSoldPieChart, .orderHistory {
+    width: 100%;
+    height: 300px; /* Puedes ajustar según tus necesidades */
+}
+
+.stock, .topSellingProducts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Puedes continuar añadiendo más estilos específicos según tu diseño y necesidades. */
