@@ -15,19 +15,26 @@ const DashboardMain: React.FC = () => {
         <div className={styles.container}>
             <SidebarChaza />
 
-            <div className={styles.boxRevenue}>
-                <div className={styles.header}>
-                    <button>View Report</button>
-                </div>
+            <div className={'$styles.boxRevenue ${styles.marginBottom30}'}>
+                <button className={styles.viewReportButton}>View Report</button>
                 <div>
                     <h2>Ganancias</h2>
                     <Revenue />
-                    <div className={styles.headerRevenue}></div>
                 </div>
-            
+        
+                <div className={styles.box}>
+                    <h2>Stock de tu chaza</h2>
+                    <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
+                    <Stock/>
+                </div>
+                {/*
+                
+                <div className={styles.box}>
+                    <h2>Top Selling Products</h2>
+                    <TopSellingProducts />
+                </div>
 
                 <div className={styles.box}>
-                    <h2>Historial de Ordenes</h2>
                     <OrderHistory />
                     <div className={styles.divider}></div>
                     <button>Ver Reporte</button>
@@ -45,15 +52,9 @@ const DashboardMain: React.FC = () => {
                     <ProductsSoldPieChart />
                 </div>
 
-                <div className={styles.box}>
-                    <h2>Stock</h2>
-                    <Stock />
-                </div>
+                
+                */ }
 
-                <div className={styles.box}>
-                    <h2>Top Selling Products</h2>
-                    <TopSellingProducts />
-                </div>
             </div>
         </div>
     );

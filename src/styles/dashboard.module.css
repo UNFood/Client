@@ -12,7 +12,7 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    margin: 20px;
     flex: 1;
 }
 .container {
@@ -45,21 +45,40 @@
     background-color: #e1e1e1;
     margin: 20px 0;
 }
-
+.viewReportButton {
+    position: absolute; /* Set the position to absolute */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+}
 .boxRevenue {
     display: flex;
+    position: relative; /* Set the position to relative */
     flex-direction: column;
     justify-content: space-between;
-    background-color: #fff; /* color de fondo blanco */
-    padding: 20px; /* espacio interno de la caja */
-    border-radius: 10px; /* bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra sutil */
-    margin-bottom: 15px; /* espacio entre las cajas */
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* slightly more diffused shadow */
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease; /* transition for a smoother hover effect */
+}
+
+/* Hover effect to make the box slightly lifted */
+.boxRevenue:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 .headerRevenue {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 15px; /* added space between the header and content for clarity */
+}
+
+/* For better responsiveness on smaller screens */
+@media (max-width: 768px) {
+    .boxRevenue {
+        padding: 15px; /* reduced padding for smaller screens */
+    }
 }
 
 
@@ -67,4 +86,40 @@
     border-bottom: 1px solid #e1e1e1; /* línea divisoria */
     padding-bottom: 20px; /* espacio entre el contenido y la línea */
     margin-bottom: 20px; /* espacio después de la línea */
+}
+
+.stock-containerB {
+    display: flexs;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: 10%;
+    margin-bottom: 500;
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+.stock-quantity, 
+.stock-product {
+    margin: 0;
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap; /* Esto evita que el texto se divida en varias líneas */
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.subtitlestock{
+    font-weight: 340;
+}
+
+
+.marginBottom30 {
+    margin-bottom: 400px;
 }

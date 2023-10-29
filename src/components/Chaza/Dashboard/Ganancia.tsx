@@ -33,7 +33,7 @@ const RevenueChart: React.FC = () => {
 
             
             <p> 
-            <AiOutlineArrowUp color="green" size={20} /> 
+            <AiOutlineArrowUp color="green" size={25} /> 
             <strong>{mejora_semanal.toLocaleString()} %</strong> 
             <span className={styles.lightText}> ganancias desde el último mes</span>
             </p>
@@ -43,7 +43,7 @@ const RevenueChart: React.FC = () => {
                 width={700}
                 height={300}
                 data={data}
-                margin={{top: 20, right: 30, left: 20, bottom: 5}}
+                margin={{top: 20, right: 15, left: 0, bottom: 4}}
             >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
