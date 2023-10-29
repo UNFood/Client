@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, Row, Col, Breadcrumb, Button } from "react-bootstrap";
+import { Card, Row, Col, Button } from "react-bootstrap";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
-import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
+import { BsCartPlusFill } from "react-icons/bs";
 import { addProductToCart } from "@/utils/cart";
 import Message from "@/components/Message";
 

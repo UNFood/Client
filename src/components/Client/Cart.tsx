@@ -78,8 +78,6 @@ function Cart({
       };
     });
 
-    console.log(products);
-
     const order: CreateOrder = {
       user,
       chaza,
