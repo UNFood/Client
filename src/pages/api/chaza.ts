@@ -12,7 +12,7 @@ export function getChazas() {
   };
   return axios
     .get<{ message: string; data: Chaza[] }>(
-      `${BASE_URL}api/v1/chaza/chazas`,
+      `${BASE_URL}/api/v1/chaza/chazas`,
       config
     )
     .then((res) => res.data);
@@ -28,7 +28,7 @@ export function getChaza(id: string) {
   };
   return axios
     .get<{ message: string; data: Chaza }>(
-      `${BASE_URL}api/v1/chaza/byId/${id}`,
+      `${BASE_URL}/api/v1/chaza/byId/${id}`,
       config
     )
     .then((res) => res.data);
@@ -44,7 +44,7 @@ export function getChazabyName(name: string) {
   };
   return axios
     .get<{ message: string; data: Chaza }>(
-      `${BASE_URL}api/v1/chaza/byName/${name}`,
+      `${BASE_URL}/api/v1/chaza/byName/${name}`,
       config
     )
     .then((res) => res.data);
@@ -60,7 +60,7 @@ export function createChaza(chaza: ChazaCreate) {
     },
   };
   return axios
-    .post<Chaza>(`${BASE_URL}api/v1/chaza`, chaza, config)
+    .post<Chaza>(`${BASE_URL}/api/v1/chaza`, chaza, config)
     .then((res) => res.data);
 }
 
@@ -72,7 +72,7 @@ export function updateChaza(chaza: ChazaUpdate) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.put<Chaza>(`${BASE_URL}api/v1/chaza`, chaza, config);
+  return axios.put<Chaza>(`${BASE_URL}/api/v1/chaza`, chaza, config);
 }
 
 export function deleteChaza(id: number) {
@@ -83,5 +83,5 @@ export function deleteChaza(id: number) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.delete<Chaza>(`${BASE_URL}api/v1/chaza/${id}`, config);
+  return axios.delete<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config);
 }
