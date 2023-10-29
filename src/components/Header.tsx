@@ -68,11 +68,11 @@ function Header() {
               <Button variant="success" onClick={handleShow}>
                 <FaShoppingCart size={25} />
               </Button>
-              <Dropdown>
+              <Dropdown className={`${styles.dropdown}`}>
                 <Dropdown.Toggle variant="light" className="w-100">
                   <MdAccountCircle size={25}></MdAccountCircle>
                 </Dropdown.Toggle>
-                <Dropdown.Menu className={`${styles.dropdown}`}>
+                <Dropdown.Menu>
                   <Dropdown.Item>
                     <FaUserAlt size={20}></FaUserAlt>
                     <span>Perfil</span>
