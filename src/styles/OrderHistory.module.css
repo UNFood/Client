@@ -3,14 +3,34 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    
 }
-
+.chart {
+    flex: 4;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    
+    padding: 10px;
+    color: gray;
+  }
+  
+  .chart .title {
+    margin-bottom: 20px;
+  }
+  
+  .chart .chartGrid {
+    stroke: rgb(228, 225, 225);
+  }
+  
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.NooTooMuch{
+    font-weight: 200;
+}
 .stats h1 {
     font-size: 48px;
     margin: 0;
