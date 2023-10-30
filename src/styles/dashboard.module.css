@@ -59,6 +59,10 @@
     top: 10px; /* Adjust as needed */
     right: 10px; /* Adjust as needed */
 }
+.flexContainer {
+    display: flex;
+    justify-content: space-between; /* Si deseas que haya un espacio entre los dos componentes */
+}
 
 .contentContainer {
     display: flex;

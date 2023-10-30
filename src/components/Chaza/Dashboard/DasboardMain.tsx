@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Revenue from './Ganancia';
-
-
 import Stock from './Stock';
-import OrderHistory from './OrderHistory';
+import OrderHistory from '../Dashboard/OrderHistory';
 import TopSellingProducts from './TopSellingProducts';
 import styles from '../../../styles/dashboard.module.css';
 import SidebarChaza from '../../Chaza/SidebarChaza';
@@ -22,11 +20,17 @@ const DashboardMain: React.FC = () => {
                     <Revenue />
                 </div>
                 <div className={styles.line}></div>
-                <div className={styles.boxStock}>
-                    <h2>Stock de tu chaza</h2>
-                    <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
-                    <Stock/>
+                <div className={styles.flexContainer}> {/* Nuevo contenedor */}
+                    <div className={styles.boxStock}>
+                        <h2>Stock de tu chaza</h2>
+                        <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
+                        <Stock/>
+                    </div>
+                    <OrderHistory/>
                 </div>
+            </div>
+        </div>);
+
                 {/*
                 
                 <div className={styles.box}>
@@ -55,9 +59,6 @@ const DashboardMain: React.FC = () => {
                 
                 */ }
 
-            </div>
-        </div>
-    );
 }
 
 export default DashboardMain;
