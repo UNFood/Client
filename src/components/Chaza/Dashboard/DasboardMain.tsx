@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Revenue from './Ganancia';
-import SalesChart from './SalesChart';
-import ProductsSoldPieChart from './ProductsSoldPieChart';
+
+
 import Stock from './Stock';
 import OrderHistory from './OrderHistory';
 import TopSellingProducts from './TopSellingProducts';
@@ -15,14 +15,14 @@ const DashboardMain: React.FC = () => {
         <div className={styles.container}>
             <SidebarChaza />
 
-            <div className={'$styles.boxRevenue ${styles.marginBottom30}'}>
+            <div className={`${styles.boxRevenue} ${styles.marginBottom30}`}>
                 <button className={styles.viewReportButton}>View Report</button>
                 <div>
                     <h2>Ganancias</h2>
                     <Revenue />
                 </div>
-        
-                <div className={styles.box}>
+                <div className={styles.line}></div>
+                <div className={styles.boxStock}>
                     <h2>Stock de tu chaza</h2>
                     <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
                     <Stock/>

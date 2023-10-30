@@ -1,11 +1,14 @@
 /* Estilo general del dashboard */
+
+
 .dashboardContainer {
+    width: 100%;     
+    height: 100%;    
     padding: 20px;
     background-color: #f4f4f4;
     display: flex;
     flex-wrap: wrap;
 }
-
 /* Estilos para el componente Revenue */
 .revenueContainer {
     background-color: #fff;
@@ -20,10 +23,15 @@
     width: 100%;
     height: 100vh;
 }
+
+
 .mainContent {
+    display: flex;
+    flex-direction: column;  /* para que los hijos se apilen verticalmente */
     flex-grow: 1; 
     overflow-y: auto; 
 }
+
 
 .lightText {
     font-weight: 150;
@@ -41,27 +49,50 @@
     flex: 2;
 }
 .line {
-    height: 1px;
+    height: 2px;
     background-color: #e1e1e1;
-    margin: 20px 0;
+    margin-top: 5px; 
+    margin-bottom: 5px; 
 }
 .viewReportButton {
     position: absolute; /* Set the position to absolute */
     top: 10px; /* Adjust as needed */
     right: 10px; /* Adjust as needed */
 }
-.boxRevenue {
+
+.contentContainer {
     display: flex;
-    position: relative; /* Set the position to relative */
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%; /* Ocupa el 100% de la altura de su contenedor padre */
+}
+.boxRevenue {
+    width: 50%; 
+    display: flex;
+    position: relative; 
     flex-direction: column;
     justify-content: space-between;
     background-color: #fff; 
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* slightly more diffused shadow */
-    margin-bottom: 15px;
-    transition: box-shadow 0.3s ease; /* transition for a smoother hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+    transition: box-shadow 0.3s ease;
+    height: 100%; /* Añadido para estirar el contenedor */
 }
+.boxStock {
+    width: 50%; 
+    display: flex;
+    position: relative; 
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff; 
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+    transition: box-shadow 0.3s ease;
+    height: 100%; /* Añadido para estirar el contenedor */
+}
+
 
 /* Hover effect to make the box slightly lifted */
 .boxRevenue:hover {
@@ -89,14 +120,14 @@
 }
 
 .stock-containerB {
-    display: flexs;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10%;
-    width: 10%;
-    margin-bottom: 500;
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px; /* corregido a 30px */
 }
-
 .left-column, .right-column {
     display: flex;
     flex-direction: column;
@@ -121,5 +152,5 @@
 
 
 .marginBottom30 {
-    margin-bottom: 400px;
+    margin-bottom: 30px;
 }
