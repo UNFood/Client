@@ -1,4 +1,9 @@
-import {Product} from "./product";
+import { Product } from "./product";
+
+export interface Location {
+  type: string;
+  coordinates: number[];
+}
 
 export interface Chaza {
   _id: string;
@@ -10,8 +15,9 @@ export interface Chaza {
   phone: String;
   products: Product[];
   score: number;
-  image: String ;
+  image: String;
   payment_method: Number[];
+  location: Location; 
 }
 
 export interface ChazaCreate {
@@ -23,6 +29,7 @@ export interface ChazaCreate {
   phone: String;
   image: null | String | File;
   payment_method: Number[];
+  location: Location;
 }
 
 export interface ChazaUpdate {
@@ -32,4 +39,5 @@ export interface ChazaUpdate {
   address: String;
   phone: String;
   payment_method: Number[];
+  location: Location; 
 }
