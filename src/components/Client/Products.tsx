@@ -5,7 +5,7 @@ import { useState } from "react";
 import styles from "@/styles/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, Row, Col, Form } from "react-bootstrap";
+import { Card, Row, Col, Form, Button } from "react-bootstrap";
 import { Product } from "@/types/product";
 import currencyFormater from "@/utils/currency";
 import { ordenPrecio, rangoPrecio } from "@/utils/filtrosProductos";
