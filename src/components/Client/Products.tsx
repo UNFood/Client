@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -10,12 +11,19 @@ import currencyFormater from "@/utils/currency";
 import { ordenPrecio, rangoPrecio } from "@/utils/filtrosProductos";
 import categorias from "@/utils/categoriesProduct";
 import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
+import { addProductToCart } from "@/utils/cart";
+import Message from "@/components/Message";
 
 function Products({ products }: { products: Product[] }) {
   const router = useRouter();
   const [priceSort, setPriceSort] = useState<string>("0");
   const [categories, setCategories] = useState<string>("");
   const [priceRange, setPriceRange] = useState<number>(0);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     let query = {}
@@ -80,7 +88,19 @@ function Products({ products }: { products: Product[] }) {
       </option>
     );
   });
-
+  
+  const handelAddProductToCart = (product: Product) => {
+    if (addProductToCart(product.name_chaza.toString(), product, 1)) {
+      setMessage("Producto agregado al carrito");
+      setType("success");
+      handleShow();
+    } else {
+      setMessage("Producto ya agregado al carrito");
+      setType("warning");
+      handleShow();
+    }
+  };
+  
   const renderProducts = products.map((product, index) => {
     return (
       <Col sm={6} md={4} xl={3} className="mb-5" key={index}>
@@ -93,9 +113,12 @@ function Products({ products }: { products: Product[] }) {
               height={179}
             ></Image>
             <div className="position-absolute top-0">
-              <button className="btn btn-light  rounded-0">
+              <Button
+                className="btn btn-light  rounded-0"
+                onClick={() => handelAddProductToCart(product)}
+              >
                 <BsCartPlusFill></BsCartPlusFill>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -129,6 +152,13 @@ function Products({ products }: { products: Product[] }) {
   });
 
   return (
+    <>
+    <Message
+        show={show}
+        handleClose={handleClose}
+        message={message}
+        type={type}
+    ></Message>
     <div className={`${styles.products} mt-5 w-100`}>
       <div className={`${styles.home_chaza}`}>
         <div className={`${styles.sidebar_filters} d-grid gap-3`}>
@@ -170,6 +200,7 @@ function Products({ products }: { products: Product[] }) {
         </div>
       </div>
     </div>
+     </>
   );
 }
 
