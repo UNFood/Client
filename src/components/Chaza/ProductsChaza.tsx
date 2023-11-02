@@ -3,12 +3,16 @@ import { Button } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import ModalProductRegister from "./ModalProductRegister";
 import { Chaza } from "@/types/chaza";
-import Products from "@/components/Client/Products";
+import ProductCard from "./ProductCard";
 
 function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const renderProducts = chazaData.products.map((product, index) => {
+    return <ProductCard product={product} key={index}></ProductCard>;
+  });
 
   return (
     <>
@@ -27,9 +31,7 @@ function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
             <AiFillPlusCircle size={60}></AiFillPlusCircle>
           </Button>
         </section>
-        <section>
-          <Products products={chazaData.products}></Products>
-        </section>
+        <section>{renderProducts}</section>
       </div>
     </>
   );

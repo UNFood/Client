@@ -3,7 +3,7 @@ export interface Product {
   name: String;
   name_chaza: String;
   description: String;
-  price: number;
+  price: Number;
   image: String;
   category: Number;
   stock: Number;
@@ -18,12 +18,4 @@ export interface ProductCreate {
   category: number;
   image: null | String | File;
   stock: number;
-}
-
-export interface ProductUpdate {
-  description: string;
-  price: string;
-  category: string;
-  stock: number;
-  total_sales: number;
 }

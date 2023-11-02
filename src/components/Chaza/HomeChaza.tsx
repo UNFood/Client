@@ -105,7 +105,6 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     setLoading(true);
-    console.log("first");
     event.preventDefault();
     event.stopPropagation();
     form.reportValidity();

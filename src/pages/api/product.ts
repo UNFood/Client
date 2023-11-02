@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Product, ProductCreate, ProductUpdate } from "@/types/product";
+import { Product, ProductCreate } from "@/types/product";
 import cookie from "js-cookie";
 
 export function getProducts() {
@@ -48,7 +48,7 @@ export function createProduct(chaza: ProductCreate) {
     .then((res) => res.data);
 }
 
-export function updateProduct(chaza: ProductUpdate) {
+export function updateProduct(product: Product) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -56,7 +56,9 @@ export function updateProduct(chaza: ProductUpdate) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.put<Product>(`${BASE_URL}api/v1/product`, chaza, config);
+  return axios
+    .put<Product>(`${BASE_URL}api/v1/product`, product, config)
+    .then((res) => res.data);
 }
 
 export function deleteChaza(id: number) {
