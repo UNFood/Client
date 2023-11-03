@@ -4,7 +4,6 @@ export const ordenPrecio: { [index: string]: any } = {
 };
 
 export const rangoPrecio: { [index: string]: any } = {
-    0: "0-1000000",
     1: "100-5000",
     2: "5100-10000",
     3: "10100-15000",
