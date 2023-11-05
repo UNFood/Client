@@ -2,17 +2,23 @@ import axios from "axios";
 import { Product, ProductCreate } from "@/types/product";
 import cookie from "js-cookie";
 
-export function getProducts() {
+export function getProducts(category: string, order: string, range: string) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    params: {
+      categories: category,
+      priceOrder: order,
+      priceRange: range,
+    },
   };
+  console.log(category, order, range);
   return axios
     .get<{ message: string; data: Product[] }>(
-      `${BASE_URL}api/v1/product/products`,
+      `${BASE_URL}/api/v1/product/products`,
       config
     )
     .then((res) => res.data);
@@ -28,7 +34,7 @@ export function getProduct(id: string) {
   };
   return axios
     .get<{ message: string; data: Product }>(
-      `${BASE_URL}api/v1/product/${id}`,
+      `${BASE_URL}/api/v1/product/${id}`,
       config
     )
     .then((res) => res.data);
@@ -69,5 +75,5 @@ export function deleteProduct(id: string) {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.delete<Product>(`${BASE_URL}api/v1/product/${id}`, config);
+  return axios.delete<Product>(`${BASE_URL}/api/v1/product/${id}`, config);
 }
