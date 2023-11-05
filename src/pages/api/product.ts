@@ -34,7 +34,7 @@ export function getProduct(id: string) {
     .then((res) => res.data);
 }
 
-export function createProduct(chaza: ProductCreate) {
+export function createProduct(product: ProductCreate) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -44,7 +44,7 @@ export function createProduct(chaza: ProductCreate) {
     },
   };
   return axios
-    .post<Product>(`${BASE_URL}api/v1/product`, chaza, config)
+    .post<Product>(`${BASE_URL}api/v1/product`, product, config)
     .then((res) => res.data);
 }
 
@@ -61,7 +61,7 @@ export function updateProduct(product: Product) {
     .then((res) => res.data);
 }
 
-export function deleteChaza(id: number) {
+export function deleteProduct(id: string) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {

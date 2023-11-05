@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { Col, Card, Button, Form } from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/products.module.css";
@@ -6,7 +6,8 @@ import { FiEdit } from "react-icons/fi";
 import { Product } from "@/types/product";
 import Loading from "../Loading";
 import { useMutation } from "react-query";
-import { updateProduct } from "@/pages/api/product";
+import { updateProduct, deleteProduct } from "@/pages/api/product";
+import Question from "../Question";
 
 function ProductCard({ product }: { product: Product }) {
   const [productData, setProductData] = useState<Product>({
@@ -23,6 +24,11 @@ function ProductCard({ product }: { product: Product }) {
   const [editable, setEditable] = useState(false);
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [message, setMessage] = useState("");
+  const [acepted, setAcepted] = useState(false);
+  const handleClosedQuestion = () => setShowQuestion(false);
+  const handleShowQuestion = () => setShowQuestion(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -37,7 +43,6 @@ function ProductCard({ product }: { product: Product }) {
   const updateProductMutation = useMutation({
     mutationFn: updateProduct,
     onSuccess: (response) => {
-      console.log(response);
       setLoading(false);
       setEditable(false);
     },
@@ -61,8 +66,38 @@ function ProductCard({ product }: { product: Product }) {
     setValidated(true);
   };
 
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: (response) => {
+      setLoading(false);
+      setEditable(false);
+      window.location.reload();
+    },
+    onError: () => {
+      setLoading(false);
+    },
+  });
+
+  useEffect(() => {
+    if (acepted) {
+      setLoading(true);
+      deleteProductMutation.mutate(productData._id.toString());
+    }
+  }, [acepted]);
+
+  const handleDelete = () => {
+    setMessage("El producto se eliminará permanentemente");
+    handleShowQuestion();
+  };
+
   return (
     <>
+      <Question
+        show={showQuestion}
+        message={message}
+        handleClose={handleClosedQuestion}
+        setAcepted={setAcepted}
+      ></Question>
       {loading && <Loading></Loading>}
       <Col sm={6} md={4} xl={3} className="mb-5">
         <Card className={`${styles.product_card} m-auto`}>
@@ -136,7 +171,11 @@ function ProductCard({ product }: { product: Product }) {
                     Guardar
                   </Button>
                 ) : (
-                  <Button variant="danger" className="w-100 rounded-0 mb-0">
+                  <Button
+                    variant="danger"
+                    className="w-100 rounded-0 mb-0"
+                    onClick={handleDelete}
+                  >
                     Eliminar
                   </Button>
                 )}

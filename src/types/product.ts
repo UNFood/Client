@@ -3,11 +3,11 @@ export interface Product {
   name: String;
   name_chaza: String;
   description: String;
-  price: Number;
+  price: number;
   image: String;
-  category: Number;
-  stock: Number;
-  total_sales: Number;
+  category: number;
+  stock: number;
+  total_sales: number;
 }
 
 export interface ProductCreate {
