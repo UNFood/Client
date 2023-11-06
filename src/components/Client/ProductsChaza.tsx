@@ -93,7 +93,7 @@ function Products({ products }: { products: Product[] }) {
         handleClose={handleCloseDetails}
         product={productSelected}
       ></ModalProductDetail>
-      <div className={`${styles.products}`}>
+      <div className={`${styles.products} overflow-auto`}>
         <Row className="gx-0 w-100">{renderProducts}</Row>
       </div>
     </>
