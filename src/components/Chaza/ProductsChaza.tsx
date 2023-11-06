@@ -17,7 +17,7 @@ function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
         handleClose={handleClose}
         chazaId={chazaData.owner}
       ></ModalProductRegister>
-      <div className="w-100 h-100 text-center p-5">
+      <div className="w-100 h-100 text-center p-5 overflow-auto">
         <section className="mb-5 ">
           <Button
             variant="primary"
