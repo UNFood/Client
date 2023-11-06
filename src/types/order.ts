@@ -13,6 +13,7 @@ export interface Order {
   _id: string;
   user: string;
   chaza: string;
+  numeroCelular: string;
   products: ProductsOrderReader[];
   total: number;
   state: number;

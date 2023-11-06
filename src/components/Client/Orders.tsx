@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Order, ProductsOrderReader } from "@/types/order";
 import currencyFormatter from "@/utils/currency";
 import Link from "next/link";
+import { IoLogoWhatsapp } from "react-icons/io5";
 
 function Orders({ orders }: { orders: Order[] }) {
   const renderProducts = (products: ProductsOrderReader[]) =>
@@ -33,7 +34,18 @@ function Orders({ orders }: { orders: Order[] }) {
       <Card className="w-100" key={index}>
         <Card.Body>
           <Card.Header className="d-flex justify-content-between">
-            <strong>{date.toDateString()}</strong>
+            <div className="d-flex">
+              <p>
+                {order.chaza} - <strong>{date.toDateString()}</strong>
+              </p>
+              <a
+                className="btn btn-outline-success"
+                href={`https://wa.me/57${order.numeroCelular}`}
+                target="_blank"
+              >
+                <IoLogoWhatsapp size={30}></IoLogoWhatsapp>
+              </a>
+            </div>
             <Badge
               bg={
                 order.state === 0
