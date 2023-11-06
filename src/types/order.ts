@@ -33,6 +33,5 @@ export interface UpdateOrder {
   chaza: string;
   products: ProductsOrderReader[];
   state: number;
-  time_to_delivery: string;
   total: number;
 }
