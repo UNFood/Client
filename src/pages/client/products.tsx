@@ -8,16 +8,9 @@ import Loading from "@/components/Loading";
 
 function Productss() {
   const router = useRouter();
-  const [priceOrder, setPriceOrder] = useState<string>("0");
-  const [categories, setCategories] = useState<string>("0,");
-  const [priceRange, setPriceRange] = useState<string>("0,1000000");
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    setPriceOrder(router.query.priceOrder as string || "0");
-    setCategories(router.query.categories as string || "0,");
-    setPriceRange(router.query.priceRange as string|| "0,1000000");
-
-  }, [router.query.priceOrder, router.query.categories, router.query.priceRange]);
+  useEffect(() => {}, []);
 
   const {
     status,
@@ -25,18 +18,18 @@ function Productss() {
     data: products,
   } = useQuery({
     queryKey: ["getProducts"],
-    queryFn: () => getProducts(categories, priceOrder, priceRange),
-    
+    queryFn: () => getProducts(),
   });
   if (status === "loading") return <Loading></Loading>;
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (products === null || products === undefined) return <h1>Error</h1>;
 
+  const data = [...products.data].reverse();
 
   return (
     <>
-      <Header></Header>
-      <Products products={products.data} ></Products>
+      <Header setSearch={setSearch}></Header>
+      <Products products={data} search={search}></Products>
     </>
   );
 }

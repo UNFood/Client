@@ -32,7 +32,7 @@ function OrderDashboard({ orders }: { orders: Order[] }) {
           <div className="d-flex justify-content-between">
             <Card.Title className="text-foreground/90">{order.user}</Card.Title>
             <Card.Title className="text-foreground/90">
-              {orderNumber}
+              # {orderNumber}
             </Card.Title>
           </div>
         </Card.Header>
