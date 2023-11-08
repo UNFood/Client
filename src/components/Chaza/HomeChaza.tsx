@@ -15,6 +15,7 @@ import Loading from "../Loading";
 import { updateChaza } from "@/pages/api/chaza";
 import Message from "../Message";
 import ModalMap from "./ModalMap";
+import QRCode from "qrcode";
 
 function HomeChaza({ chazaData }: { chazaData: Chaza }) {
 
@@ -27,6 +28,9 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     phone: chazaData.phone,
     payment_method: chazaData.payment_method,
   });
+
+  const [src, setSrc] = useState<string>('')
+
 
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -135,6 +139,11 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     setValidated(true);
   };
 
+const generateQR = () => {
+    QRCode.toDataURL(`http://localhost:3000/client/${chazaData.name}`).then(setSrc)
+
+}
+
   return (
     <>
       <ModalMap
@@ -163,6 +172,10 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
             <Button variant="danger" onClick={() => setEditable(!editable)}>
               <FiEdit size={30}></FiEdit>
             </Button>
+
+            <Image src={src} alt="logo" fill></Image>
+            <Button variant="danger" onClick={generateQR}></Button>
+
           </div>
           <Form
             noValidate={false}
