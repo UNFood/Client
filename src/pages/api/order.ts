@@ -47,7 +47,7 @@ export function createOrder(order: CreateOrder) {
     .then((res) => res.data);
 }
 
-export function UpdateOrderState(order: UpdateOrder) {
+export function UpdateOrder(order: UpdateOrder) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
