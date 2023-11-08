@@ -28,10 +28,10 @@ function Productss() {
     queryFn: () => getProducts(categories, priceOrder, priceRange),
     
   });
-
   if (status === "loading") return <Loading></Loading>;
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (products === null || products === undefined) return <h1>Error</h1>;
+
 
   return (
     <>
