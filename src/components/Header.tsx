@@ -18,8 +18,10 @@ import logout from "@/utils/logout";
 import Location from "./Location";
 import Cart from "./Client/Cart";
 import { MdAccountCircle } from "react-icons/md";
+import { useRouter } from "next/router";
 
 function Header() {
+  const router = useRouter();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -49,6 +51,12 @@ function Header() {
                 placeholder="Busca tus productos favoritos"
                 aria-label="Search"
                 className="m-auto"
+                onClick={() => {
+                  router.asPath !== "/client/products"? router.push("/client/products"): null;
+                }}
+                onChange={(e) => {
+                }
+                }
               />
               <Button variant="light">
                 <BsSearch size={20} />

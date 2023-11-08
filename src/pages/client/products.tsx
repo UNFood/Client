@@ -36,7 +36,7 @@ function Productss() {
   return (
     <>
       <Header></Header>
-      <Products products={products.data}></Products>
+      <Products products={products.data} ></Products>
     </>
   );
 }
