@@ -30,10 +30,12 @@ function Orders() {
   if (status === "error") return <div>{JSON.stringify(error)}</div>;
   if (orders === null || orders === undefined) return <div>Error</div>;
 
+  const data = [...orders.data].reverse();
+
   return (
     <div className={`${styles.home_chaza} h-100 w-100`}>
       <SidebarChaza></SidebarChaza>
-      <OrderDashboard orders={orders.data}></OrderDashboard>
+      <OrderDashboard orders={data}></OrderDashboard>
     </div>
   );
 }

@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import Image from "next/image";
 import styles from "@/styles/navbar.module.css";
-import { BiMap } from "react-icons/bi";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsSearch } from "react-icons/bs";
 import { BiStoreAlt, BiPackage, BiReceipt } from "react-icons/bi";
@@ -20,12 +19,22 @@ import Cart from "./Client/Cart";
 import { MdAccountCircle } from "react-icons/md";
 import { useRouter } from "next/router";
 
-function Header() {
+function Header({
+  setSearch,
+}: {
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (router.asPath == "/client/products" && setSearch !== undefined)
+      setSearch(value);
+  };
 
   return (
     <>
@@ -45,22 +54,22 @@ function Header() {
             id="navbarScroll"
             className="justify-content-between"
           >
-            <Form className="d-flex m-auto text-center">
+            <Form
+              className="d-flex m-auto text-center"
+              onClick={() => {
+                router.asPath !== "/client/products"
+                  ? router.push("/client/products")
+                  : null;
+              }}
+            >
               <Form.Control
+                name="search"
                 type="search"
                 placeholder="Busca tus productos favoritos"
                 aria-label="Search"
                 className="m-auto"
-                onClick={() => {
-                  router.asPath !== "/client/products"? router.push("/client/products"): null;
-                }}
-                onChange={(e) => {
-                }
-                }
+                onChange={handleSearch}
               />
-              <Button variant="light">
-                <BsSearch size={20} />
-              </Button>
             </Form>
             <Nav className="ms-3" navbarScroll>
               <Location></Location>

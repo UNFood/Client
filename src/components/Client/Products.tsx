@@ -13,7 +13,13 @@ import { BsCartPlusFill, BsCartCheckFill } from "react-icons/bs";
 import { addProductToCart } from "@/utils/cart";
 import Message from "@/components/Message";
 
-function Products({ products }: { products: Product[] }) {
+function Products({
+  products,
+  search,
+}: {
+  products: Product[];
+  search: string;
+}) {
   const [priceSort, setPriceSort] = useState<string>("0");
   const [categories, setCategories] = useState<string>("");
   const [priceRange, setPriceRange] = useState<number>(0);
@@ -23,10 +29,24 @@ function Products({ products }: { products: Product[] }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [searchQuery, setSearchQuery] = useState<string>(search);
 
   useEffect(() => {
     // Filtra los productos según los filtros seleccionados
     let filteredProducts = products;
+
+    if (search !== "") {
+      setSearchQuery(search);
+      filteredProducts = filteredProducts.filter((product) => {
+        if (
+          product.name
+            .toLocaleLowerCase()
+            .includes(searchQuery.trim().toLocaleLowerCase())
+        )
+          return product;
+      });
+    }
+    console.log(searchQuery);
 
     // Filtra por precio
     if (priceSort !== "0") {
@@ -57,7 +77,7 @@ function Products({ products }: { products: Product[] }) {
     }
 
     setFilteredProducts(filteredProducts);
-  }, [categories, priceRange, priceSort]);
+  }, [categories, priceRange, priceSort, search]);
 
   const renderPriceSort = Object.keys(ordenPrecio).map((key, index) => {
     return (

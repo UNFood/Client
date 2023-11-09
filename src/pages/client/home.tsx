@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Home from "@/components/Client/Home";
-import { useEffect, useState } from "react";
 
 function home() {
   return (
