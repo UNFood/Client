@@ -8,11 +8,6 @@
   font-weight: bolder;
 }
 
-.home_chaza button:hover{
-  color: #550A2D;
-  background-color: #A63C6D ;
-  border-color: #550A2D;
-}
 .info input{
   font-size: 1.25rem;
   font-style: normal;
@@ -34,14 +29,24 @@
   line-height: 150%; /* 30px */
   
 }
+
+.info button{
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 30px */
+  border-radius: 0px;
+  border: #A63C6D 1px solid;
+}
+
 .sidebar_chaza_store {
   background-color: white;
   border-right: #A63C6D 1px solid;
   text-align: center;
 }
 .sidebar_chaza_store button{
-  text-decoration: none;
   font-weight: bold;
+  background-color: #ffffff;
   color: #a63c6d;
   border-radius: 0px;
   width: 100%;
@@ -63,11 +68,7 @@
 .info {
     border-bottom: #A63C6D 1px solid;
 }
-.info label{
-    color: #A63C6D;
-    font-size: 1rempx;
-    font-style: normal;
-}
+
 
 .img_container{
   position: unset!important; 

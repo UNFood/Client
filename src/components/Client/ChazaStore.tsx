@@ -11,7 +11,8 @@ import categoriasChaza from "@/utils/categoriesChaza";
 import { useState } from "react";
 import { Product } from "@/types/product";
 import Link from "next/link";
-import ModalMapDirections from "@/components/Client/ModalMapDirections";
+import ModalMapDirections from "./ModalMapDirections";
+import ModalQR from "./ModalQR";
 
 let dictCategorias: { [key: string]: string } = {};
 
@@ -30,6 +31,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   const [category, setCategory] = useState(-1);
   const [showMap, setShowMap] = useState(false);
   const [directionResponse, setDirectionResponse] = useState<any>(null);
+  const [showQR, setshowQR] = useState(false);
 
   products.forEach((product) => {
     dictCategorias[product.category.toString()] =
@@ -49,6 +51,14 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     calculateRoute();
     setShowMap(true);
   };
+
+  const handleshowQR = () => {
+    setshowQR(true);
+  };
+  const handleClose = () => {
+    setshowQR(false);
+  }
+  
   const calculateRoute = async () => {
     const directionsService = new google.maps.DirectionsService();
     const result = await directionsService.route({
@@ -88,6 +98,10 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
+      <ModalQR
+        show={showQR}
+        handleClose={handleClose}
+    ></ModalQR>
       <div className={`${styles.home_chaza}`}>
         <div className={`${styles.sidebar_chaza_store} d-flex flex-column`}>
           <div>
@@ -132,6 +146,11 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     {categoriasChaza[chaza.type]}
                   </span>
                 </Form.Label>
+                <Button 
+                  onClick={() => {handleshowQR()}}
+                >
+                  Ver QR Pagos
+                </Button>
               </div>
             </div>
           </div>
