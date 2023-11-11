@@ -1,27 +1,13 @@
 import React from "react";
-import { useState } from "react";
 import styles from "@/styles/sidebar.chaza.module.css";
 import { Nav, Navbar, Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import { FiLogOut } from "react-icons/fi";
 import logout from "@/utils/logout";
-import ModalAddQR from "./ModalAddQR";
 
 function SidebarChaza() {
-  const [showAddQR, setshowAddQR] = useState(false);
-  const handleshowAddQR = () => {
-    setshowAddQR(true);
-  };
-  const handleClose = () => {
-    setshowAddQR(false);
-  }
   return (
-    <>  
-    <ModalAddQR
-        show={showAddQR}
-        handleClose={handleClose}
-    ></ModalAddQR>
     <Navbar expand="md" className="p-0">
       <div className={`${styles.sidebar_chaza} text-center`}>
         <Navbar.Brand href="home">
@@ -51,13 +37,8 @@ function SidebarChaza() {
                 Estadisticas
               </Link>
             </div>
-            
+
             <div className="mt-5 mb-2">
-              <Button 
-              onClick={() => {handleshowAddQR()}}
-            >
-              Agregar QRPagos
-            </Button>
               <Button variant="danger">
                 <FiLogOut size={20} onClick={logout} />
               </Button>
@@ -66,7 +47,6 @@ function SidebarChaza() {
         </Navbar.Collapse>
       </div>
     </Navbar>
-    </>
   );
 }
 
