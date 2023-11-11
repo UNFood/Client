@@ -11,7 +11,6 @@ import categoriasChaza from "@/utils/categoriesChaza";
 import { useState } from "react";
 import { Product } from "@/types/product";
 import Link from "next/link";
-import ModalMapDirections from "./ModalMapDirections";
 import ModalQR from "./ModalQR";
 import ModalMapDirections from "@/components/Client/ModalMapDirections";
 import Stars from "../Stars";
@@ -65,7 +64,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   };
   const handleClose = () => {
     setshowQR(false);
-  }
+  };
   
   const calculateRoute = async () => {
     const directionsService = new google.maps.DirectionsService();
@@ -106,9 +105,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
-      <ModalQR
-        show={showQR}
-        handleClose={handleClose}
+      <ModalQR show={showQR} handleClose={handleClose}
     ></ModalQR>
       <ModalOpinions
         id={chaza.owner}
@@ -169,8 +166,11 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     {categoriasChaza[chaza.type]}
                   </span>
                 </Form.Label>
-                <Button 
-                  onClick={() => {handleshowQR()}}
+                <Button
+                  variant="light"
+                  onClick={() => {
+                    handleshowQR();
+                  }}
                 >
                   Ver QR Pagos
                 </Button>
