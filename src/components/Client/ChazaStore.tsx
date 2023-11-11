@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Products from "@/components/Client/ProductsChaza";
 import Image from "next/image";
 import styles from "@/styles/chaza.store.module.css";
@@ -13,25 +13,29 @@ import { Product } from "@/types/product";
 import Link from "next/link";
 import ModalMapDirections from "./ModalMapDirections";
 import ModalQR from "./ModalQR";
+import fetchLocation from "@/utils/geocoding";
+import {Location} from "@/types/location";
 
 let dictCategorias: { [key: string]: string } = {};
 
 function ChazaStore({ chaza }: { chaza: Chaza }) {
-  const stringCurrentLocation = localStorage.getItem("currentLocation")?.toString()??"";
-  const stringDestination = "4.639312349308707,-74.08324255218506";
-  const currentLocation = {
+  const stringCurrentLocation =localStorage.getItem("currentLocation")?.toString() ?? "";
+  const stringDestination = chaza.address;
+  const currentLocation : Location= {
     lat: Number(stringCurrentLocation.split(",")[0]),
     lng: Number(stringCurrentLocation.split(",")[1]),
   };
-  const destination = {
+  const destination :Location= {
     lat: Number(stringDestination.split(",")[0]),
     lng: Number(stringDestination.split(",")[1]),
   };
+
   const [products, setProducts] = useState(chaza.products);
   const [category, setCategory] = useState(-1);
   const [showMap, setShowMap] = useState(false);
   const [directionResponse, setDirectionResponse] = useState<any>(null);
   const [showQR, setshowQR] = useState(false);
+  const [locationName, setLocationName] = useState("");
 
   products.forEach((product) => {
     dictCategorias[product.category.toString()] =
@@ -57,8 +61,8 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   };
   const handleClose = () => {
     setshowQR(false);
-  }
-  
+  };
+
   const calculateRoute = async () => {
     const directionsService = new google.maps.DirectionsService();
     const result = await directionsService.route({
@@ -91,6 +95,14 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     );
   });
 
+  const renderLocationName = async () => { 
+    const name = await fetchLocation(destination);
+    setLocationName(name);
+  }
+
+  useEffect(() => {
+    renderLocationName();
+  }, []);
   return (
     <>
       <ModalMapDirections
@@ -98,10 +110,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
-      <ModalQR
-        show={showQR}
-        handleClose={handleClose}
-    ></ModalQR>
+      <ModalQR show={showQR} handleClose={handleClose}></ModalQR>
       <div className={`${styles.home_chaza}`}>
         <div className={`${styles.sidebar_chaza_store} d-flex flex-column`}>
           <div>
@@ -131,7 +140,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     eventKey="link-1"
                     onClick={handleShowMap}
                   >
-                    {chaza.address}
+                    {locationName ?? "Cargando..."}
                   </Nav.Link>
                 </Form.Label>
                 <Form.Label className="d-flex align-items-center">
@@ -146,8 +155,10 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     {categoriasChaza[chaza.type]}
                   </span>
                 </Form.Label>
-                <Button 
-                  onClick={() => {handleshowQR()}}
+                <Button
+                  onClick={() => {
+                    handleshowQR();
+                  }}
                 >
                   Ver QR Pagos
                 </Button>

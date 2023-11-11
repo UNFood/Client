@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Button, Col, Row } from "react-bootstrap";
 import styles from "../../styles/register.module.css";
 import { GoogleMap, useLoadScript, MarkerF,  } from "@react-google-maps/api";
+import { Location } from "@/types/location";
 
 function ModalMap({
   show,
@@ -12,13 +13,13 @@ function ModalMap({
 }: {
   show: boolean;
   handleClose: () => void;
-  currentLocation: { lat: number; lng: number };
-  setCurrentLocation: (location: { lat: number; lng: number }) => void;
+  currentLocation: Location;
+  setCurrentLocation: (location: Location) => void;
 }) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
-  const center= { lat: 4.636312349308707, lng: -74.08334255218506 };
+  const center:Location= { lat: 4.636312349308707, lng: -74.08334255218506 };
   const zoom = 16;
   const options = {
     minZoom: 16,
