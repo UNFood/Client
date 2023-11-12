@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Order, ProductsOrderReader } from "@/types/order";
 import currencyFormatter from "@/utils/currency";
 import Link from "next/link";
+import { IoLogoWhatsapp } from "react-icons/io5";
 
 function Orders({ orders }: { orders: Order[] }) {
   const renderProducts = (products: ProductsOrderReader[]) =>
@@ -33,27 +34,33 @@ function Orders({ orders }: { orders: Order[] }) {
       <Card className="w-100" key={index}>
         <Card.Body>
           <Card.Header className="d-flex justify-content-between">
-            <strong>{date.toDateString()}</strong>
-            <Badge
-              bg={
-                order.state === 0
-                  ? "secondary"
+            <p>
+              <strong>{order.chaza}</strong> - {date.toDateString()}
+            </p>
+
+            <div>
+              <Badge
+                bg={
+                  order.state === 0
+                    ? "secondary"
+                    : order.state === 1
+                    ? "warning"
+                    : order.state === 2
+                    ? "success"
+                    : "success"
+                }
+                className="text-center fs-5 m-auto"
+                pill
+              >
+                {order.state === 0
+                  ? "Pendiente"
                   : order.state === 1
-                  ? "warning"
+                  ? "En preparación"
                   : order.state === 2
-                  ? "success"
-                  : "success"
-              }
-              pill
-            >
-              {order.state === 0
-                ? "Pendiente"
-                : order.state === 1
-                ? "En preparación"
-                : order.state === 2
-                ? "Listo para recoger"
-                : "Entregado"}
-            </Badge>
+                  ? "Listo para recoger"
+                  : "Entregado"}
+              </Badge>
+            </div>
           </Card.Header>
           <div className="ms-4 mt-2">
             <Row className="gx-0">
@@ -66,7 +73,7 @@ function Orders({ orders }: { orders: Order[] }) {
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
-                <div className="text-end">
+                <div className="text-end mt-2">
                   <p>
                     Total:{" "}
                     <strong> {currencyFormatter.format(order.total)} </strong>
@@ -75,6 +82,25 @@ function Orders({ orders }: { orders: Order[] }) {
               </Col>
               <Col md={4}>
                 <div className="d-flex flex-column m-auto mt-3">
+                  <div className="d-flex justify-content-evenly align-items-center mt-2">
+                    <Link
+                      href={`/client/chaza/${order.chaza}`}
+                      className="nav-link text-success m-0 p-0"
+                    >
+                      Ver chaza
+                    </Link>
+                    <a
+                      className="btn btn-outline-success btn-sm"
+                      href={`https://wa.me/57${order.numeroCelular}`}
+                      target="_blank"
+                    >
+                      <IoLogoWhatsapp size={30}></IoLogoWhatsapp>
+                    </a>
+                  </div>
+                </div>
+              </Col>
+              <Col md={4}>
+                <div className="mt-3">
                   {order.state === 0 ? (
                     <p className="text-secondary m-auto">
                       {" "}
@@ -82,7 +108,7 @@ function Orders({ orders }: { orders: Order[] }) {
                     </p>
                   ) : order.state === 1 ? (
                     <p className="text-warning m-auto">
-                      {order.state} Tu pedido esta siendo preparado
+                      Tu pedido esta siendo preparado
                     </p>
                   ) : order.state === 2 ? (
                     <p className="text-success m-auto">
@@ -91,16 +117,6 @@ function Orders({ orders }: { orders: Order[] }) {
                   ) : (
                     <p className="text-danger m-auto">Pedido entregado</p>
                   )}
-                  <Link
-                    href={`/client/chaza/${order.chaza}`}
-                    className="m-auto nav-link text-success"
-                  >
-                    Ver chaza
-                  </Link>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="mt-3">
                   <ProgressBar
                     now={
                       order.state === 0
@@ -121,6 +137,7 @@ function Orders({ orders }: { orders: Order[] }) {
                         : "success"
                     }`}
                     animated={order.state !== 3}
+                    className="mt-3"
                   ></ProgressBar>
                 </div>
               </Col>

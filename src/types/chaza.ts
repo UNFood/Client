@@ -1,4 +1,5 @@
-import {Product} from "./product";
+import { NumberLiteralType } from "typescript";
+import { Product } from "./product";
 
 export interface Chaza {
   _id: string;
@@ -10,8 +11,16 @@ export interface Chaza {
   phone: String;
   products: Product[];
   score: number;
-  image: String ;
+  image: String;
   payment_method: Number[];
+  comments: comment[];
+}
+
+export interface comment {
+  user: string;
+  comment: string;
+  calification: number;
+  date: string;
 }
 
 export interface ChazaCreate {

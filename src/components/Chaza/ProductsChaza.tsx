@@ -3,12 +3,17 @@ import { Button } from "react-bootstrap";
 import { AiFillPlusCircle } from "react-icons/ai";
 import ModalProductRegister from "./ModalProductRegister";
 import { Chaza } from "@/types/chaza";
-import Products from "@/components/Client/Products";
+import ProductCard from "./ProductCard";
+import { Row } from "react-bootstrap";
 
 function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const renderProducts = chazaData.products.map((product, index) => {
+    return <ProductCard product={product} key={index}></ProductCard>;
+  });
 
   return (
     <>
@@ -17,7 +22,7 @@ function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
         handleClose={handleClose}
         chazaId={chazaData.owner}
       ></ModalProductRegister>
-      <div className="w-100 h-100 text-center p-5">
+      <div className="w-100 h-100 text-center p-5 overflow-auto">
         <section className="mb-5 ">
           <Button
             variant="primary"
@@ -28,7 +33,7 @@ function ProductsChaza({ chazaData }: { chazaData: Chaza }) {
           </Button>
         </section>
         <section>
-          <Products products={chazaData.products}></Products>
+          <Row>{renderProducts}</Row>
         </section>
       </div>
     </>

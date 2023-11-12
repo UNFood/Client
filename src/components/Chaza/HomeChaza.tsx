@@ -116,7 +116,6 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     setLoading(true);
-    console.log("first");
     event.preventDefault();
     event.stopPropagation();
     form.reportValidity();
@@ -150,7 +149,7 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
         handleClose={handleCloseMessage}
       ></Message>
       {loading ? <Loading></Loading> : null}
-      <div className=" w-100 h-100">
+      <div className=" w-100 h-100 overflow-auto">
         <div className={styles.img_container}>
           <Image src={chazaData.image.toString()} alt="logo" fill></Image>
         </div>

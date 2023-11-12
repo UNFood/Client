@@ -19,10 +19,12 @@ function Home() {
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (chazas === null || chazas === undefined) return <h1>Error</h1>;
 
+  const data = [...chazas.data].reverse();
+
   return (
     <>
       <Header></Header>
-      <ListaChaza chazas={chazas.data}></ListaChaza>
+      <ListaChaza chazas={data}></ListaChaza>
     </>
   );
 }

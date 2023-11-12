@@ -5,9 +5,9 @@ export interface Product {
   description: String;
   price: number;
   image: String;
-  category: Number;
-  stock: Number;
-  total_sales: Number;
+  category: number;
+  stock: number;
+  total_sales: number;
 }
 
 export interface ProductCreate {
@@ -18,12 +18,4 @@ export interface ProductCreate {
   category: number;
   image: null | String | File;
   stock: number;
-}
-
-export interface ProductUpdate {
-  description: string;
-  price: string;
-  category: string;
-  stock: number;
-  total_sales: number;
 }

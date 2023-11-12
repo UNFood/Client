@@ -31,10 +31,12 @@ function Orders() {
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (orders === null || orders === undefined) return <h1>Error</h1>;
 
+  const data = [...orders.data].reverse();
+
   return (
     <>
       <Header></Header>
-      <OrdersComponent orders={orders.data}></OrdersComponent>
+      <OrdersComponent orders={data}></OrdersComponent>
     </>
   );
 }

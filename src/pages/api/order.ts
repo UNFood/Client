@@ -12,7 +12,7 @@ export function getOrdersByUser(id: string) {
   };
   return axios
     .get<{ message: string; data: Order[] }>(
-      `${BASE_URL}api/v1/order/byUser/${id}`,
+      `${BASE_URL}/api/v1/order/byUser/${id}`,
       config
     )
     .then((res) => res.data);
@@ -28,7 +28,7 @@ export function getOrdersByChaza(id: string) {
   };
   return axios
     .get<{ message: string; data: Order[] }>(
-      `${BASE_URL}api/v1/order/byChaza/${id}`,
+      `${BASE_URL}/api/v1/order/byChaza/${id}`,
       config
     )
     .then((res) => res.data);
@@ -43,11 +43,11 @@ export function createOrder(order: CreateOrder) {
     },
   };
   return axios
-    .post<Order>(`${BASE_URL}api/v1/order`, order, config)
+    .post<Order>(`${BASE_URL}/api/v1/order`, order, config)
     .then((res) => res.data);
 }
 
-export function UpdateOrderState(order: UpdateOrder) {
+export function UpdateOrder(order: UpdateOrder) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -56,6 +56,6 @@ export function UpdateOrderState(order: UpdateOrder) {
     },
   };
   return axios
-    .put<Order>(`${BASE_URL}api/v1/order`, order, config)
+    .put<Order>(`${BASE_URL}/api/v1/order`, order, config)
     .then((res) => res.data);
 }

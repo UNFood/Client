@@ -13,6 +13,7 @@ export interface Order {
   _id: string;
   user: string;
   chaza: string;
+  numeroCelular: string;
   products: ProductsOrderReader[];
   total: number;
   state: number;
@@ -32,6 +33,5 @@ export interface UpdateOrder {
   chaza: string;
   products: ProductsOrderReader[];
   state: number;
-  time_to_delivery: string;
   total: number;
 }
