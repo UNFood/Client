@@ -23,6 +23,11 @@ export interface comment {
   date: string;
 }
 
+export interface qrCreate {
+  _id: String;
+  qr: null | String | File;
+}
+
 export interface ChazaCreate {
   owner: string;
   name: String;
