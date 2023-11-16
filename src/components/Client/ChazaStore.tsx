@@ -11,17 +11,23 @@ import categoriasChaza from "@/utils/categoriesChaza";
 import { useState } from "react";
 import { Product } from "@/types/product";
 import Link from "next/link";
-import ModalMapDirections from "./ModalMapDirections";
 import ModalQR from "./ModalQR";
 import fetchLocation from "@/utils/geocoding";
 import {Location} from "@/types/location";
+import ModalMapDirections from "@/components/Client/ModalMapDirections";
+import Stars from "../Stars";
+import ModalOpinions from "./ModalOpinions";
+import { IoLogoWhatsapp } from "react-icons/io5";
+
 
 let dictCategorias: { [key: string]: string } = {};
 
 function ChazaStore({ chaza }: { chaza: Chaza }) {
+
   const stringCurrentLocation =localStorage.getItem("currentLocation")?.toString() ?? "";
   const stringDestination = chaza.address;
   const currentLocation : Location= {
+
     lat: Number(stringCurrentLocation.split(",")[0]),
     lng: Number(stringCurrentLocation.split(",")[1]),
   };
@@ -35,7 +41,13 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   const [showMap, setShowMap] = useState(false);
   const [directionResponse, setDirectionResponse] = useState<any>(null);
   const [showQR, setshowQR] = useState(false);
+
   const [locationName, setLocationName] = useState("");
+
+  const [showOpinions, setShowOpinions] = useState(false);
+  const handleShowOpinions = () => setShowOpinions(true);
+  const handleCloseOpinions = () => setShowOpinions(false);
+
 
   products.forEach((product) => {
     dictCategorias[product.category.toString()] =
@@ -55,7 +67,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     calculateRoute();
     setShowMap(true);
   };
-
+  
   const handleshowQR = () => {
     setshowQR(true);
   };
@@ -110,57 +122,80 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
-      <ModalQR show={showQR} handleClose={handleClose}></ModalQR>
+
+      <ModalQR show={showQR} handleClose={handleClose}
+    ></ModalQR>
+      <ModalOpinions
+        id={chaza.owner}
+        comments={[...chaza.comments].reverse()}
+        show={showOpinions}
+        handleClose={handleCloseOpinions}
+      ></ModalOpinions>
       <div className={`${styles.home_chaza}`}>
         <div className={`${styles.sidebar_chaza_store} d-flex flex-column`}>
           <div>
             <div className={styles.img_container}>
               <Image
-                src="/images/mcdonalds.png"
-                alt="imageChazaStore"
+                src={chaza.image.toString()}
+                alt={chaza.name.toString()}
                 fill
               ></Image>
             </div>
 
             <div className={styles.info}>
               <div className="p-4">
+                <Stars number={chaza.score}></Stars>
                 <div className="d-flex justify-content-between">
                   <div className="d-flex align-items-center">
                     <h1>{chaza.name}</h1>
                   </div>
                 </div>
                 <Card.Text className={styles.card}>
-                  {chaza.description}
+                  {chaza.description.length > 60
+                    ? chaza.description.substring(0, 59).concat("...")
+                    : chaza.description}
                 </Card.Text>
-                <Form.Label className="d-flex align-items-cente">
-                  <BiMap size={16}></BiMap>
-                  Ubicación:{" "}
+                <Form.Label className="d-flex align-items-center">
+                  <BiMap size={20}></BiMap>
+                  Ubicación:
                   <Nav.Link
-                    className="text-secondary ms-2"
+                    className=" ms-2"
                     eventKey="link-1"
                     onClick={handleShowMap}
                   >
                     {locationName ?? "Cargando..."}
+
                   </Nav.Link>
                 </Form.Label>
                 <Form.Label className="d-flex align-items-center">
                   <BsFillChatDotsFill size={16}></BsFillChatDotsFill>
-                  Telefono:{" "}
-                  <span className="text-secondary ms-2">{chaza.phone}</span>
+                  Telefono:
+                  <a
+                    className="btn btn-outline-success btn-sm ms-4"
+                    href={`https://wa.me/57${chaza.phone.toString().trim()}`}
+                    target="_blank"
+                  >
+                    <IoLogoWhatsapp size={30}></IoLogoWhatsapp>
+                  </a>
                 </Form.Label>
-                <Form.Label className="d-flex align-items-  ">
+                <Form.Label className="d-flex align-items-center">
                   <BiSolidCategory size={16}></BiSolidCategory>
-                  Categoría:{" "}
+                  Categoría:
                   <span className="text-secondary ms-2">
                     {categoriasChaza[chaza.type]}
                   </span>
                 </Form.Label>
                 <Button
+
+                  variant="light"
                   onClick={() => {
                     handleshowQR();
                   }}
                 >
                   Ver QR Pagos
+                </Button>
+                <Button variant="light" onClick={handleShowOpinions}>
+                  Ver reseñas
                 </Button>
               </div>
             </div>
