@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import styles from "../../styles/register.module.css";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
@@ -9,9 +9,11 @@ import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
 import ModalMap from "./ModalMap";
+import fetchLocationName from "@/utils/geocoding";
+import {Location} from "@/types/location";
 
 function Chazaregister({ id }: { id: string }) {
-  const center= { lat: 4.636312349308707, lng: -74.08334255218506 };
+  const center: Location = { lat: 4.636312349308707, lng: -74.08334255218506 };
 
   const [formData, setFormData] = useState<ChazaCreate>({
     owner: id,
@@ -28,7 +30,9 @@ function Chazaregister({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState(center);
+  const [currentLocation, setCurrentLocation] = useState<Location>(center);
+  const [locationName, setLocationName] = useState<string>("");
+
 
   const registerChazaMutation = useMutation({
     mutationFn: createChaza,
@@ -112,6 +116,16 @@ function Chazaregister({ id }: { id: string }) {
     });
   };
 
+  const renderLocationName = async () => {
+    const name = await fetchLocationName(currentLocation);
+    setLocationName(name);
+  }
+
+  useEffect(() => {
+    console.log(currentLocation);
+    console.log(locationName);
+    renderLocationName();
+  }, [currentLocation]);
   return (
     <>
       {loading ? <Loading></Loading> : null}
@@ -190,7 +204,7 @@ function Chazaregister({ id }: { id: string }) {
                 name="location"
                 onChange={handleChange}
                 onClick={() => handleShowMap()}
-                value={`${currentLocation.lat}, ${currentLocation.lng}`}
+                value={locationName}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Descripcion no valida
