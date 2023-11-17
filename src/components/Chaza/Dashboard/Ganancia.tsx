@@ -2,6 +2,7 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import styles from '../../../styles/dashboard.module.css';
 import {AiOutlineArrowUp} from "react-icons/ai";
+import { ResponsiveContainer } from 'recharts';
 
 // Datos actualizados con SemanaPasada y SemanaActual
 const data = [
@@ -14,10 +15,10 @@ const data = [
 ];
 
 
-const venta_mensual = 7852000
+const venta_mensual = "7852000"
 const inicio_estadistica = '2023 - Agosto - 01 '
 const fin_estadistica = '2023 - Octubre - 01'
-const mejora_semanal = 7.5
+const mejora_semanal = "7.5"
 
 const RevenueChart: React.FC = () => {
     return (
@@ -39,6 +40,7 @@ const RevenueChart: React.FC = () => {
             </p>
 
             {/* Diagrama de barras */}
+            <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 width={700}
                 height={300}
@@ -53,6 +55,7 @@ const RevenueChart: React.FC = () => {
                 <Bar dataKey="SemanaPasada" fill="#A63C6D" />
                 <Bar dataKey="SemanaActual" fill="#550A2D" />
             </BarChart>
+            </ResponsiveContainer>
         </div>
     );
 }

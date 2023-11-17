@@ -1,13 +1,21 @@
 /* Estilo general del dashboard */
 
 .dashboardContainer {
-    width: 100%;     
-    height: 100%;    
+    width: 100%;
+    height: 100%;
     padding: 20px;
     background-color: #f4f4f4;
     display: flex;
     flex-wrap: wrap;
     margin-right: 1px;
+}
+.orderHistoryContainer {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex: 1;
 }
 /* Estilos para el componente Revenue */
 .revenueContainer {
@@ -61,7 +69,7 @@
 }
 .flexContainer {
     display: flex;
-    justify-content: space-between; /* Si deseas que haya un espacio entre los dos componentes */
+    
 }
  
 .contentContainer {

@@ -30,6 +30,7 @@ const ultima_encuesta = "último mes";
 
 const OrderHistory: React.FC = () => {
     return (
+        
         <div className={styles.orderHistoryContainer}>
             <div className={styles.header}>
                 <h2><strong>Historial de Ordenes</strong></h2>

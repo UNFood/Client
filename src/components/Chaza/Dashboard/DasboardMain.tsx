@@ -21,43 +21,19 @@ const DashboardMain: React.FC = () => {
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.flexContainer}> {/* Nuevo contenedor */}
-                    <div className={styles.boxStock}>
-                        <h2>Stock de tu chaza</h2>
-                        <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
-                        <Stock/>
-                    </div>
                     <OrderHistory/>
                 </div>
             </div>
+                        {/* Nuevo componente de historial de órdenes */}
+                        <div className={styles.orderHistoryContainer}>
+                        <h2 style={{textAlign: "center"}}>Top productos vendidos</h2>
+
+                <TopSellingProducts/>
+                <h2 style={{textAlign: "center"}}>Stock de tu chaza</h2>
+                    <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
+                    <Stock/>
+            </div>
         </div>);
-
-                {/*
-                
-                <div className={styles.box}>
-                    <h2>Top Selling Products</h2>
-                    <TopSellingProducts />
-                </div>
-
-                <div className={styles.box}>
-                    <OrderHistory />
-                    <div className={styles.divider}></div>
-                    <button>Ver Reporte</button>
-                </div>
-
-                <div className={styles.line}></div>
-
-                <div className={styles.box}>
-                    <h2>Sales Chart</h2>
-                    <SalesChart />
-                </div>
-
-                <div className={styles.box}>
-                    <h2>Products Sold</h2>
-                    <ProductsSoldPieChart />
-                </div>
-
-                
-                */ }
 
 }
 
