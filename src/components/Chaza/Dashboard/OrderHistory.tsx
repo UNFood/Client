@@ -21,9 +21,6 @@ const areaData = [
     { name: "June", Total: 1700 },
 ];
 
-// Datos y opciones para el Line chart
-// ... (sin cambios aquí)
-
 const cantidad_ordenes = 234456;
 const porcentaje_ventas = 2.1;
 const ultima_encuesta = "último mes";
@@ -34,7 +31,6 @@ const OrderHistory: React.FC = () => {
         <div className={styles.orderHistoryContainer}>
             <div className={styles.header}>
                 <h2><strong>Historial de Ordenes</strong></h2>
-                <button>Ver Reporte</button>
             </div>
             
             <div className={styles.stats}>
@@ -46,10 +42,10 @@ const OrderHistory: React.FC = () => {
             </div>
             
             {/* Gráfico AreaChart */}
-            <ResponsiveContainer width="100%" aspect={4 / 3}>
+            <ResponsiveContainer width="100%" aspect={3.5 / 3}>
                 <AreaChart
                     data={areaData}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
                 >
                     <defs>
                         <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">

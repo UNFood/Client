@@ -17,22 +17,23 @@ const DashboardMain: React.FC = () => {
                 <button className={styles.viewReportButton}>View Report</button>
                 <div>
                     <h2>Ganancias</h2>
-                    <Revenue />
+                    <Revenue /> 
                 </div>
                 <div className={styles.line}></div>
-                <div className={styles.flexContainer}> {/* Nuevo contenedor */}
+                <div className={styles.flexContainer}> 
                     <OrderHistory/>
                 </div>
             </div>
-                        {/* Nuevo componente de historial de órdenes */}
-                        <div className={styles.orderHistoryContainer}>
-                        <h2 style={{textAlign: "center"}}>Top productos vendidos</h2>
-
+                
+                <div className={styles.orderHistoryContainer}>
+                <h2 style={{textAlign: "center",padding:'20px'}}>Top productos vendidos</h2>
                 <TopSellingProducts/>
-                <h2 style={{textAlign: "center"}}>Stock de tu chaza</h2>
-                    <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
-                    <Stock/>
+                <div className={styles.line}></div>
+                <h2 style={{textAlign: "center",padding:'30px'}}>Stock de tu chaza</h2>
+                <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
+                <Stock/>
             </div>
+            
         </div>);
 
 }

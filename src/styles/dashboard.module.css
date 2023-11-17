@@ -14,14 +14,13 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    margin: 20px;
     flex: 1;
 }
 /* Estilos para el componente Revenue */
 .revenueContainer {
     background-color: #fff;
     padding: 10px;
-    border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 20px;
     flex: 1;
@@ -39,7 +38,6 @@
     flex-grow: 1; 
     overflow-y: auto; 
 }
-
 
 .lightText {
     font-weight: 150;
@@ -68,16 +66,16 @@
     right: 10px; /* Adjust as needed */
 }
 .flexContainer {
+    width: 100%;
     display: flex;
-    
+    flex-grow: 1;
+    position: relative; 
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 45px;
+    height: 100%;
 }
  
-.contentContainer {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    height: 100%; /* Ocupa el 100% de la altura de su contenedor padre */
-}
 .boxRevenue {
     width: 50%; 
     display: flex;
@@ -85,11 +83,17 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #fff; 
-    padding: 25px;
+    padding: 1px;
     border-radius: 45px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
     transition: box-shadow 0.3s ease;
     height: 100%; /* Añadido para estirar el contenedor */
+}
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%; /* Ocupa el 100% de la altura de su contenedor padre */
 }
 .boxStock {
     width: 50%; 
@@ -147,7 +151,6 @@
     justify-content: space-between;
     height: 100%;
 }
-
 
 .stock-quantity, 
 .stock-product {

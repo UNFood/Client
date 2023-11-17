@@ -14,7 +14,6 @@ const data = [
     
 ];
 
-
 const venta_mensual = "7852000"
 const inicio_estadistica = '2023 - Agosto - 01 '
 const fin_estadistica = '2023 - Octubre - 01'
