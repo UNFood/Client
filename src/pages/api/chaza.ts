@@ -75,15 +75,18 @@ export function updateChaza(chaza: ChazaUpdate) {
   return axios.put<Chaza>(`${BASE_URL}/api/v1/chaza`, chaza, config);
 }
 
-export function deleteChaza(id: number) {
+export function uploadQR(qr: qrCreate) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.delete<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config);
+  return axios
+    .post<Chaza>(`${BASE_URL}/api/v1/chaza/qr`, qr, config)
+    .then((res) => res.data);
 }
 
 export function addComment({ id, comment }: { id: string; comment: comment }) {
@@ -99,16 +102,13 @@ export function addComment({ id, comment }: { id: string; comment: comment }) {
     .then((res) => res.data);
 }
 
-export function uploadQR(qr: qrCreate) {
+export function deleteChaza(id: number) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
     headers: {
-      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios
-    .post<Chaza>(`${BASE_URL}/api/v1/chaza/qr`, qr, config)
-    .then((res) => res.data);
+  return axios.delete<Chaza>(`${BASE_URL}/api/v1/chaza/${id}`, config);
 }

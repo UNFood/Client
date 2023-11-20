@@ -97,7 +97,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
       </Button>
     );
   });
-
+  console.log(chaza)
   return (
     <>
       <ModalMapDirections
@@ -105,7 +105,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
-      <ModalQR show={showQR} handleClose={handleClose}
+      <ModalQR show={showQR} handleClose={handleClose} link={chaza.qr}
     ></ModalQR>
       <ModalOpinions
         id={chaza.owner}

@@ -3,25 +3,25 @@ import Modal from "react-bootstrap/Modal";
 import { Button, Col, Row, Form } from "react-bootstrap";
 import { qrCreate } from "@/types/chaza";
 import { uploadQR } from "@/pages/api/chaza";
-
+import { getToken } from "@/pages/api/token";
 import { useMutation } from "react-query";
 
 import styles from "../../styles/register.module.css";
+import { get } from "http";
 
 function ModalAddQR({
-  id,
   show,
   handleClose,
 }: {
-  id: String;
   show: boolean;
   handleClose: () => void;
 }) {
 
-  const [image, setImage] = useState<qrCreate>({
-    _id: id,
+  const [qr, setQr] = useState<qrCreate>({
+    _id: "",
     qr: "",
   });
+  
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,8 @@ function ModalAddQR({
       setLoading(false);
       setValidated(true);
     } else {
-      uploadQRMutation.mutate(image);
+      qr._id = getToken()?.id??""
+      uploadQRMutation.mutate(qr);
     }
 
     setValidated(true);
@@ -88,7 +89,7 @@ function ModalAddQR({
                   : null;
                 console.log(selectedImage);
 
-                setImage((prevFormData) => ({
+                setQr((prevFormData) => ({
                   ...prevFormData,
                   qr: selectedImage,
                 }));
