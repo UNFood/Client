@@ -1,11 +1,11 @@
 import React from 'react';
 // Importar el componente DashboardMain
-import DashboardMain from '../../components/Chaza/Dashboard/DasboardMain';
+import Ganancia from '../../components/Chaza/Dashboard/Ganancia';
 const DashboardPage: React.FC = () => {
     return (
         <div>
             {/* Renderizar el componente DashboardMain */}
-            <DashboardMain />
+            <Ganancia />
 
 
         </div>
@@ -15,3 +15,4 @@ const DashboardPage: React.FC = () => {
 // Con Next.js, el export default de una página en la carpeta /pages
 // hará que esa página esté disponible como una ruta en tu aplicación.
 export default DashboardPage;
+

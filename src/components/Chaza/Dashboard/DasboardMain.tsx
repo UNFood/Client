@@ -14,7 +14,6 @@ const DashboardMain: React.FC = () => {
             <SidebarChaza />
 
             <div className={`${styles.boxRevenue} ${styles.marginBottom30}`}>
-                <button className={styles.viewReportButton}>View Report</button>
                 <div>
                     <h2>Ganancias</h2>
                     <Revenue /> 

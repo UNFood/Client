@@ -1,66 +1,66 @@
-.orderHistoryContainer {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .orderHistoryContainer {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        
+        
+    }
+    .chart {
+        flex: 4;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        
+        padding: 10px;
+        color: gray;
+    }
     
+    .chart .title {
+        margin-bottom: 20px;
+    }
     
-}
-.chart {
-    flex: 4;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    .chart .chartGrid {
+        stroke: rgb(228, 225, 225);
+    }
     
-    padding: 10px;
-    color: gray;
-  }
-  
-  .chart .title {
-    margin-bottom: 20px;
-  }
-  
-  .chart .chartGrid {
-    stroke: rgb(228, 225, 225);
-  }
-  
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.NooTooMuch{
-    font-weight: 200;
-}
-.stats h1 {
-    font-size: 48px;
-    margin: 0;
-}
+    .NooTooMuch{
+        font-weight: 200;
+    }
+    .stats h1 {
+        font-size: 48px;
+        margin: 0;
+    }
 
-.stats p {
-    font-size: 18px;
-    color: #888888;
-}
+    .stats p {
+        font-size: 18px;
+        color: #888888;
+    }
 
-.decrease {
-    color: red;
-}
+    .decrease {
+        color: red;
+    }
 
-.chart {
-    height: 150px; /* ajustar según necesidad */
-    background-color: #f1f1f1; /* Placeholder para el gráfico */
-    margin-top: 20px;
-}
+    .chart {
+        height: 150px; /* ajustar según necesidad */
+        background-color: #f1f1f1; /* Placeholder para el gráfico */
+        margin-top: 20px;
+    }
 
-.legend {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
+    .legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
 
-.currentWeek {
-    color: blue;
-}
+    .currentWeek {
+        color: blue;
+    }
 
-.lastWeek {
-    color: gray;
-}
+    .lastWeek {
+        color: gray;
+    }
