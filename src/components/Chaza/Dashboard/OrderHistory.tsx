@@ -1,7 +1,13 @@
-import React from 'react';
+// Orders.tsx
+
+import React, { useState, useEffect } from 'react';
+import { getOrdersByChaza } from "../../../pages/api/order";
+import { getToken } from "@/pages/api/token";
+import { useQuery } from 'react-query';
+import Loading from "@/components/Loading";
 import styles from '../../../styles/OrderHistory.module.css';
-import { AiOutlineArrowDown } from "react-icons/ai";
-import { Line } from 'react-chartjs-2';
+import { Order } from "@/types/order";
+
 import {
     AreaChart,
     Area,
@@ -11,63 +17,64 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-// Datos para el AreaChart
-const areaData = [
-    { name: "January", Total: 1200 },
-    { name: "February", Total: 2100 },
-    { name: "March", Total: 800 },
-    { name: "April", Total: 1600 },
-    { name: "May", Total: 900 },
-    { name: "June", Total: 1700 },
-];
 
-const cantidad_ordenes = 234456;
-const porcentaje_ventas = 2.1;
-const ultima_encuesta = "último mes";
+function Orders() {
+    const [id, setId] = useState<string>("");
 
-const OrderHistory: React.FC = () => {
+    const token = getToken()?.id;
+    useEffect(() => {
+        if (token) {
+            setId(token);
+        }
+    }, [token]);
+
+    const { status, error, data: orders } = useQuery({
+        queryKey: ["getOrdersByChaza"],
+        queryFn: () => (id !== "" ? getOrdersByChaza(id) : null),
+        enabled: id !== "",
+    });
+
+    if (status === "loading") return <Loading />;
+    if (status === "error") return <div>{JSON.stringify(error)}</div>;
+    if (!orders || !Array.isArray(orders.data)) return <div>Error</div>;
+
+    const areaData = transformOrderDataToAreaData(orders.data);
+    const lastFiveOrders = orders.data.slice(0, 5);
+
     return (
-        
         <div className={styles.orderHistoryContainer}>
-            <div className={styles.header}>
-                <h2><strong>Historial de Ordenes</strong></h2>
-            </div>
-            
-            <div className={styles.stats}>
-                <h6><span className={styles.NooTooMuch}>Cantidad de ordenes desde {ultima_encuesta} </span>{cantidad_ordenes}</h6>
-                <p>
-                    <AiOutlineArrowDown color="red" size={20} />
-                    <strong>{porcentaje_ventas}</strong> % vs {ultima_encuesta}
-                </p>
-            </div>
-            
-            {/* Gráfico AreaChart */}
+            <h2> Historial de Órdenes</h2>
             <ResponsiveContainer width="100%" aspect={3.5 / 3}>
                 <AreaChart
                     data={areaData}
-                    margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                 >
-                    <defs>
-                        <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="50%" stopColor="#A63C6D" stopOpacity={0.8} />
-                            <stop offset="95%" stopColor="#550A2D" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-                    <XAxis dataKey="name" stroke="gray" />
+                    <XAxis dataKey="date" />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
-                    <Area 
-                        type="monotone" 
-                        dataKey="Total" 
-                        stroke="#550A2D" 
-                        fillOpacity={1} 
-                        fill="url(#total)" 
-                    />
+                    <Area type="monotone" dataKey="count" stroke="#8884d8" fill="#8884d8" />
                 </AreaChart>
             </ResponsiveContainer>
+
+            <div>
+
+            </div>
         </div>
     );
 }
 
-export default OrderHistory;
+function transformOrderDataToAreaData(orders: Order[]) {
+    const ordersByMonth: { [key: string]: number } = {};
 
+    orders.forEach(order => {
+        const month = new Date(order.createdAt).toLocaleString('default', { month: 'long' });
+        ordersByMonth[month] = (ordersByMonth[month] || 0) + 1;
+    });
+
+    return Object.keys(ordersByMonth).map(month => ({
+        date: month,
+        count: ordersByMonth[month]
+    }));
+}
+
+export default Orders;

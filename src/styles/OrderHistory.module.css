@@ -4,18 +4,17 @@
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         
-        
     }
     .chart {
         flex: 4;
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        -webkit-box-shadow: 2px 4px 20px 1px rgba(0, 0, 0, 0.47);
         
         padding: 10px;
-        color: gray;
+        color: blue;
     }
     
     .chart .title {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     .chart .chartGrid {
@@ -43,12 +42,6 @@
 
     .decrease {
         color: red;
-    }
-
-    .chart {
-        height: 150px; /* ajustar según necesidad */
-        background-color: #f1f1f1; /* Placeholder para el gráfico */
-        margin-top: 20px;
     }
 
     .legend {
