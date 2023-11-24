@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button, Col, Row, Form } from "react-bootstrap";
+import { qrCreate } from "@/types/chaza";
+import { uploadQR } from "@/pages/api/chaza";
+import { getToken } from "@/pages/api/token";
+import { useMutation } from "react-query";
 import styles from "../../styles/register.module.css";
 
 function ModalAddQR({
@@ -10,6 +14,43 @@ function ModalAddQR({
   show: boolean;
   handleClose: () => void;
 }) {
+
+  const [qr, setQr] = useState<qrCreate>({
+    _id: "",
+    qr: "",
+  });
+  
+  const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const uploadQRMutation = useMutation({
+    mutationFn: uploadQR,
+    onSuccess: (response) => {
+      setLoading(false);
+      window.location.href = "home";
+    },
+    onError: (error: any) => {
+      setLoading(false);
+    },
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const form = event.currentTarget;
+    setLoading(true);
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (form.checkValidity() === false) {
+      setLoading(false);
+      setValidated(true);
+    } else {
+      qr._id = getToken()?.id??""
+      uploadQRMutation.mutate(qr);
+    }
+
+    setValidated(true);
+  };
+
   return (
     <Modal
       show={show}
@@ -20,6 +61,12 @@ function ModalAddQR({
     >
       <Modal.Header closeButton>Agregar QR Pagos</Modal.Header>
       <Modal.Body>
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+          className="w-100 text-center m-auto"
+        >
         <Row>
           <Form.Group className="mb-3 ">
             <Form.Label>
@@ -38,18 +85,24 @@ function ModalAddQR({
                   ? event.target.files[0]
                   : null;
                 console.log(selectedImage);
+
+                setQr((prevFormData) => ({
+                  ...prevFormData,
+                  qr: selectedImage,
+                }));
               }}
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Imagen no valida
             </Form.Control.Feedback>
             <Modal.Footer className="d-flex justify-content-center">
-              <Button  onClick={handleClose}>
+              <Button  type='submit'>
                 Guardar
               </Button>
             </Modal.Footer>
           </Form.Group>
         </Row>
+        </Form>
       </Modal.Body>
     </Modal>
   );

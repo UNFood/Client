@@ -14,6 +14,7 @@ export interface Chaza {
   image: String;
   payment_method: Number[];
   comments: comment[];
+  qr: string;
 }
 
 export interface comment {
@@ -41,4 +42,9 @@ export interface ChazaUpdate {
   address: String;
   phone: String;
   payment_method: Number[];
+}
+
+export interface qrCreate {
+  _id: String;
+  qr: null | String | File;
 }
