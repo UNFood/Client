@@ -16,8 +16,12 @@ function ModalQrChaza({
       <Modal.Header closeButton>
         <Modal.Title>Qr Chaza</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="text-center">
-        <Image src={src} alt="qrCode" width={500} height={500}></Image>
+      <Modal.Body
+        style={{
+          minHeight: "500px",
+        }}
+      >
+        <Image src={src} alt="qrCode" fill></Image>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleClose}>Close</Button>

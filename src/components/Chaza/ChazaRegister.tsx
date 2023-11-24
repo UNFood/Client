@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/register.module.css";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
 import ModalMap from "./ModalMap";
 import fetchLocationName from "@/utils/geocoding";
-import {Location} from "@/types/location";
+import { Location } from "@/types/location";
 
 function Chazaregister({ id }: { id: string }) {
   const center: Location = { lat: 4.636312349308707, lng: -74.08334255218506 };
@@ -33,7 +33,6 @@ function Chazaregister({ id }: { id: string }) {
   const [currentLocation, setCurrentLocation] = useState<Location>(center);
   const [locationName, setLocationName] = useState<string>("");
 
-
   const registerChazaMutation = useMutation({
     mutationFn: createChaza,
     onSuccess: (response) => {
@@ -46,8 +45,13 @@ function Chazaregister({ id }: { id: string }) {
   });
   const handleCloseMap = () => {
     setShowMap(false);
-    handleChange({target:{name:"address",value:`${currentLocation.lat},${currentLocation.lng}`}} as React.ChangeEvent<HTMLInputElement>)
-  }
+    handleChange({
+      target: {
+        name: "address",
+        value: `${currentLocation.lat},${currentLocation.lng}`,
+      },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
   const handleShowMap = () => {
     setShowMap(true);
   };
@@ -107,7 +111,6 @@ function Chazaregister({ id }: { id: string }) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -119,11 +122,9 @@ function Chazaregister({ id }: { id: string }) {
   const renderLocationName = async () => {
     const name = await fetchLocationName(currentLocation);
     setLocationName(name);
-  }
+  };
 
   useEffect(() => {
-    console.log(currentLocation);
-    console.log(locationName);
     renderLocationName();
   }, [currentLocation]);
   return (
@@ -195,7 +196,7 @@ function Chazaregister({ id }: { id: string }) {
                 Telefono no valido
               </Form.Control.Feedback>
             </Form.Group>
-            
+
             <Form.Group className="mb-3 ">
               <Form.Control
                 required
@@ -208,7 +209,7 @@ function Chazaregister({ id }: { id: string }) {
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Descripcion no valida
-               </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3 ">
@@ -222,7 +223,6 @@ function Chazaregister({ id }: { id: string }) {
                   const selectedImage = event.target.files
                     ? event.target.files[0]
                     : null;
-                  console.log(selectedImage);
 
                   setFormData((prevFormData) => ({
                     ...prevFormData,

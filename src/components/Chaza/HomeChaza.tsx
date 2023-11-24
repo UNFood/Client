@@ -19,7 +19,16 @@ import QRCode from "qrcode";
 import { BsQrCode } from "react-icons/bs";
 import ModalQrChaza from "./ModalQRChaza";
 
+import ModalAddQR from "./ModalAddQR";
+
 function HomeChaza({ chazaData }: { chazaData: Chaza }) {
+  const [showAddQR, setshowAddQR] = useState(false);
+  const handleshowAddQR = () => {
+    setshowAddQR(true);
+  };
+  const handleClose = () => {
+    setshowAddQR(false);
+  };
   const [editable, setEditable] = useState(false);
   const [chaza, setChaza] = useState<ChazaUpdate>({
     owner: chazaData.owner,
@@ -159,6 +168,11 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
 
   return (
     <>
+      <ModalAddQR
+        show={showAddQR}
+        handleClose={handleClose}
+        qrActual={chazaData.qr?.toString() ?? ""}
+      ></ModalAddQR>
       <ModalMap
         show={showMap}
         handleClose={handleCloseMap}
@@ -193,6 +207,15 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
               </Button>
               <Button variant="danger" onClick={generateQR}>
                 <BsQrCode size={30} />
+                <span className="ms-2">Chaza</span>
+              </Button>
+              <Button
+                onClick={() => {
+                  handleshowAddQR();
+                }}
+              >
+                <BsQrCode size={30} />
+                <span className="ms-2">Pagos</span>
               </Button>
             </div>
           </div>
