@@ -7,16 +7,18 @@ import { BiMap, BiSolidCategory } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
-import { ChazaUpdate } from "@/types/chaza";
+import { ChazaUpdate, Chaza} from "@/types/chaza";
 import metodosPago from "@/utils/paymentMethods";
 import categorias from "@/utils/categoriesChaza";
-import { Chaza } from "@/types/chaza";
 import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { updateChaza } from "@/pages/api/chaza";
 import Message from "../Message";
+import ModalMap from "./ModalMap";
+import QRCode from "qrcode";
 
 function HomeChaza({ chazaData }: { chazaData: Chaza }) {
+
   const [editable, setEditable] = useState(false);
   const [chaza, setChaza] = useState<ChazaUpdate>({
     owner: chazaData.owner,
@@ -27,24 +29,37 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     payment_method: chazaData.payment_method,
   });
 
+  const [src, setSrc] = useState<string>('')
+
+
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+  const [showMap, setShowMap] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState({lat:Number (chazaData.address.toString().split(",")[0]),lng:Number (chazaData.address.toString().split(",")[1])});
 
   const handleShowMessage = () => setShowMessage(true);
   const handleCloseMessage = () => setShowMessage(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    console.log(name, value);
+    
     setChaza((prevFormData) => {
       return {
         ...prevFormData,
         [name]: value,
       };
     });
+  };
+  const handleCloseMap = () => {
+    handleChange({target:{name:"address",value:`${currentLocation.lat},${currentLocation.lng}`}} as React.ChangeEvent<HTMLInputElement>)
+    setShowMap(false)};
+  const handleShowMap = () => {
+    setShowMap(true);
   };
 
   const renderPaymentMethods = Object.keys(metodosPago).map((key, index) => {
@@ -105,7 +120,6 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     setLoading(true);
-    console.log("first");
     event.preventDefault();
     event.stopPropagation();
     form.reportValidity();
@@ -124,8 +138,19 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     setValidated(true);
   };
 
+const generateQR = () => {
+    QRCode.toDataURL(`http://localhost:3000/client/${chazaData.name}`).then(setSrc)
+
+}
+
   return (
     <>
+      <ModalMap
+        show={showMap}
+        handleClose={handleCloseMap}
+        currentLocation={currentLocation}
+        setCurrentLocation={setCurrentLocation}
+      ></ModalMap>
       <Message
         message={message}
         type={messageType}
@@ -133,7 +158,7 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
         handleClose={handleCloseMessage}
       ></Message>
       {loading ? <Loading></Loading> : null}
-      <div className=" w-100 h-100">
+      <div className=" w-100 h-100 overflow-auto">
         <div className={styles.img_container}>
           <Image src={chazaData.image.toString()} alt="logo" fill></Image>
         </div>
@@ -146,6 +171,10 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
             <Button variant="danger" onClick={() => setEditable(!editable)}>
               <FiEdit size={30}></FiEdit>
             </Button>
+
+            <Image src={src} alt="logo" fill></Image>
+            <Button variant="danger" onClick={generateQR}></Button>
+
           </div>
           <Form
             noValidate={false}
@@ -175,9 +204,11 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
                 required
                 name="address"
                 type="text"
-                defaultValue={chazaData.address?.toString()}
+                defaultValue={`${currentLocation.lat},${currentLocation.lng}`}
                 disabled={!editable}
                 onChange={handleChange}
+                onClick={()=>handleShowMap()}
+                value={`${currentLocation.lat},${currentLocation.lng}`}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
                 Direccion no valida

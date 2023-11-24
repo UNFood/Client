@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Product, ProductCreate } from "@/types/product";
+import { Order, CreateOrder, UpdateOrder } from "@/types/order";
 import cookie from "js-cookie";
 
-export function getProducts() {
+export function getOrdersByUser(id: string) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -11,14 +11,14 @@ export function getProducts() {
     },
   };
   return axios
-    .get<{ message: string; data: Product[] }>(
-      `${BASE_URL}/api/v1/product/products`,
+    .get<{ message: string; data: Order[] }>(
+      `${BASE_URL}/api/v1/order/byUser/${id}`,
       config
     )
     .then((res) => res.data);
 }
 
-export function getProduct(id: string) {
+export function getOrdersByChaza(id: string) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -27,29 +27,27 @@ export function getProduct(id: string) {
     },
   };
   return axios
-    .get<{ message: string; data: Product }>(
-      `${BASE_URL}/api/v1/product/${id}`,
+    .get<{ message: string; data: Order[] }>(
+      `${BASE_URL}/api/v1/order/byChaza/${id}`,
       config
     )
     .then((res) => res.data);
 }
 
-export function createProduct(product: ProductCreate) {
+export function createOrder(order: CreateOrder) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
     headers: {
-      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   };
   return axios
-
-    .post<Product>(`${BASE_URL}api/v1/product`, product, config)
+    .post<Order>(`${BASE_URL}/api/v1/order`, order, config)
     .then((res) => res.data);
 }
 
-export function updateProduct(product: Product) {
+export function UpdateOrder(order: UpdateOrder) {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
   const token = cookie.get("user-token");
   const config = {
@@ -57,19 +55,7 @@ export function updateProduct(product: Product) {
       Authorization: `Bearer ${token}`,
     },
   };
-
   return axios
-    .put<Product>(`${BASE_URL}api/v1/product`, product, config)
+    .put<Order>(`${BASE_URL}/api/v1/order`, order, config)
     .then((res) => res.data);
-}
-
-export function deleteProduct(id: string) {
-  const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
-  const token = cookie.get("user-token");
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  return axios.delete<Product>(`${BASE_URL}/api/v1/product/${id}`, config);
 }

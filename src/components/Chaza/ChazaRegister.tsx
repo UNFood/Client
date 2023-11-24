@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import styles from "../../styles/register.module.css";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
@@ -8,8 +8,13 @@ import categorias from "@/utils/categoriesChaza";
 import { useMutation } from "react-query";
 import Loading from "../Loading";
 import { createChaza } from "@/pages/api/chaza";
+import ModalMap from "./ModalMap";
+import fetchLocationName from "@/utils/geocoding";
+import {Location} from "@/types/location";
 
 function Chazaregister({ id }: { id: string }) {
+  const center: Location = { lat: 4.636312349308707, lng: -74.08334255218506 };
+
   const [formData, setFormData] = useState<ChazaCreate>({
     owner: id,
     name: "",
@@ -24,6 +29,10 @@ function Chazaregister({ id }: { id: string }) {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorPayment, setErrorPayment] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState<Location>(center);
+  const [locationName, setLocationName] = useState<string>("");
+
 
   const registerChazaMutation = useMutation({
     mutationFn: createChaza,
@@ -35,6 +44,14 @@ function Chazaregister({ id }: { id: string }) {
       setLoading(false);
     },
   });
+  const handleCloseMap = () => {
+    setShowMap(false);
+    handleChange({target:{name:"address",value:`${currentLocation.lat},${currentLocation.lng}`}} as React.ChangeEvent<HTMLInputElement>)
+  }
+  const handleShowMap = () => {
+    setShowMap(true);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     setLoading(true);
@@ -90,6 +107,7 @@ function Chazaregister({ id }: { id: string }) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    console.log(name, value);
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -98,9 +116,25 @@ function Chazaregister({ id }: { id: string }) {
     });
   };
 
+  const renderLocationName = async () => {
+    const name = await fetchLocationName(currentLocation);
+    setLocationName(name);
+  }
+
+  useEffect(() => {
+    console.log(currentLocation);
+    console.log(locationName);
+    renderLocationName();
+  }, [currentLocation]);
   return (
     <>
       {loading ? <Loading></Loading> : null}
+      <ModalMap
+        show={showMap}
+        handleClose={handleCloseMap}
+        currentLocation={currentLocation}
+        setCurrentLocation={setCurrentLocation}
+      ></ModalMap>
       <div className={styles["form-container"]}>
         <img
           src="/images/chazafondo.PNG"
@@ -161,18 +195,22 @@ function Chazaregister({ id }: { id: string }) {
                 Telefono no valido
               </Form.Control.Feedback>
             </Form.Group>
+            
             <Form.Group className="mb-3 ">
               <Form.Control
                 required
                 type="text"
-                placeholder="Direccion"
-                name="address"
+                placeholder="Selecciona ubicacion"
+                name="location"
                 onChange={handleChange}
+                onClick={() => handleShowMap()}
+                value={locationName}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
-                Direccion no valida
-              </Form.Control.Feedback>
+                Descripcion no valida
+               </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group className="mb-3 ">
               <Form.Control
                 required
