@@ -7,7 +7,7 @@ import { BiMap, BiSolidCategory } from "react-icons/bi";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdPayment } from "react-icons/md";
 import Stars from "../Stars";
-import { ChazaUpdate, Chaza} from "@/types/chaza";
+import { ChazaUpdate, Chaza } from "@/types/chaza";
 import metodosPago from "@/utils/paymentMethods";
 import categorias from "@/utils/categoriesChaza";
 import { useMutation } from "react-query";
@@ -16,9 +16,10 @@ import { updateChaza } from "@/pages/api/chaza";
 import Message from "../Message";
 import ModalMap from "./ModalMap";
 import QRCode from "qrcode";
+import { BsQrCode } from "react-icons/bs";
+import ModalQrChaza from "./ModalQRChaza";
 
 function HomeChaza({ chazaData }: { chazaData: Chaza }) {
-
   const [editable, setEditable] = useState(false);
   const [chaza, setChaza] = useState<ChazaUpdate>({
     owner: chazaData.owner,
@@ -29,8 +30,10 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     payment_method: chazaData.payment_method,
   });
 
-  const [src, setSrc] = useState<string>('')
-
+  const [src, setSrc] = useState<string>("");
+  const [showQR, setShowQR] = useState<boolean>(false);
+  const handleCloseQR = () => setShowQR(false);
+  const handleShowQR = () => setShowQR(true);
 
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,7 +42,10 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [showMap, setShowMap] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState({lat:Number (chazaData.address.toString().split(",")[0]),lng:Number (chazaData.address.toString().split(",")[1])});
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: Number(chazaData.address.toString().split(",")[0]),
+    lng: Number(chazaData.address.toString().split(",")[1]),
+  });
 
   const handleShowMessage = () => setShowMessage(true);
   const handleCloseMessage = () => setShowMessage(false);
@@ -47,7 +53,7 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     console.log(name, value);
-    
+
     setChaza((prevFormData) => {
       return {
         ...prevFormData,
@@ -56,8 +62,14 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     });
   };
   const handleCloseMap = () => {
-    handleChange({target:{name:"address",value:`${currentLocation.lat},${currentLocation.lng}`}} as React.ChangeEvent<HTMLInputElement>)
-    setShowMap(false)};
+    handleChange({
+      target: {
+        name: "address",
+        value: `${currentLocation.lat},${currentLocation.lng}`,
+      },
+    } as React.ChangeEvent<HTMLInputElement>);
+    setShowMap(false);
+  };
   const handleShowMap = () => {
     setShowMap(true);
   };
@@ -138,10 +150,12 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
     setValidated(true);
   };
 
-const generateQR = () => {
-    QRCode.toDataURL(`http://localhost:3000/client/${chazaData.name}`).then(setSrc)
-
-}
+  const generateQR = () => {
+    QRCode.toDataURL(`http://localhost:3000/client/${chazaData.name}`).then(
+      setSrc
+    );
+    handleShowQR();
+  };
 
   return (
     <>
@@ -151,6 +165,11 @@ const generateQR = () => {
         currentLocation={currentLocation}
         setCurrentLocation={setCurrentLocation}
       ></ModalMap>
+      <ModalQrChaza
+        show={showQR}
+        handleClose={handleCloseQR}
+        src={src}
+      ></ModalQrChaza>
       <Message
         message={message}
         type={messageType}
@@ -168,13 +187,14 @@ const generateQR = () => {
               <h1 className="me-3">{chazaData.name}</h1>
               <Stars number={chazaData.score}></Stars>
             </div>
-            <Button variant="danger" onClick={() => setEditable(!editable)}>
-              <FiEdit size={30}></FiEdit>
-            </Button>
-
-            <Image src={src} alt="logo" fill></Image>
-            <Button variant="danger" onClick={generateQR}></Button>
-
+            <div>
+              <Button variant="danger" onClick={() => setEditable(!editable)}>
+                <FiEdit size={30}></FiEdit>
+              </Button>
+              <Button variant="danger" onClick={generateQR}>
+                <BsQrCode size={30} />
+              </Button>
+            </div>
           </div>
           <Form
             noValidate={false}
@@ -207,7 +227,7 @@ const generateQR = () => {
                 defaultValue={`${currentLocation.lat},${currentLocation.lng}`}
                 disabled={!editable}
                 onChange={handleChange}
-                onClick={()=>handleShowMap()}
+                onClick={() => handleShowMap()}
                 value={`${currentLocation.lat},${currentLocation.lng}`}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
