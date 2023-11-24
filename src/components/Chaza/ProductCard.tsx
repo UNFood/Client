@@ -8,6 +8,7 @@ import Loading from "../Loading";
 import { useMutation } from "react-query";
 import { updateProduct, deleteProduct } from "@/pages/api/product";
 import Question from "../Question";
+import Message from "../Message";
 
 function ProductCard({ product }: { product: Product }) {
   const [productData, setProductData] = useState<Product>({
@@ -29,6 +30,10 @@ function ProductCard({ product }: { product: Product }) {
   const [acepted, setAcepted] = useState(false);
   const handleClosedQuestion = () => setShowQuestion(false);
   const handleShowQuestion = () => setShowQuestion(true);
+  const [showMessage, setShowMessage] = useState(false);
+  const handleShowMessage = () => setShowMessage(true);
+  const handleCloseMessage = () => setShowMessage(false);
+  const [messageType, setMessageType] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,6 +48,9 @@ function ProductCard({ product }: { product: Product }) {
   const updateProductMutation = useMutation({
     mutationFn: updateProduct,
     onSuccess: (response) => {
+      setMessage("El producto se actualizó correctamente");
+      setMessageType("success");
+      handleShowMessage();
       setLoading(false);
       setEditable(false);
     },
@@ -69,6 +77,9 @@ function ProductCard({ product }: { product: Product }) {
   const deleteProductMutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: (response) => {
+      setMessage("El producto se eliminó correctamente");
+      setMessageType("success");
+      handleShowMessage();
       setLoading(false);
       setEditable(false);
       window.location.reload();
@@ -98,16 +109,27 @@ function ProductCard({ product }: { product: Product }) {
         handleClose={handleClosedQuestion}
         setAcepted={setAcepted}
       ></Question>
+      <Message
+        show={showMessage}
+        message={message}
+        handleClose={handleCloseMessage}
+        type={messageType}
+      ></Message>
       {loading && <Loading></Loading>}
       <Col sm={6} md={4} xl={3} className="mb-5">
-        <Card className={`${styles.product_card} m-auto`}>
+        <Card
+          className={`${styles.product_card} m-auto`}
+          style={{ minHeight: "450px" }}
+        >
           <div className="text-center">
-            <Image
-              src={product.image.toString()}
-              alt={product.name.toString()}
-              width={260}
-              height={179}
-            ></Image>
+            {!editable ? (
+              <Image
+                src={product.image.toString()}
+                alt={product.name.toString()}
+                width={260}
+                height={179}
+              ></Image>
+            ) : null}
             <div className="position-absolute top-0">
               <Button variant="success" onClick={() => setEditable(!editable)}>
                 <FiEdit size={30}></FiEdit>
@@ -117,12 +139,9 @@ function ProductCard({ product }: { product: Product }) {
 
           <Card.Body>
             <div>
-              <Form
-                onSubmit={handleSubmit}
-                noValidate={false}
-                validated={validated}
-              >
+              <Form onSubmit={handleSubmit} noValidate validated={validated}>
                 <Form.Group className="mb-1">
+                  {editable ? <Form.Label>Nombre</Form.Label> : null}
                   <Form.Control
                     required
                     name="name"
@@ -136,6 +155,7 @@ function ProductCard({ product }: { product: Product }) {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-1">
+                  {editable ? <Form.Label>Descripción </Form.Label> : null}
                   <Form.Control
                     required
                     name="description"
@@ -149,6 +169,7 @@ function ProductCard({ product }: { product: Product }) {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-1">
+                  {editable ? <Form.Label>Precio</Form.Label> : null}
                   <Form.Control
                     required
                     name="price"
@@ -162,18 +183,33 @@ function ProductCard({ product }: { product: Product }) {
                     Precio no valido
                   </Form.Control.Feedback>
                 </Form.Group>
+                <Form.Group className="mb-1">
+                  {editable ? <Form.Label>Cantidad</Form.Label> : null}
+                  <Form.Control
+                    required
+                    name="stock"
+                    type="number"
+                    defaultValue={product.stock.toString()}
+                    disabled={!editable}
+                    onChange={handleChange}
+                    min={1}
+                  ></Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    Cantidad no valida
+                  </Form.Control.Feedback>
+                </Form.Group>
                 {editable ? (
                   <Button
                     type="submit"
                     variant="success"
-                    className="w-100 mt-3"
+                    className="w-100 mt-5"
                   >
                     Guardar
                   </Button>
                 ) : (
                   <Button
                     variant="danger"
-                    className="w-100 rounded-0 mb-0"
+                    className="w-100  mb-0"
                     onClick={handleDelete}
                   >
                     Eliminar
