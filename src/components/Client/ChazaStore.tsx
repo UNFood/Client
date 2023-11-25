@@ -13,25 +13,23 @@ import { Product } from "@/types/product";
 import Link from "next/link";
 import ModalQR from "./ModalQR";
 import fetchLocation from "@/utils/geocoding";
-import {Location} from "@/types/location";
+import { Location } from "@/types/location";
 import ModalMapDirections from "@/components/Client/ModalMapDirections";
 import Stars from "../Stars";
 import ModalOpinions from "./ModalOpinions";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
-
 let dictCategorias: { [key: string]: string } = {};
 
 function ChazaStore({ chaza }: { chaza: Chaza }) {
-
-  const stringCurrentLocation =localStorage.getItem("currentLocation")?.toString() ?? "";
+  const stringCurrentLocation =
+    localStorage.getItem("currentLocation")?.toString() ?? "";
   const stringDestination = chaza.address;
-  const currentLocation : Location= {
-
+  const currentLocation: Location = {
     lat: Number(stringCurrentLocation.split(",")[0]),
     lng: Number(stringCurrentLocation.split(",")[1]),
   };
-  const destination :Location= {
+  const destination: Location = {
     lat: Number(stringDestination.split(",")[0]),
     lng: Number(stringDestination.split(",")[1]),
   };
@@ -47,7 +45,6 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
   const [showOpinions, setShowOpinions] = useState(false);
   const handleShowOpinions = () => setShowOpinions(true);
   const handleCloseOpinions = () => setShowOpinions(false);
-
 
   products.forEach((product) => {
     dictCategorias[product.category.toString()] =
@@ -67,7 +64,7 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     calculateRoute();
     setShowMap(true);
   };
-  
+
   const handleshowQR = () => {
     setshowQR(true);
   };
@@ -107,10 +104,10 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
     );
   });
 
-  const renderLocationName = async () => { 
+  const renderLocationName = async () => {
     const name = await fetchLocation(destination);
     setLocationName(name);
-  }
+  };
 
   useEffect(() => {
     renderLocationName();
@@ -122,8 +119,11 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
         handleClose={handleCloseMap}
         directionResponse={directionResponse}
       ></ModalMapDirections>
-      <ModalQR show={showQR} handleClose={handleClose} link={chaza.qr}
-    ></ModalQR>
+      <ModalQR
+        show={showQR}
+        handleClose={handleClose}
+        link={chaza.qr}
+      ></ModalQR>
       <ModalOpinions
         id={chaza.owner}
         comments={[...chaza.comments].reverse()}
@@ -163,7 +163,6 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     onClick={handleShowMap}
                   >
                     {locationName ?? "Cargando..."}
-
                   </Nav.Link>
                 </Form.Label>
                 <Form.Label className="d-flex align-items-center">
@@ -184,15 +183,17 @@ function ChazaStore({ chaza }: { chaza: Chaza }) {
                     {categoriasChaza[chaza.type]}
                   </span>
                 </Form.Label>
-                <Button
+                {chaza.qr !== undefined ? (
+                  <Button
+                    variant="light"
+                    onClick={() => {
+                      handleshowQR();
+                    }}
+                  >
+                    Ver QR Pagos
+                  </Button>
+                ) : null}
 
-                  variant="light"
-                  onClick={() => {
-                    handleshowQR();
-                  }}
-                >
-                  Ver QR Pagos
-                </Button>
                 <Button variant="light" onClick={handleShowOpinions}>
                   Ver reseñas
                 </Button>
