@@ -48,3 +48,8 @@ export interface qrCreate {
   _id: String;
   qr: null | String | File;
 }
+
+export interface numbers {
+  chazas: number;
+  products: number;
+}

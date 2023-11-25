@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Button, Col, Row, Form, Image} from "react-bootstrap";
+import { Button, Col, Row, Form, Image } from "react-bootstrap";
 import styles from "../../styles/register.module.css";
 
 function ModalQR({
@@ -12,7 +12,6 @@ function ModalQR({
   handleClose: () => void;
   link: string;
 }) {
- 
   return (
     <Modal
       show={show}
@@ -21,11 +20,9 @@ function ModalQR({
       centered
       className={`${styles.GoogleMap}`}
     >
-      <Modal.Header closeButton>
-        QR Pagos
-      </Modal.Header>
+      <Modal.Header closeButton>QR Pagos</Modal.Header>
       <Modal.Body>
-        <Image src= {link} fluid></Image>
+        <Image src={link} fluid></Image>
       </Modal.Body>
     </Modal>
   );
