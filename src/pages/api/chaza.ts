@@ -1,5 +1,12 @@
 import axios from "axios";
-import { Chaza, ChazaCreate, ChazaUpdate, comment, qrCreate } from "@/types/chaza";
+import {
+  Chaza,
+  ChazaCreate,
+  ChazaUpdate,
+  comment,
+  qrCreate,
+  numbers,
+} from "@/types/chaza";
 import cookie from "js-cookie";
 
 export function getChazas() {
@@ -99,7 +106,6 @@ export function addComment({ id, comment }: { id: string; comment: comment }) {
     .then((res) => res.data);
 <<<<<<< HEAD
 =======
-
 >>>>>>> develop
 }
 
@@ -114,5 +120,20 @@ export function uploadQR(qr: qrCreate) {
   };
   return axios
     .post<Chaza>(`${BASE_URL}/api/v1/chaza/qr`, qr, config)
+    .then((res) => res.data);
+}
+export function getNumbers() {
+  const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
+  const token = cookie.get("user-token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios
+    .get<{ message: string; data: numbers }>(
+      `${BASE_URL}/api/v1/chaza/numbers`,
+      config
+    )
     .then((res) => res.data);
 }

@@ -23,7 +23,7 @@ function Login({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
     onSuccess: (response) => {
       setShowError(false);
       setLoading(false);
-      cookie.set("user-token", response.data);
+      cookie.set("user-token", response.data, { expires: 1 });
       if (loginMode === "chaza") {
         window.location.href = "/chaza/home";
       } else {

@@ -60,12 +60,14 @@ function ModalMap({
                 mapContainerStyle={{ width: "100%", height: "100%" }}
                 zoom={zoom}
                 center={center}
-                onClick={(e) =>
-                  setCurrentLocation({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                  }) 
-                }
+                onClick={(e) => {
+                  if (e && e.latLng) {
+                    setCurrentLocation({
+                      lat: e.latLng.lat(),
+                      lng: e.latLng.lng(),
+                    });
+                  }
+                }}
                 options={options}
               >
                 <div>{renderMarkers()}</div>

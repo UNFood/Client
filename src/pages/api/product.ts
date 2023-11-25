@@ -48,7 +48,7 @@ export function createProduct(product: ProductCreate) {
 =======
 
 >>>>>>> develop
-    .post<Product>(`${BASE_URL}api/v1/product`, product, config)
+    .post<Product>(`${BASE_URL}/api/v1/product`, product, config)
     .then((res) => res.data);
 }
 
@@ -65,7 +65,7 @@ export function updateProduct(product: Product) {
 
 >>>>>>> develop
   return axios
-    .put<Product>(`${BASE_URL}api/v1/product`, product, config)
+    .put<Product>(`${BASE_URL}/api/v1/product`, product, config)
     .then((res) => res.data);
 }
 
