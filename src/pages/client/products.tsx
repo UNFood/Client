@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Products from "@/components/Client/Products";
-import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { getProducts } from "../api/product";
 import Loading from "@/components/Loading";
 
 function Productss() {
-  const router = useRouter();
   const [search, setSearch] = useState("");
-
-  useEffect(() => {}, []);
 
   const {
     status,
