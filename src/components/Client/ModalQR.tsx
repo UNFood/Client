@@ -6,9 +6,11 @@ import styles from "../../styles/register.module.css";
 function ModalQR({
   show,
   handleClose,
+  link,
 }: {
   show: boolean;
   handleClose: () => void;
+  link: string;
 }) {
  
   return (
@@ -23,7 +25,7 @@ function ModalQR({
         QR Pagos
       </Modal.Header>
       <Modal.Body>
-        <Image src="https://borealtech.com/wp-content/uploads/2018/10/codigo-qr-1024x1024-1.jpg" fluid></Image>
+        <Image src= {link} fluid></Image>
       </Modal.Body>
     </Modal>
   );

@@ -44,6 +44,10 @@ export function createProduct(product: ProductCreate) {
     },
   };
   return axios
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
     .post<Product>(`${BASE_URL}api/v1/product`, product, config)
     .then((res) => res.data);
 }
@@ -56,6 +60,10 @@ export function updateProduct(product: Product) {
       Authorization: `Bearer ${token}`,
     },
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
   return axios
     .put<Product>(`${BASE_URL}api/v1/product`, product, config)
     .then((res) => res.data);
