@@ -104,9 +104,6 @@ export function addComment({ id, comment }: { id: string; comment: comment }) {
   return axios
     .post<Chaza>(`${BASE_URL}/api/v1/chaza/comment/${id}`, comment, config)
     .then((res) => res.data);
-<<<<<<< HEAD
-=======
->>>>>>> develop
 }
 
 export function uploadQR(qr: qrCreate) {

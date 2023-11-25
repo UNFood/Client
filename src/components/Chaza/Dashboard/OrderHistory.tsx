@@ -18,27 +18,45 @@ import {
 } from "recharts";
 
 
-function Orders() {
+function OrdersEst() {
+    console.log("Entro");
+    
     const [id, setId] = useState<string>("");
-
     const token = getToken()?.id;
     useEffect(() => {
         if (token) {
             setId(token);
-        }
+        }   
     }, [token]);
-
-    const { status, error, data: orders } = useQuery({
-        queryKey: ["getOrdersByChaza"],
-        queryFn: () => (id !== "" ? getOrdersByChaza(id) : null),
-        enabled: id !== "",
+    
+    console.log("id");
+    const {
+        status,
+        error,
+        data: orders,
+    } = useQuery({queryKey:["getOrdersByChaza"],
+    queryFn :() =>(id !== "" ? getOrdersByChaza(id):null),
+    enabled: id !== "",
     });
 
-    if (status === "loading") return <Loading />;
+    if (status === "loading") return <Loading></Loading>;
     if (status === "error") return <div>{JSON.stringify(error)}</div>;
     if (!orders || !Array.isArray(orders.data)) return <div>Error</div>;
 
+    const data = [...orders.data].reverse();
+
+
+    console.log("Data");
+    console.log(data)
+
+    /*
+
+    
+    console.log(orders);
+
+
     const areaData = transformOrderDataToAreaData(orders.data);
+    
     const lastFiveOrders = orders.data.slice(0, 5);
 
     return (
@@ -64,6 +82,7 @@ function Orders() {
 }
 
 function transformOrderDataToAreaData(orders: Order[]) {
+    console.log("Entro v2");
     const ordersByMonth: { [key: string]: number } = {};
 
     orders.forEach(order => {
@@ -71,10 +90,15 @@ function transformOrderDataToAreaData(orders: Order[]) {
         ordersByMonth[month] = (ordersByMonth[month] || 0) + 1;
     });
 
+    console.log(ordersByMonth);  // Mueve el console.log aquí
+
     return Object.keys(ordersByMonth).map(month => ({
         date: month,
         count: ordersByMonth[month]
     }));
+
+    */
 }
 
-export default Orders;
+
+export default OrdersEst;

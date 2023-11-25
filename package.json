@@ -28,13 +28,8 @@
     "jose": "^4.15.4",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
-<<<<<<< HEAD
-    "next": "^14.0.2",
-    "ng2-charts": "^5.0.3",
-=======
     "next": "13.4.19",
     "qrcode": "^1.5.3",
->>>>>>> develop
     "react": "18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-chartjs-2": "^5.2.0",

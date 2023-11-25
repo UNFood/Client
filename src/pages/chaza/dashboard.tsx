@@ -6,8 +6,7 @@ const DashboardPage: React.FC = () => {
         <div>
             {/* Renderizar el componente DashboardMain */}
             <DashboardMain />
-
-
+            
         </div>
     );
 }
