@@ -5,7 +5,7 @@ import { getNumbers } from "../api/chaza";
 import { useQuery } from "react-query";
 import Loading from "@/components/Loading";
 
-function home() {
+function Homee() {
   const {
     status,
     error,
@@ -26,4 +26,4 @@ function home() {
   );
 }
 
-export default home;
+export default Homee;
