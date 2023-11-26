@@ -46,17 +46,18 @@ function Products({
           return product;
       });
     }
-    console.log(searchQuery);
 
     // Filtra por precio
     if (priceSort !== "0") {
       filteredProducts = filteredProducts.sort((a, b) => {
-        if (priceSort === "asc") {
+        if (priceSort === "1") {
           return a.price - b.price;
         } else {
           return b.price - a.price;
         }
       });
+    }else{
+      setFilteredProducts(products);
     }
 
     // Filtra por categorías
