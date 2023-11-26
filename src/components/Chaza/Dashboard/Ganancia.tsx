@@ -1,35 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import styles from '../../../styles/dashboard.module.css';
-import { AiOutlineArrowUp } from "react-icons/ai";
+import {AiOutlineArrowUp} from "react-icons/ai";
+import { ResponsiveContainer } from 'recharts';
+
 import { Order } from '@/types/order';
 
 
 // Datos actualizados con SemanaPasada y SemanaActual
+const data = [
+    {name: 'Empanada', SemanaPasada: 150, SemanaActual: 400},
+    {name: 'Perro Caliente', SemanaPasada: 284, SemanaActual: 300},
+    {name: 'Hamburguesa', SemanaPasada: 257, SemanaActual: 562},
+    {name: 'Salchipapa', SemanaPasada: 460, SemanaActual: 289},
+    {name: 'Gaseosa', SemanaPasada: 201, SemanaActual: 365},
+];
 
-function randomDate(start: Date, end: Date) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
-let startDate = new Date('2023-01-01');
-let endDate = new Date('2023-12-31');
-let randomDateGenerated = randomDate(startDate, endDate);
-const venta_mensual = Math.random() * 10000;
-
+const venta_mensual = "7852000"
 const inicio_estadistica = '2023 - Agosto - 01 '
 const fin_estadistica = '2023 - Octubre - 01'
 const mejora_semanal = "7.5"
 
 function RevenueChart({orders}:{orders:Order[]}){
-
-    console.log("88888ss");
-    console.log();
-    const data = [
-        {name: orders[0].products[0].product.name.split(' ').slice(0,3).join(' '), SemanaPasada: 150, SemanaActual: 400},
-        {name: orders[0].products[1].product.name.split(' ').slice(0,3).join(' '), SemanaPasada: 284, SemanaActual: 300},
-        
-    ];
-    console.log(venta_mensual);
+    
     return (
         <div className={styles.revenueContainer}>
             <h2>Venta Total Mensual {venta_mensual.toLocaleString()}</h2>
@@ -41,7 +34,7 @@ function RevenueChart({orders}:{orders:Order[]}){
                 
             </p>
 
-
+            
             <p> 
             <AiOutlineArrowUp color="green" size={25} /> 
             <strong>{mejora_semanal.toLocaleString()} %</strong> 
