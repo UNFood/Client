@@ -6,8 +6,11 @@ import {
   comment,
   qrCreate,
   numbers,
+  stats
 } from "@/types/chaza";
 import cookie from "js-cookie";
+
+
 
 export function getChazas() {
   const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
@@ -130,6 +133,23 @@ export function getNumbers() {
   return axios
     .get<{ message: string; data: numbers }>(
       `${BASE_URL}/api/v1/chaza/numbers`,
+      config
+    )
+    .then((res) => res.data);
+}
+
+export function getStats(id:string){  
+
+  const BASE_URL = process.env.BASE_URL ?? "http://localhost:8080";
+  const token = cookie.get("user-token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios
+    .get<{ message: string; data: stats }>(
+      `${BASE_URL}/api/v1/chaza/stats/${id}`,
       config
     )
     .then((res) => res.data);

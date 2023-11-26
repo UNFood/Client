@@ -4,6 +4,9 @@ import styles from '../../../styles/dashboard.module.css';
 import {AiOutlineArrowUp} from "react-icons/ai";
 import { ResponsiveContainer } from 'recharts';
 
+import { Order } from '@/types/order';
+
+
 // Datos actualizados con SemanaPasada y SemanaActual
 const data = [
     {name: 'Empanada', SemanaPasada: 150, SemanaActual: 400},
@@ -11,7 +14,6 @@ const data = [
     {name: 'Hamburguesa', SemanaPasada: 257, SemanaActual: 562},
     {name: 'Salchipapa', SemanaPasada: 460, SemanaActual: 289},
     {name: 'Gaseosa', SemanaPasada: 201, SemanaActual: 365},
-    
 ];
 
 const venta_mensual = "7852000"
@@ -19,7 +21,8 @@ const inicio_estadistica = '2023 - Agosto - 01 '
 const fin_estadistica = '2023 - Octubre - 01'
 const mejora_semanal = "7.5"
 
-const RevenueChart: React.FC = () => {
+function RevenueChart({orders}:{orders:Order[]}){
+    
     return (
         <div className={styles.revenueContainer}>
             <h2>Venta Total Mensual {venta_mensual.toLocaleString()}</h2>

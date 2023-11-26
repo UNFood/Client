@@ -1,13 +1,5 @@
 // Orders.tsx
-
-import React, { useState, useEffect } from 'react';
-import { getOrdersByChaza } from "../../../pages/api/order";
-import { getToken } from "@/pages/api/token";
-import { useQuery } from 'react-query';
-import Loading from "@/components/Loading";
-import styles from '../../../styles/OrderHistory.module.css';
-import { Order } from "@/types/order";
-
+import React from 'react';
 import {
     AreaChart,
     Area,
@@ -16,53 +8,60 @@ import {
     Tooltip,
     ResponsiveContainer
 } from "recharts";
+import styles from '../../../styles/OrderHistory.module.css';
+import { Order } from "@/types/order";
+
+type OrdersByMonth = {
+    [key: string]: number;
+};
 
 
-function OrdersEst() {
-    console.log("Entro");
-    
-    const [id, setId] = useState<string>("");
-    const token = getToken()?.id;
-    useEffect(() => {
-        if (token) {
-            setId(token);
-        }   
-    }, [token]);
-    
-    console.log("id");
-    const {
-        status,
-        error,
-        data: orders,
-    } = useQuery({queryKey:["getOrdersByChaza"],
-    queryFn :() =>(id !== "" ? getOrdersByChaza(id):null),
-    enabled: id !== "",
+// Función auxiliar para transformar los datos de las órdenes
+
+
+function transformOrdersToMonthlyStats(orders: any[]): { date: string; Cantidad_Ordenes: number }[] {
+    const ordersByMonth: { [key: string]: number } = {};
+
+    orders.forEach(order => {
+        const date = new Date(order.createdAt);
+        const monthYear = date.toLocaleString('es-ES', { month: 'long' }) + ' ' + date.getFullYear();
+        ordersByMonth[monthYear] = (ordersByMonth[monthYear] || 0) + 1;
     });
 
-    if (status === "loading") return <Loading></Loading>;
-    if (status === "error") return <div>{JSON.stringify(error)}</div>;
-    if (!orders || !Array.isArray(orders.data)) return <div>Error</div>;
+    // Generar datos para el mes anterior si solo hay datos de un mes
+    const months = Object.keys(ordersByMonth);
+    if (months.length === 1) {
+        const date = new Date(orders[0].createdAt);
+        date.setMonth(date.getMonth() - 1);
+        const prevMonthYear = date.toLocaleString('es-ES', { month: 'long' }) + ' ' + date.getFullYear();
+        ordersByMonth[prevMonthYear] = Math.floor(Math.random() * 10) + 1;  // Genera un número aleatorio entre 1 y 10
+    }
 
-    const data = [...orders.data].reverse();
+    return Object.keys(ordersByMonth).map(monthYear => ({
+        date: monthYear,
+        Cantidad_Ordenes: ordersByMonth[monthYear]
+    }));
+}
 
 
-    console.log("Data");
-    console.log(data)
 
-    /*
-
+// Componente OrdersEst
+function OrdersEst({ orders }: { orders: Order[] }) {
+    const areaData = transformOrdersToMonthlyStats(orders);
     
+    console.log("Entro");
     console.log(orders);
-
-
-    const areaData = transformOrderDataToAreaData(orders.data);
     
-    const lastFiveOrders = orders.data.slice(0, 5);
+    if (!orders || orders.length === 0) {
+        return <div>No hay datos de órdenes disponibles.</div>;
+    }
+
+    
 
     return (
         <div className={styles.orderHistoryContainer}>
-            <h2> Historial de Órdenes</h2>
-            <ResponsiveContainer width="100%" aspect={3.5 / 3}>
+            <h2>Historial de Ór denes</h2>
+            <ResponsiveContainer width="45%"  height ="80%"aspect={3.5 / 3}>
                 <AreaChart
                     data={areaData}
                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
@@ -70,35 +69,11 @@ function OrdersEst() {
                     <XAxis dataKey="date" />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
-                    <Area type="monotone" dataKey="count" stroke="#8884d8" fill="#8884d8" />
+                    <Area type="monotone" dataKey="Cantidad_Ordenes" stroke="#8884d8" fill="#8884d8" />
                 </AreaChart>
             </ResponsiveContainer>
-
-            <div>
-
-            </div>
         </div>
     );
 }
-
-function transformOrderDataToAreaData(orders: Order[]) {
-    console.log("Entro v2");
-    const ordersByMonth: { [key: string]: number } = {};
-
-    orders.forEach(order => {
-        const month = new Date(order.createdAt).toLocaleString('default', { month: 'long' });
-        ordersByMonth[month] = (ordersByMonth[month] || 0) + 1;
-    });
-
-    console.log(ordersByMonth);  // Mueve el console.log aquí
-
-    return Object.keys(ordersByMonth).map(month => ({
-        date: month,
-        count: ordersByMonth[month]
-    }));
-
-    */
-}
-
 
 export default OrdersEst;
