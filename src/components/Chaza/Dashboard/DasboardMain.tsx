@@ -10,7 +10,8 @@ import SidebarChaza from '../../Chaza/SidebarChaza';
 import { stats } from '@/types/chaza';
 
 function DashboardMain({stats}:{stats:stats}){
-    
+    console.log("eee");
+    console.log(stats); 
     return (
         <div className={styles.container}>
             <SidebarChaza />
@@ -29,11 +30,11 @@ function DashboardMain({stats}:{stats:stats}){
                 
                 <div className={styles.orderHistoryContainer}>
                 <h2 style={{textAlign: "center",padding:'20px'}}>Top productos vendidos</h2>
-                <TopSellingProducts/>
+                <TopSellingProducts products={stats.products}/>
                 <div className={styles.line}></div>
                 <h2 style={{textAlign: "center",padding:'30px'}}>Stock de tu chaza</h2>
                 <h5 className={styles.subtitlestock}>A tu chaza le quedan ...</h5>
-                <Stock/>
+                <Stock products={stats.products}/>
             </div>
             
         </div>);
