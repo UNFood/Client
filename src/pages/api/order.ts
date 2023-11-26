@@ -27,11 +27,8 @@ export function getOrdersByChaza(id: string) {
     },
   };
   return axios
-    .get<{
-        slice(arg0: number, arg1: number): unknown; message: string; data: Order[] 
-}>(
+    .get<{ message: string; data: Order[] }>(
       `${BASE_URL}/api/v1/order/byChaza/${id}`,
-      
       config
     )
     .then((res) => res.data);

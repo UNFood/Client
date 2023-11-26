@@ -27,7 +27,6 @@ function Products() {
     queryFn: () => (id !== "" ? getChaza(id) : null),
     enabled: id !== "",
   });
-  
   if (status === "loading") return <Loading></Loading>;
   if (status === "error") return <div>{JSON.stringify(error)}</div>;
   if (chaza === null) return <div>Error</div>;
