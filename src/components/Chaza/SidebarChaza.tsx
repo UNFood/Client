@@ -38,7 +38,7 @@ function SidebarChaza() {
                 <Link className="nav-link" href="orders">
                   Pedidos
                 </Link>
-                <Link className="nav-link" href="analytics">
+                <Link className="nav-link" href="dashboard">
                   Estadisticas
                 </Link>
               </div>
