@@ -5,8 +5,6 @@ export interface ProductsOrder {
 }
 
 export interface ProductsOrderReader {
-  name(name: (name: any) => unknown, arg1: { SemanaPasada: number; SemanaActual: number; }): unknown;
-  name(name: any): unknown;
   product: Product;
   quantity: number;
 }
