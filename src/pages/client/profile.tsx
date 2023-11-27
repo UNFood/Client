@@ -6,7 +6,7 @@ import { getToken } from "../api/token";
 import { useQuery } from "react-query";
 import Header from "@/components/Header";
 
-function profile() {
+function Profilee() {
   const [id, setId] = useState<string>("");
 
   const token = getToken()?.id;
@@ -39,4 +39,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Profilee;
