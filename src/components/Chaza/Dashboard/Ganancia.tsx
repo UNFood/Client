@@ -7,6 +7,7 @@ import { Order } from '@/types/order';
 
 // Datos actualizados con SemanaPasada y SemanaActual
 
+
 function randomDate(start: Date, end: Date) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }

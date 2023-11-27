@@ -58,6 +58,7 @@ function OrdersEst({ orders }: { orders: Order[] }) {
 
     
 
+    
     return (
         <div className={styles.orderHistoryContainer}>
             <h2>Historial de Ór denes</h2>

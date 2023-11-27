@@ -32,6 +32,7 @@ const renderCircle = (item: StockItem, maxQuantity: number) => (
   </div>
 );
 
+
 function Stock({ products }: { products: Product[] }) {
   // Transformar los productos en StockItems y alternar colores
   const stockItems: StockItem[] = products.map((product, index) => ({

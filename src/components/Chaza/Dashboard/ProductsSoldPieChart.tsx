@@ -57,6 +57,7 @@ export const ProductsSoldPieChart = () => {
             <img className="ellipse-5" alt="Ellipse" src="ellipse-12.svg" />
             <img className="ellipse-6" alt="Ellipse" src="ellipse-15.svg" />
           </div>
+          
         </div>
         <button className="button">
           <div className="overlap-2">

@@ -18,6 +18,7 @@ function Chazaregister({ id }: { id: string }) {
   const [formData, setFormData] = useState<ChazaCreate>({
     owner: id,
     name: "",
+    
     description: "",
     type: -1,
     phone: "",
