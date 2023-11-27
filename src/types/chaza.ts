@@ -1,4 +1,3 @@
-import { NumberLiteralType } from "typescript";
 import { Product } from "./product";
 import { Order } from "./order";
 
@@ -55,7 +54,7 @@ export interface numbers {
   products: number;
 }
 
-export interface stats{
+export interface stats {
   orders: Order[];
-  products : Product[];
+  products: Product[];
 }

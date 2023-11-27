@@ -1,14 +1,9 @@
 // components/Dashboard/TopSellingProducts.tsx
 
-import React from 'react';
-import styles from '../../../styles/TopSellingProducts.module.css';
-
-type Product = {
-  _id: string;
-  name: string;
-  total_sales: number; // Asumiendo que este campo indica el total de ventas
-  image: string; // URL de la imagen del producto
-};
+import React from "react";
+import styles from "../../../styles/TopSellingProducts.module.css";
+import { Product } from "@/types/product";
+import Image from "next/image";
 
 // Simulando una función que obtendría los productos de alguna parte
 // En tu caso, esta data vendría de tus productos, ya sea a través de props o de algún estado.
@@ -25,9 +20,14 @@ function TopSellingProducts({ products }: { products: Product[] }) {
       <h3>Productos más vendidos</h3>
       <p>Tu chaza está onfire con estos productos...</p>
       <ul className={styles.productList}>
-        {topSellingProducts.map((product) => (
-          <li key={product._id} className={styles.productItem}>
-            <img src={product.image} alt={product.name} className={styles.productImage} />
+        {topSellingProducts.map((product, index) => (
+          <li key={index} className={styles.productItem}>
+            <Image
+              src={product.image.toString()}
+              alt={product.name.toString()}
+              width={60}
+              height={60}
+            ></Image>
             <div className={styles.productDetails}>
               <span className={styles.productName}>{product.name}</span>
               <span className={styles.productPrice}>{product.total_sales}</span>

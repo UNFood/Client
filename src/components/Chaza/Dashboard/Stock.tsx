@@ -1,6 +1,6 @@
-import React from 'react';
-import { Product } from '@/types/product';
-import styles from '../../../styles/stock.dashboard.module.css';
+import React from "react";
+import { Product } from "@/types/product";
+import styles from "../../../styles/stock.dashboard.module.css";
 
 interface StockItem {
   id: string;
@@ -35,14 +35,14 @@ const renderCircle = (item: StockItem, maxQuantity: number) => (
 function Stock({ products }: { products: Product[] }) {
   // Transformar los productos en StockItems y alternar colores
   const stockItems: StockItem[] = products.map((product, index) => ({
-    id: product._id,
-    product: product.name,
+    id: product._id.toString(),
+    product: product.name.toString(),
     quantity: product.stock,
-    color: index % 2 === 0 ? '#550A2D' : '#874463', // Alternar colores
+    color: index % 2 === 0 ? "#550A2D" : "#874463", // Alternar colores
   }));
 
   // Encontrar la cantidad máxima para el escalado
-  const maxQuantity = Math.max(...stockItems.map(item => item.quantity));
+  const maxQuantity = Math.max(...stockItems.map((item) => item.quantity));
 
   // Ordenar y tomar los 5 productos con más stock
   const topStockItems = stockItems
@@ -51,7 +51,7 @@ function Stock({ products }: { products: Product[] }) {
 
   return (
     <div className={styles.stockContainerB}>
-      {topStockItems.map(item => renderCircle(item, maxQuantity))}
+      {topStockItems.map((item) => renderCircle(item, maxQuantity))}
     </div>
   );
 }
