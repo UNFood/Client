@@ -1,5 +1,5 @@
-import { NumberLiteralType } from "typescript";
 import { Product } from "./product";
+import { Order } from "./order";
 
 export interface Chaza {
   _id: string;
@@ -52,4 +52,9 @@ export interface qrCreate {
 export interface numbers {
   chazas: number;
   products: number;
+}
+
+export interface stats {
+  orders: Order[];
+  products: Product[];
 }

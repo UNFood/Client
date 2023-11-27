@@ -16,6 +16,7 @@ function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
     lastName: "",
     email: "",
     password: "",
+    phone: "",
   });
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -71,6 +72,7 @@ function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
         lastName: response.family_name,
         email: response.email,
         password: response.name + process.env.GOOGLE_PASS_KEY,
+        phone: "",
       });
     },
     onError: (error: any) => {
@@ -166,7 +168,19 @@ function Register({ loginMode }: { loginMode: "chaza" | "cliente" | "" }) {
             Email no valido
           </Form.Control.Feedback>
         </Form.Group>
-
+        <Form.Group className="mb-3 ">
+          <Form.Control
+            required
+            type="text"
+            placeholder="Numero de celular"
+            name="phone"
+            onChange={handleChange}
+            isInvalid={formData.phone.length !== 10}
+          ></Form.Control>
+          <Form.Control.Feedback type="invalid">
+            Celular no valido
+          </Form.Control.Feedback>
+        </Form.Group>
         <Form.Group className="mb-3 ">
           <Form.Control
             required

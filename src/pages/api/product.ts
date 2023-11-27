@@ -44,7 +44,6 @@ export function createProduct(product: ProductCreate) {
     },
   };
   return axios
-
     .post<Product>(`${BASE_URL}/api/v1/product`, product, config)
     .then((res) => res.data);
 }
@@ -57,7 +56,6 @@ export function updateProduct(product: Product) {
       Authorization: `Bearer ${token}`,
     },
   };
-
   return axios
     .put<Product>(`${BASE_URL}/api/v1/product`, product, config)
     .then((res) => res.data);

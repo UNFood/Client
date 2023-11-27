@@ -160,9 +160,9 @@ function HomeChaza({ chazaData }: { chazaData: Chaza }) {
   };
 
   const generateQR = () => {
-    QRCode.toDataURL(`http://localhost:3000/client/${chazaData.name}`).then(
-      setSrc
-    );
+    QRCode.toDataURL(
+      `https://client-inky-delta.vercel.app/client/chaza/${chazaData.name}`
+    ).then(setSrc);
     handleShowQR();
   };
 

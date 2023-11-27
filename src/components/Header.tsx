@@ -90,7 +90,9 @@ function Header({
                   <MdAccountCircle size={25}></MdAccountCircle>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => (window.location.href = "/client/profile")}
+                  >
                     <FaUserAlt size={20}></FaUserAlt>
                     <span>Perfil</span>
                   </Dropdown.Item>
